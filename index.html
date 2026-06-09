@@ -302,18 +302,55 @@
             color: #94a3b8;
         }
         @media (max-width: 700px) {
-            .hero h1 { font-size: 32px; }
-            .hero { padding: 40px 24px; }
-            section { padding: 32px 20px; }
-            .brand-card { padding: 16px; min-width: 80px; }
-            .brand-card span { font-size: 13px; }
-            .mobile-buttons { flex-direction: column; gap: 10px; }
-            .master-block { flex-direction: column; text-align: center; }
-            .story-item { flex-direction: column; gap: 8px; }
-            .story-year { min-width: auto; }
-            .logo { font-size: 22px; }
-            .logo-reanimator { font-size: 16px; padding: 2px 8px; }
-        }
+    /* ... ваш текущий код для телефонов ... */
+
+    /* Уменьшаем текст мастера (но фото не трогаем) */
+    .master-quote {
+        font-size: 14px;
+        padding: 18px;
+    }
+
+    /* Уменьшаем карточки брендов */
+    .brand-card {
+        flex: 0 0 100px;
+        padding: 12px 6px;
+    }
+    .brand-card i {
+        font-size: 32px;
+    }
+    .brand-card span {
+        font-size: 12px;
+    }
+
+    /* Уменьшаем заголовки секций */
+    h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        padding-left: 16px;
+    }
+
+    /* Уменьшаем отступы внутри секций */
+    section {
+        padding: 24px 16px;
+    }
+
+    /* Уменьшаем карточки услуг (телефоны/планшеты/ноутбуки) */
+    .card {
+        padding: 16px;
+        font-size: 14px;
+    }
+    .card i {
+        font-size: 28px;
+    }
+
+    /* Уменьшаем блок "Нам доверяют" (цифры) */
+    .stat-number {
+        font-size: 36px;
+    }
+    .stat {
+        min-width: 100px;
+    }
+}
     </style>
 </head>
 <body>
