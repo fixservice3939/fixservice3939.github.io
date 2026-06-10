@@ -438,6 +438,20 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-wrap: wrap;
+        }
+        .contacts-col p i {
+            width: 24px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .contacts-col p strong {
+            flex-shrink: 0;
+        }
+        .contacts-col p a,
+        .contacts-col p span {
+            word-break: break-word;
+            flex: 1;
         }
         .contacts-col a {
             color: #7EC8FF;
@@ -771,11 +785,25 @@
                 font-size: 0.8rem;
                 bottom: 90px;
             }
-            .float-call, .float-telegram {
-                padding: 14px 22px;
-                font-size: 0.9rem;
-                border-radius: 50px;
-                gap: 10px;
+            .logo {
+                font-size: 1.2rem;
+            }
+            .contacts-col p {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .contacts-col p i {
+                width: 24px;
+                flex-shrink: 0;
+                text-align: center;
+            }
+            .contacts-col p strong {
+                flex-shrink: 0;
+            }
+            .contacts-col p a,
+            .contacts-col p span {
+                word-break: break-word;
+                flex: 1;
             }
         }
     </style>
