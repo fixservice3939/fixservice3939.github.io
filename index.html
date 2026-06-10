@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>FixService | Ремонт телефонов, планшетов, ноутбуков</title>
+    <title>FixService | REANIMATOR – Сервисный центр</title>
     
     <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -11,746 +11,1014 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
 
+    <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #ffffff;
-            color: #1e293b;
-            line-height: 1.5;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .container { max-width: 1280px; margin: 0 auto; padding: 40px 32px; }
-        
-        header {
-            background: white;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+            font-weight: 500;
+            line-height: 1.4;
+            background-image: url('fon2.jpeg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #FFFFFF;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(20, 15, 35, 0.55);
+            backdrop-filter: blur(1px);
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px 80px 24px;
+            position: relative;
+            z-index: 2;
+        }
+
+        h1, h2, h3, .logo, .btn, .stat-number {
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        /* Стилизация всех блоков — прозрачно-сиреневый фон */
+        .hero-block,
+        .master-block,
+        .stats-section,
+        .faq-block,
+        .brands-grid .brand-card,
+        .services-grid .service-card,
+        .parts-grid .part-card,
+        .accessories-grid .accessory-card,
+        .form-block,
+        .contacts-block,
+        .map-block,
+        .story-item {
+            background: rgba(128, 90, 180, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(126, 200, 255, 0.35);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero-block {
+            border-radius: 32px;
+            padding: 2rem 2rem;
+            margin: 20px 0 40px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(126, 200, 255, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(126, 200, 255, 0.5);
+        }
+
+        .hero-block h1 {
+            font-size: clamp(2.2rem, 6vw, 4.2rem);
+            line-height: 1.2;
+            color: #FFFFFF;
+            text-align: left;
+            margin-bottom: 1rem;
+        }
+
+        .hero-description {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #F0F9FF;
+            margin-top: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background: #3E9FDC;
+            color: white;
+            font-weight: 700;
+            padding: 12px 32px;
+            border-radius: 60px;
+            text-decoration: none;
+            margin-top: 24px;
+            transition: all 0.2s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .hero-btn:hover {
+            background: #62B8F0;
+            transform: scale(1.02);
+        }
+
+        .master-block {
+            border-radius: 40px;
+            padding: 2rem;
+            margin: 1rem 0 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .stats-section {
+            border-radius: 40px;
+            padding: 30px 20px;
+            margin: 25px 0;
+        }
+
+        .faq-block {
+            border-radius: 32px;
+            padding: 1.8rem;
+            margin: 1.5rem 0;
+        }
+        .faq-item {
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(126, 200, 255, 0.25);
+        }
+        .faq-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .faq-question {
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #7EC8FF;
+            margin-bottom: 0.4rem;
+        }
+        .faq-answer {
+            color: #E0F0FF;
+            line-height: 1.4;
+        }
+
+        h2 {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin: 2rem 0 1.2rem 0;
+            color: #FFFFFF;
+            font-weight: 800;
+            scroll-margin-top: 80px;
+            background: rgba(128, 90, 180, 0.25);
+            backdrop-filter: blur(6px);
+            display: inline-block;
+            padding: 0.5rem 1.2rem 0.5rem 1.5rem;
+            border-radius: 60px;
+            border-left: 5px solid #7EC8FF;
+        }
+
+        /* Шапка sticky */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 1rem;
             position: sticky;
             top: 0;
             z-index: 100;
-            padding: 16px 32px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            align-items: center;
+            background: rgba(20, 15, 35, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(126, 200, 255, 0.3);
+            margin-bottom: 20px;
         }
         .logo {
-            font-size: 28px;
+            font-size: 1.8rem;
             font-weight: 800;
+        }
+        .logo .fix { color: #FFFFFF; }
+        .logo .service { color: #7EC8FF; }
+        .logo .reanimator { color: #C5A3FF; font-weight: 800; }
+
+        .nav-links {
             display: flex;
-            align-items: baseline;
+            gap: 1.8rem;
             flex-wrap: wrap;
-            gap: 4px;
-        }
-        .logo-fix { background: #1e3a8a; color: white; padding: 4px 12px; border-radius: 40px; }
-        .logo-service { color: #38bdf8; }
-        .logo-divider { color: #94a3b8; font-weight: 400; margin: 0 2px; }
-        .logo-reanimator { 
-            background: #1e3a8a; 
-            color: white; 
-            padding: 4px 12px; 
-            border-radius: 40px;
-            font-size: 20px;
-            font-weight: 700;
-        }
-        nav { display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
-        nav a { text-decoration: none; color: #1e293b; font-weight: 500; transition: 0.2s; }
-        nav a:hover { color: #38bdf8; }
-        
-        .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
-            border-radius: 32px;
-            padding: 64px 56px;
-            margin-bottom: 56px;
-        }
-        .hero h1 { font-size: 44px; margin-bottom: 20px; font-weight: 700; }
-        .hero p { font-size: 18px; margin-bottom: 32px; }
-        .btn {
-            display: inline-block;
-            background: #2563eb;
-            color: white;
-            font-weight: bold;
-            padding: 14px 28px;
-            border-radius: 60px;
-            text-decoration: none;
-            transition: 0.3s;
-            cursor: pointer;
-            border: none;
-        }
-        .btn:hover { background: #1d4ed8; transform: scale(1.02); }  
-        section {
-            background: white;
-            border-radius: 28px;
-            padding: 48px 40px;
-            margin-bottom: 48px;
-            border: 1px solid #eef2f6;
-            transition: box-shadow 0.2s;
-        }
-        section:hover {
-            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-        }
-        h2 {
-            font-size: 32px;
-            margin-bottom: 32px;
-            border-left: 6px solid #38bdf8;
-            padding-left: 24px;
-        }
-        h3 { font-size: 24px; margin-bottom: 20px; }
-        
-        .brands-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 16px;
-            justify-content: center;
-        }
-        .brand-card {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 20px 24px;
-            text-align: center;
-            min-width: 100px;
-            transition: 0.2s;
-            border: 1px solid #eef2f6;
-            cursor: pointer;
-        }
-        .brand-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 28px rgba(0,0,0,0.08);
-            border-color: #e2e8f0;
-        }
-        .brand-card span { font-weight: 600; font-size: 16px; }
-        
-        .parts-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            margin-top: 16px;
-        }
-        .card {
-            flex: 1;
-            min-width: 200px;
-            background: #f8fafc;
-            padding: 24px;
-            border-radius: 24px;
-            border: 1px solid #eef2f6;
-            text-align: center;
-            transition: 0.2s;
-        }
-        .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-            border-color: #e2e8f0;
-        }
-        
-        .master-block {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 40px;
             align-items: center;
-            margin-bottom: 48px;
         }
+        .nav-link {
+            text-decoration: none;
+            font-weight: 600;
+            color: #F0F9FF;
+            transition: 0.2s;
+            cursor: pointer;
+            padding: 6px 0;
+        }
+        .nav-link:hover { color: #7EC8FF; transform: translateY(-1px); }
+
+        /* Мастер */
         .master-photo {
-            flex: 0 0 160px;
+            flex-shrink: 0;
+            width: 140px;
             text-align: center;
         }
         .master-photo img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
+            width: 130px;
+            height: 130px;
             object-fit: cover;
-            border: 4px solid #38bdf8;
+            border-radius: 50%;
+            border: 3px solid #FFFFFF;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: #2a2350;
+            transition: transform 0.2s;
         }
-        .master-quote {
-            flex: 1;
-            background: #f8fafc;
-            padding: 32px;
-            border-radius: 24px;
-            border-left: 6px solid #38bdf8;
-            font-size: 18px;
+        .master-photo img:hover { transform: scale(1.02); }
+        .quote-area { flex: 1; }
+        .quote-mark {
+            font-size: 2.8rem;
+            font-family: 'Times New Roman', serif;
+            color: #C5A3FF;
+            line-height: 1;
+            margin-bottom: 0.25rem;
         }
-        
+        .quote-text {
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #F0F9FF;
+            margin-bottom: 1.2rem;
+        }
+
+        /* Таймлайн вертикальный */
         .story-timeline {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
             margin-top: 20px;
         }
         .story-item {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            align-items: flex-start;
-            background: #f8fafc;
-            padding: 20px;
             border-radius: 24px;
-            border-left: 4px solid #38bdf8;
-            border-top: 1px solid #eef2f6;
-            border-right: 1px solid #eef2f6;
-            border-bottom: 1px solid #eef2f6;
+            padding: 1.2rem 1.5rem;
+            border-left: 4px solid #7EC8FF;
+            transition: all 0.2s;
+        }
+        .story-item:hover {
+            transform: translateX(5px);
+            background: rgba(128, 90, 180, 0.4);
         }
         .story-year {
             font-weight: 800;
-            font-size: 22px;
-            min-width: 80px;
-            color: #2563eb;
+            font-size: 1.3rem;
+            color: #7EC8FF;
+            margin-bottom: 6px;
         }
         .story-text {
-            flex: 1;
+            color: #E0F0FF;
+            font-size: 0.9rem;
         }
-        
-        .vlog-bar {
-            background: #f8fafc;
+
+        /* Статистика */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+        .stat-item { cursor: pointer; transition: all 0.2s; padding: 10px; border-radius: 24px; }
+        .stat-item:hover { background: rgba(126,200,255,0.15); transform: translateY(-3px); }
+        .stat-number { font-size: 2.4rem; font-weight: 800; color: #7EC8FF; }
+        .stat-label { color: #E0F0FF; font-weight: 600; }
+
+        /* Сетка брендов */
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 14px;
+            margin: 1rem 0;
+        }
+        .brand-card {
             border-radius: 60px;
-            padding: 12px 24px;
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-            border: 1px solid #eef2f6;
-        }
-        .vlog-label {
+            padding: 0.8rem 0.5rem;
+            text-align: center;
             font-weight: 600;
-            color: #1e293b;
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        .vlog-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: white;
-            padding: 8px 20px;
-            border-radius: 60px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 14px;
-            transition: 0.2s;
-            border: 1px solid #e2e8f0;
+        .brand-card:hover {
+            background: #3E9FDC;
+            transform: scale(1.03);
         }
-        .vlog-link i {
-            font-size: 18px;
+
+        /* Сетка услуг (виды работ) */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 1rem 0;
         }
-        .vlog-link.telegram-link i {
-            color: #0088cc;
+        .service-card {
+            border-radius: 28px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        .vlog-link.youtube-link i {
-            color: #ff0000;
+        .service-card:hover {
+            transform: translateY(-4px);
+            background: rgba(128, 90, 180, 0.45);
+            border-color: #7EC8FF;
         }
-        .vlog-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-            border-color: #cbd5e1;
+        .service-title {
+            font-weight: 700;
+            font-size: 0.95rem;
         }
-        
-        input, select, textarea {
+
+        /* Аксессуары — увеличенные карточки */
+        .accessories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 16px;
+            margin: 1rem 0;
+        }
+        .accessory-card {
+            border-radius: 28px;
+            padding: 1.2rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+        .accessory-card:hover {
+            transform: translateY(-4px);
+            background: rgba(128, 90, 180, 0.45);
+            border-color: #7EC8FF;
+        }
+
+        /* Запчасти — сетка (без листания) */
+        .parts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 1rem 0;
+        }
+        .part-card {
+            border-radius: 28px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            transition: all 0.2s;
+            border: 1px solid #C5A3FF;
+        }
+        .part-card:hover {
+            transform: translateY(-5px);
+            background: rgba(128, 90, 180, 0.45);
+            border-color: #7EC8FF;
+        }
+        .part-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            color: #C5A3FF;
+        }
+        .part-title {
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 8px;
+            color: white;
+        }
+        .part-desc {
+            font-size: 0.8rem;
+            color: #E0E0FF;
+        }
+
+        /* Форма */
+        .form-block {
+            border-radius: 32px;
+            padding: 2rem;
+            margin: 1rem 0 1.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
             width: 100%;
             padding: 14px 18px;
-            border: 1px solid #eef2f6;
-            border-radius: 60px;
-            font-size: 16px;
-            margin-bottom: 20px;
-            transition: 0.2s;
-            background: white;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(126,200,255,0.5);
+            border-radius: 40px;
+            font-size: 1rem;
+            color: white;
+            font-family: inherit;
         }
-        input:focus, select:focus, textarea:focus {
+        .form-group textarea {
+            border-radius: 24px;
+            resize: vertical;
+        }
+        .form-group input:focus, 
+        .form-group select:focus, 
+        .form-group textarea:focus {
             outline: none;
-            border-color: #38bdf8;
-            box-shadow: 0 0 0 3px rgba(56,189,248,0.1);
+            border-color: #7EC8FF;
+            background: rgba(255,255,255,0.2);
         }
-        textarea { border-radius: 24px; }
-        
-        .form-container {
-            max-width: 700px;
-            margin: 0 auto;
+        .form-group option {
+            background: #1a1a2e;
         }
-        
-        .faq-item {
-            background: #f8fafc;
-            border-radius: 20px;
-            padding: 20px;
-            margin-bottom: 16px;
-            border-left: 4px solid #38bdf8;
-            border-top: 1px solid #eef2f6;
-            border-right: 1px solid #eef2f6;
-            border-bottom: 1px solid #eef2f6;
-        }
-        
-        .contacts {
+        .checkbox-label {
             display: flex;
-            flex-wrap: wrap;
-            gap: 24px;
-            justify-content: space-between;
-            background: #f8fafc;
-            padding: 28px;
-            border-radius: 24px;
-            border: 1px solid #eef2f6;
+            align-items: flex-start;
+            gap: 12px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-align: left;
+            justify-content: flex-start;
         }
-        .contacts a { color: #1e293b; text-decoration: none; font-weight: 500; }
-        .contacts a:hover { color: #38bdf8; }
-        
-        .map-container {
-            margin-top: 32px;
-            border-radius: 24px;
-            overflow: hidden;
+        .checkbox-label input {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
         }
-        .map-container iframe {
+        .checkbox-label span {
+            flex: 1;
+            text-align: left;
+        }
+        .checkbox-label a {
+            color: #7EC8FF;
+        }
+        .btn-submit {
+            background: #3E9FDC;
             width: 100%;
-            height: 300px;
-            border: 0;
-            border-radius: 20px;
-        }
-        
-        .mobile-buttons {
-            position: fixed;
-            bottom: 24px;
-            right: 24px;
-            display: flex;
-            gap: 16px;
-            z-index: 200;
-        }
-        .mobile-btn {
-            background: #2563eb;
-            color: white;
+            padding: 14px;
+            border: none;
             border-radius: 60px;
-            padding: 14px 24px;
-            text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-        }
-        
-        .telegram-widget {
-            position: fixed;
-            bottom: 24px;
-            left: 24px;
-            z-index: 200;
-        }
-        .telegram-widget .telegram-btn {
-            background: #0088cc;
+            font-weight: 800;
+            font-size: 1rem;
             color: white;
-            border-radius: 60px;
-            padding: 12px 20px;
-            text-decoration: none;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
-            transition: 0.2s;
-            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
-        .telegram-widget .telegram-btn:hover {
-            background: #006699;
+        .btn-submit:hover {
+            background: #62B8F0;
             transform: scale(1.02);
         }
-        
+
+        /* Контакты */
+        .contacts-block {
+            border-radius: 32px;
+            padding: 1.8rem;
+            margin: 1rem 0 1.5rem;
+        }
+        .contacts-block p {
+            margin-bottom: 0.8rem;
+            color: #F0F9FF;
+        }
+        .contacts-block a {
+            color: #7EC8FF;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .contacts-block a:hover {
+            color: #C5A3FF;
+            transform: translateX(3px);
+            display: inline-block;
+        }
+
+        /* Карта + Режим работы */
+        .map-block {
+            border-radius: 32px;
+            padding: 1.8rem;
+            margin: 1rem 0 1.5rem;
+        }
+        .map-wrapper iframe {
+            width: 100%;
+            height: 250px;
+            border-radius: 24px;
+            border: 1px solid rgba(126,200,255,0.4);
+            pointer-events: auto;
+        }
+        .work-hours {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #7EC8FF;
+            font-size: 1rem;
+        }
+        .map-link {
+            text-align: center;
+            margin-top: 12px;
+        }
+        .map-link a {
+            color: #7EC8FF;
+            text-decoration: none;
+            font-size: 0.85rem;
+        }
+        .map-address {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #E0F0FF;
+        }
+
+        /* Плавающие кнопки */
+        .floating-buttons {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 1000;
+        }
+        .float-call, .float-telegram {
+            padding: 12px 20px;
+            border-radius: 60px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+            border: none;
+            text-align: center;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .float-call { background: #3E9FDC; color: white; }
+        .float-telegram { background: #0088cc; color: white; }
+        .float-call:hover { transform: scale(1.05); background: #62B8F0; }
+        .float-telegram:hover { transform: scale(1.05); background: #006699; }
+
+        /* Попап */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(8px);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .popup-overlay.active { visibility: visible; opacity: 1; }
+        .popup-form {
+            background: rgba(128, 90, 180, 0.35);
+            backdrop-filter: blur(12px);
+            max-width: 500px;
+            width: 90%;
+            border-radius: 32px;
+            padding: 2rem;
+            border: 1px solid rgba(126,200,255,0.6);
+        }
+        .popup-form h3 { color: #FFFFFF; margin-bottom: 1rem; font-weight: 800; }
+        .popup-form input, .popup-form select, .popup-form textarea {
+            width: 100%;
+            padding: 12px 16px;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(126,200,255,0.5);
+            border-radius: 30px;
+            color: white;
+            font-family: inherit;
+            font-size: 0.9rem;
+        }
+        .popup-form input:focus, .popup-form select:focus, .popup-form textarea:focus {
+            outline: none;
+            border-color: #7EC8FF;
+            background: rgba(255,255,255,0.2);
+        }
+        .popup-form option { background: #1a1a2e; }
+        .close-popup {
+            background: transparent;
+            border: none;
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #7EC8FF;
+            transition: all 0.2s;
+            line-height: 1;
+            padding: 0 8px;
+        }
+        .close-popup:hover { color: #C5A3FF; transform: scale(1.1); }
+        .form-buttons {
+            display: flex;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        .form-buttons button {
+            flex: 1;
+            background: #3E9FDC;
+            padding: 12px;
+            border: none;
+            border-radius: 40px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+        .form-buttons button:hover { background: #62B8F0; transform: translateY(-2px); }
+        .cancel-btn { background: rgba(255,255,255,0.25); }
+        .cancel-btn:hover { background: rgba(255,255,255,0.4); }
+        .popup-checkbox {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 15px 0;
+            font-size: 0.8rem;
+            text-align: left;
+            justify-content: flex-start;
+        }
+        .popup-checkbox input {
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        .popup-checkbox label {
+            flex: 1;
+            text-align: left;
+            line-height: 1.4;
+        }
+        .popup-checkbox a { color: #7EC8FF; }
+
+        /* Уведомление */
         .toast {
             position: fixed;
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: #2563eb;
+            background: #3E9FDC;
             color: white;
-            padding: 12px 20px;
+            padding: 12px 24px;
             border-radius: 60px;
-            font-size: 14px;
-            font-weight: 500;
-            z-index: 300;
+            font-weight: 600;
+            z-index: 1100;
+            transition: all 0.3s;
             opacity: 0;
-            transition: all 0.3s ease;
             pointer-events: none;
+            font-size: 0.9rem;
             white-space: nowrap;
-            max-width: 90%;
-            white-space: normal;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            line-height: 1.4;
         }
         .toast.show {
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
-        
+
+        /* Футер */
         footer {
+            padding: 30px 0 25px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(126, 200, 255, 0.3);
             text-align: center;
-            padding: 40px;
-            background: #0f172a;
-            color: #94a3b8;
         }
-        
-        @media (max-width: 700px) {
-            header {
-                padding: 12px 16px;
-                gap: 12px;
-            }
-            .logo {
-                font-size: 24px;
-            }
-            nav {
-                gap: 14px;
-            }
-            nav a {
-                font-size: 13px;
-            }
-            .container {
-                padding: 20px 12px 80px;
-            }
-            .hero {
-                padding: 32px 20px;
-                margin-bottom: 32px;
-            }
-            .hero h1 {
-                font-size: 28px;
-            }
-            .hero p {
-                font-size: 15px;
-                margin-bottom: 20px;
-            }
-            .btn, .quick-btn {
-                padding: 10px 20px;
-                font-size: 14px;
-            }
-            section {
-                padding: 24px 16px;
-                margin-bottom: 24px;
-                border-radius: 20px;
-            }
-            h2 {
-                font-size: 22px;
-                margin-bottom: 20px;
-                padding-left: 14px;
-                border-left-width: 4px;
-            }
-            .grid-2col, .parts-grid {
-                gap: 16px;
-            }
-            .card {
-                padding: 16px;
-                min-width: auto;
-                border-radius: 18px;
-            }
-            .card i {
-                font-size: 28px;
-            }
-            .card strong {
-                font-size: 16px;
-            }
-            
-            .master-block {
-                gap: 20px;
-            }
-            .master-photo {
-                flex: 0 0 120px;
-            }
-            .master-photo img {
-                width: 120px;
-                height: 120px;
-            }
-            .master-photo p {
-                font-size: 12px;
-                margin-top: 8px;
-            }
-            .master-quote {
-                padding: 18px;
-                font-size: 14px;
-            }
-            
-            .brand-card {
-                padding: 12px 16px;
-                min-width: 70px;
-            }
-            .brand-card span {
-                font-size: 12px;
-            }
-            
-            .vlog-bar {
-                padding: 12px 16px;
-                gap: 10px;
-                border-radius: 32px;
-            }
-            .vlog-label {
-                font-size: 13px;
-            }
-            .vlog-link {
-                padding: 6px 14px;
-                font-size: 12px;
-            }
-            .vlog-link i {
-                font-size: 14px;
-            }
-            
-            .faq-item {
-                padding: 14px;
-                font-size: 14px;
-            }
-            
-            input, select, textarea {
-                padding: 10px 14px;
-                font-size: 14px;
-                margin-bottom: 14px;
-            }
-            
-            .contacts {
-                padding: 18px;
-                gap: 12px;
-                font-size: 13px;
-            }
-            .contacts span {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-            }
-            .mobile-buttons {
-                bottom: 12px;
-                right: 12px;
-                gap: 10px;
-            }
-            .mobile-btn {
-                padding: 10px 16px;
-                font-size: 12px;
-            }
-            .telegram-widget {
-                bottom: 12px;
-                left: 12px;
-            }
-            .telegram-widget .telegram-btn {
-                padding: 8px 14px;
-                font-size: 11px;
-            }
-            footer {
-                padding: 24px 16px;
-                font-size: 12px;
-            }
-            
-            .toast {
-                font-size: 12px;
-                padding: 8px 16px;
-                bottom: 20px;
-                max-width: 85%;
-            }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        .footer-links a {
+            color: #E0F0FF;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s;
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+        .footer-links a:hover { color: #7EC8FF; background: rgba(126,200,255,0.15); }
+        .footer-text { font-size: 0.85rem; color: #aaa; margin-top: 10px; }
+        .footer-privacy { margin-top: 12px; }
+        .footer-privacy a { color: #7EC8FF; text-decoration: none; font-size: 0.8rem; }
+
+        @media (max-width: 800px) {
+            .master-block { flex-direction: column; text-align: center; }
+            .hero-block { text-align: center; }
+            .hero-block h1 { text-align: center; }
+            .hero-description { font-size: 1.1rem; }
+            .navbar { flex-direction: column; padding: 15px 0; }
+            .nav-links { justify-content: center; gap: 1rem; }
+            .floating-buttons { bottom: 20px; right: 15px; gap: 10px; }
+            .float-call, .float-telegram { padding: 10px 16px; font-size: 0.75rem; }
+            .brands-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); gap: 10px; }
+            .brand-card { font-size: 0.75rem; padding: 0.6rem 0.3rem; }
+            .services-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .accessories-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+            .parts-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+            .part-card { padding: 1rem; }
+            .toast { white-space: normal; text-align: center; max-width: 85%; font-size: 0.8rem; }
+            .checkbox-label { font-size: 0.75rem; }
+            .popup-checkbox { font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
 
-<header>
-    <div class="logo">
-        <span class="logo-fix">Fix</span>
-        <span class="logo-service">Service</span>
-        <span class="logo-divider">|</span>
-        <span class="logo-reanimator">REANIMATOR</span>
-    </div>
-    <nav>
-        <a href="#master">О мастере</a>
-        <a href="#vlog">Видео-блог</a>
-        <a href="#brands">Бренды</a>
-        <a href="#order">Заявка</a>
-        <a href="#contacts">Контакты</a>
-    </nav>
-</header>
-
 <div class="container">
-    <div class="hero">
-        <h1>FixService<br>Починим телефон, планшет или ноутбук.</h1>
-        <p><i class="fas fa-shield-alt"></i> Гарантия 1 год. Отвечаю за 10 минут.</p>
-        <a href="#order" class="btn"><i class="fas fa-paper-plane"></i> Оставить заявку</a>
+    <!-- ШАПКА (sticky) -->
+    <div class="navbar">
+        <div class="logo"><span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span></div>
+        <div class="nav-links">
+            <a href="#services" class="nav-link">Услуги</a>
+            <a href="#master" class="nav-link">Мастер</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#contacts" class="nav-link">Контакты</a>
+            <a href="#map" class="nav-link">Карта</a>
+        </div>
     </div>
 
-    <section id="master">
-        <h2><i class="fas fa-user"></i> Слово мастера</h2>
-        <div class="master-block">
-            <div class="master-photo">
-                <img src="foto.jpg" alt="Сергей, мастер сервисного центра FixService">
-                <p style="margin-top: 12px;">Сергей, мастер</p>
-            </div>
-            <div class="master-quote">
-                <i class="fas fa-quote-left"></i> Я профессионал, ремонтирую технику больше 10 лет. Чиню аккуратно и быстро. Приносите посмотрим.
-            </div>
-        </div>
-        
-        <h3 style="margin-bottom: 24px;"><i class="fas fa-history"></i> Как я стал мастером</h3>
-        <div class="story-timeline">
-            <div class="story-item">
-                <div class="story-year">2017</div>
-                <div class="story-text">Начал с ремонта своих устройств починил первый iPhone 5s. Понял, что это моё.</div>
-            </div>
-            <div class="story-item">
-                <div class="story-year">2019</div>
-                <div class="story-text">Прошёл курсы по микропайке и диагностике материнских плат. Восстановил более 50 ноутбуков.</div>
-            </div>
-            <div class="story-item">
-                <div class="story-year">2024</div>
-                <div class="story-text">Открыл мастерскую FixService в Ликино-Дулёво. Более 400 довольных клиентов.</div>
-            </div>
-            <div class="story-item">
-                <div class="story-year">2026</div>
-                <div class="story-text">Расширил перечень услуг ремонт сложных планшетов, замена BGA-чипов.</div>
-            </div>
-        </div>
-    </section>
+    <!-- HERO -->
+    <div class="hero-block">
+        <div class="badge">СЕРВИСНЫЙ ЦЕНТР</div>
+        <h1>Качественный ремонт вашей техники</h1>
+        <div class="hero-description">Быстрая диагностика, оригинальные запчасти, гарантия на все виды работ.</div>
+        <button class="hero-btn" id="heroOpenBtn">Оставить заявку</button>
+    </div>
 
-    <section id="vlog">
-        <h2><i class="fas fa-video"></i> Видео-блог мастера</h2>
-        <div class="vlog-bar">
-            <span class="vlog-label">Смотреть:</span>
-            <a href="https://t.me/AppleReanimator_Group" class="vlog-link telegram-link" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-telegram-plane"></i> Telegram канал
-            </a>
-            <a href="https://youtube.com/@fixservices" class="vlog-link youtube-link" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-youtube"></i> YouTube канал
-            </a>
+    <!-- МАСТЕР -->
+    <h2 id="master">О мастере</h2>
+    <div class="master-block">
+        <div class="master-photo">
+            <img src="foto.jpg" alt="Мастер FixService">
         </div>
-    </section>
-
-    <section id="brands">
-        <h2><i class="fas fa-microchip"></i> Бренды, которые мы чиним</h2>
-        <div class="brands-grid">
-            <div class="brand-card"><span>Apple</span></div>
-            <div class="brand-card"><span>Samsung</span></div>
-            <div class="brand-card"><span>Xiaomi</span></div>
-            <div class="brand-card"><span>Huawei</span></div>
-            <div class="brand-card"><span>Honor</span></div>
-            <div class="brand-card"><span>Lenovo</span></div>
-            <div class="brand-card"><span>ASUS</span></div>
-            <div class="brand-card"><span>HP</span></div>
-            <div class="brand-card"><span>MacBook</span></div>
+        <div class="quote-area">
+            <div class="quote-mark">„</div>
+            <div class="quote-text">Я профессионал, ремонтирую технику больше 10 лет. Чиню аккуратно и быстро. Приносите посмотрим.</div>
+            <div class="story-timeline">
+                <div class="story-item"><div class="story-year">2017</div><div class="story-text">Починил первый iPhone 5s, понял что это моё</div></div>
+                <div class="story-item"><div class="story-year">2019</div><div class="story-text">Курсы по микропайке, восстановил 50+ ноутбуков</div></div>
+                <div class="story-item"><div class="story-year">2024</div><div class="story-text">Открыл FixService в Ликино-Дулёво, 400+ клиентов</div></div>
+                <div class="story-item"><div class="story-year">2026</div><div class="story-text">Расширил перечень услуг</div></div>
+            </div>
         </div>
-    </section>
+    </div>
 
-    <section>
-        <h2><i class="fas fa-microchip"></i> Качественные запчасти</h2>
-        <div class="parts-grid">
-            <div class="card"><i class="fas fa-tv fa-2x"></i><br><strong>Дисплеи класса Original</strong><br>Яркость, цветопередача как у нового.</div>
-            <div class="card"><i class="fas fa-battery-full fa-2x"></i><br><strong>Аккумуляторы</strong><br>1000+ циклов, контроль ёмкости.</div>
-            <div class="card"><i class="fas fa-plug fa-2x"></i><br><strong>Шлейфы и разъёмы</strong><br>Полное соответствие стандартам.</div>
-            <div class="card"><i class="fas fa-cogs fa-2x"></i><br><strong>Кнопки и корпуса</strong><br>Износостойкие, оригинальной формы.</div>
+    <!-- СТАТИСТИКА -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item"><div class="stat-number">10 лет</div><div class="stat-label">опыта</div></div>
+            <div class="stat-item"><div class="stat-number">400+</div><div class="stat-label">довольных клиентов</div></div>
+            <div class="stat-item"><div class="stat-number">12 мес</div><div class="stat-label">гарантии</div></div>
+            <div class="stat-item"><div class="stat-number">24/7</div><div class="stat-label">онлайн запись</div></div>
         </div>
-    </section>
+    </div>
 
-    <section id="order">
-        <h2><i class="fas fa-pen-alt"></i> Оставить заявку</h2>
-        <div class="form-container">
-            <form id="mainForm">
-                <input type="text" id="name" placeholder="Ваше имя" required>
-                <input type="tel" id="phone" placeholder="Телефон" required>
-                <select id="device">
+    <!-- БРЕНДЫ -->
+    <h2>Бренды</h2>
+    <div class="brands-grid">
+        <div class="brand-card">Oneplus</div><div class="brand-card">Oppo</div><div class="brand-card">Infinix</div>
+        <div class="brand-card">Nokia</div><div class="brand-card">Vivo</div><div class="brand-card">itel</div>
+        <div class="brand-card">Tecno</div><div class="brand-card">Honor</div><div class="brand-card">Xiaomi</div>
+        <div class="brand-card">Gresso</div><div class="brand-card">BlackBerry</div><div class="brand-card">Vertu</div>
+        <div class="brand-card">Sony</div><div class="brand-card">realme</div><div class="brand-card">Samsung</div>
+        <div class="brand-card">Huawei</div><div class="brand-card">Apple</div>
+    </div>
+
+    <!-- ВИДЫ РАБОТ -->
+    <h2 id="services">Виды работ</h2>
+    <div class="services-grid">
+        <div class="service-card"><div class="service-title">Замена дисплея и стекла</div></div>
+        <div class="service-card"><div class="service-title">Замена разъёма и АКБ</div></div>
+        <div class="service-card"><div class="service-title">Ремонт материнской платы</div></div>
+        <div class="service-card"><div class="service-title">Восстановление данных</div></div>
+        <div class="service-card"><div class="service-title">Увеличение памяти iPhone</div></div>
+        <div class="service-card"><div class="service-title">Ремонт джойстиков</div></div>
+    </div>
+
+    <!-- АКСЕССУАРЫ -->
+    <h2>Аксессуары</h2>
+    <div class="accessories-grid">
+        <div class="accessory-card">Защитные стёкла</div>
+        <div class="accessory-card">Гидрогелевые плёнки</div>
+        <div class="accessory-card">Чехлы и бамперы</div>
+        <div class="accessory-card">Зарядки и кабели</div>
+        <div class="accessory-card">Наушники и колонки</div>
+        <div class="accessory-card">Адаптеры и переходники</div>
+        <div class="accessory-card">Повербанки</div>
+        <div class="accessory-card">Карты памяти и флешки</div>
+        <div class="accessory-card">Держатели и автодержатели</div>
+    </div>
+
+    <!-- ЗАПЧАСТИ (сетка) -->
+    <h2>Качественные запчасти</h2>
+    <div class="parts-grid">
+        <div class="part-card"><div class="part-icon"><i class="fas fa-tv"></i></div><div class="part-title">Дисплеи класса Original</div><div class="part-desc">Яркость, цветопередача как у нового</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-battery-full"></i></div><div class="part-title">Аккумуляторы</div><div class="part-desc">1000+ циклов, контроль ёмкости</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-plug"></i></div><div class="part-title">Шлейфы и разъёмы</div><div class="part-desc">Полное соответствие стандартам</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-cogs"></i></div><div class="part-title">Кнопки и корпуса</div><div class="part-desc">Износостойкие, оригинальной формы</div></div>
+    </div>
+
+    <!-- FAQ -->
+    <h2 id="faq">Частые вопросы</h2>
+    <div class="faq-block">
+        <div class="faq-item"><div class="faq-question">Гарантия</div><div class="faq-answer">1 год на все работы.</div></div>
+        <div class="faq-item"><div class="faq-question">Сколько по времени</div><div class="faq-answer">Экран на iPhone 2 часа. Ноутбук сложнее скажу точный срок.</div></div>
+        <div class="faq-item"><div class="faq-question">Залили телефон</div><div class="faq-answer">Не включайте. Сразу приносите шанс спасти выше.</div></div>
+    </div>
+
+    <!-- ФОРМА ЗАЯВКИ -->
+    <h2>Оставить заявку</h2>
+    <div class="form-block">
+        <form id="mainForm">
+            <div class="form-group"><input type="text" id="formName" placeholder="Ваше имя" required></div>
+            <div class="form-group"><input type="tel" id="formPhone" placeholder="Телефон" required></div>
+            <div class="form-group">
+                <select id="formDevice">
                     <option value="Телефон">Телефон</option>
                     <option value="Планшет">Планшет</option>
                     <option value="Ноутбук">Ноутбук</option>
                 </select>
-                <input type="text" id="model" placeholder="Модель, например iPhone 13, Samsung S22">
-                <textarea id="problem" rows="3" placeholder="Опишите проблему"></textarea>
-                <button type="submit" class="btn">Отправить заявку</button>
-            </form>
-        </div>
-    </section>
+            </div>
+            <div class="form-group"><input type="text" id="formModel" placeholder="Модель (iPhone 13, Samsung S22...)"></div>
+            <div class="form-group"><textarea id="formProblem" rows="2" placeholder="Опишите проблему"></textarea></div>
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="formPrivacy" required> 
+                    <span>Я принимаю условия <a href="privacy.html" target="_blank">Политики конфиденциальности</a> и даю согласие на обработку данных</span>
+                </label>
+            </div>
+            <button type="submit" class="btn-submit">Отправить заявку</button>
+        </form>
+    </div>
 
-    <section>
-        <h2><i class="fas fa-question-circle"></i> Частые вопросы</h2>
-        <div class="faq-item"><strong>Гарантия</strong><br>1 год на все работы.</div>
-        <div class="faq-item"><strong>Сколько по времени</strong><br>Экран на iPhone 2 часа. Ноутбук сложнее скажу точный срок.</div>
-        <div class="faq-item"><strong>Залили телефон</strong><br>Не включайте. Сразу приносите шанс спасти выше.</div>
-    </section>
+    <!-- КОНТАКТЫ -->
+    <h2 id="contacts">Контакты</h2>
+    <div class="contacts-block">
+        <p><i class="fas fa-phone-alt"></i> <strong>Телефон:</strong> <a href="tel:89778111666">8 (977) 811-16-66</a></p>
+        <p><i class="fab fa-telegram-plane"></i> <strong>Telegram (личный):</strong> <a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a></p>
+        <p><i class="fab fa-telegram-plane"></i> <strong>Telegram-канал:</strong> <a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a></p>
+        <p><i class="fab fa-youtube"></i> <strong>YouTube:</strong> <a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a></p>
+    </div>
 
-    <section id="contacts">
-        <h2><i class="fas fa-map-marker-alt"></i> Контакты</h2>
-        <div class="contacts">
-            <span><i class="fas fa-phone-alt"></i> <a href="tel:+79778111666">+7 (977) 811-16-66</a></span>
-            <span><i class="fab fa-whatsapp"></i> <a href="https://wa.me/79777713939">WhatsApp</a></span>
-            <span><i class="fab fa-telegram-plane"></i> <a href="https://t.me/AppleReanimator">Telegram</a></span>
-            <span><i class="fas fa-map-pin"></i> ул. Советская 41, 2 этаж, пом.209</span>
-            <span><i class="fas fa-clock"></i> 10:00–18:00</span>
+    <!-- КАРТА -->
+    <h2 id="map">Как нас найти</h2>
+    <div class="map-block">
+        <div class="map-address"><i class="fas fa-map-pin"></i> ул. Советская 41, 2 этаж, пом.209, Ликино-Дулёво</div>
+        <div class="map-wrapper">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=38.955609,55.720436&z=18&pt=38.955609,55.720436" allowfullscreen="true" title="Карта FixService"></iframe>
         </div>
-        
-        <div class="map-container">
-            <iframe src="https://yandex.ru/map-widget/v1/?ll=38.955609,55.720436&z=18&pt=38.955609,55.720436" allowfullscreen="true" title="Карта с адресом FixService"></iframe>
+        <div class="work-hours"><i class="fas fa-clock"></i> Режим работы: 10:00 – 18:00</div>
+        <div class="map-link">
+            <a href="https://yandex.ru/maps/-/CPdlF6Lt" target="_blank"><i class="fas fa-external-link-alt"></i> Открыть FixService на Яндекс.Картах</a>
         </div>
-        <p style="margin-top: 20px;"><a href="https://yandex.ru/maps/-/CPdlF6Lt" target="_blank" rel="noopener noreferrer"><i class="fas fa-external-link-alt"></i> Открыть FixService на Яндекс.Картах</a></p>
-    </section>
+    </div>
 </div>
 
-<div class="mobile-buttons">
-    <a href="tel:+79778111666" class="mobile-btn"><i class="fas fa-phone-alt"></i> Позвонить</a>
-    <a href="https://wa.me/79777713939" class="mobile-btn" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-    <a href="https://t.me/AppleReanimator" class="mobile-btn" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+<!-- ПЛАВАЮЩИЕ КНОПКИ -->
+<div class="floating-buttons">
+    <a href="tel:89778111666" class="float-call"><i class="fas fa-phone-alt"></i> Позвонить</a>
+    <a href="https://t.me/AppleReanimator" class="float-telegram" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
 </div>
 
-<div class="telegram-widget">
-    <a href="https://t.me/AppleReanimator_Group" target="_blank" class="telegram-btn">
-        <i class="fab fa-telegram-plane"></i> Telegram канал
-    </a>
-</div>
-
-<div class="toast" id="toast">Заявка отправлена. Мастер свяжется с вами.</div>
-
+<!-- ФУТЕР -->
 <footer>
-    <p> 2026 FixService ремонт телефонов и ноутбуков в Ликино-Дулёво | Гарантия 1 год</p>
+    <div class="logo" style="font-size:1.4rem; justify-content: center; display: flex;"><span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span></div>
+    <div class="footer-links">
+        <a href="#services">Услуги</a>
+        <a href="#master">Мастер</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacts">Контакты</a>
+        <a href="#map">Карта</a>
+    </div>
+    <div class="footer-text">© 2025 FixService | REANIMATOR — Сервисный центр. Качественный ремонт вашей техники.</div>
+    <div class="footer-privacy"><a href="privacy.html">Политика конфиденциальности</a></div>
 </footer>
+
+<!-- ПОПАП -->
+<div id="popupForm" class="popup-overlay">
+    <div class="popup-form">
+        <button class="close-popup" id="closePopupBtn">×</button>
+        <h3>Оставить заявку</h3>
+        <form id="popupFormElement">
+            <input type="text" id="popupName" placeholder="Имя" required>
+            <input type="tel" id="popupPhone" placeholder="Телефон" required>
+            <select id="popupDevice">
+                <option value="Телефон">Телефон</option>
+                <option value="Планшет">Планшет</option>
+                <option value="Ноутбук">Ноутбук</option>
+            </select>
+            <input type="text" id="popupModel" placeholder="Модель устройства">
+            <textarea id="popupProblem" rows="2" placeholder="Описание проблемы"></textarea>
+            <div class="popup-checkbox">
+                <input type="checkbox" id="popupPrivacy" required>
+                <label>Я принимаю <a href="privacy.html" target="_blank">Политику конфиденциальности</a></label>
+            </div>
+            <div class="form-buttons">
+                <button type="submit">Отправить</button>
+                <button type="button" class="cancel-btn" id="cancelPopupBtn">Отмена</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="toast" class="toast">Заявка отправлена. Мастер свяжется с вами.</div>
 
 <script>
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZPz4T5TGfNLQbWzU3gDue63RSe6xvLKCtUNxIOpu8Kw684chKTeSMeajPrpImXrUrvg/exec';
 
     const toast = document.getElementById('toast');
-    
     function showMessage(text, isError = false) {
         toast.textContent = text;
-        toast.style.background = isError ? '#dc2626' : '#2563eb';
+        toast.style.background = isError ? '#dc2626' : '#3E9FDC';
         toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
+        setTimeout(() => toast.classList.remove('show'), 3000);
     }
 
-    document.getElementById('mainForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const device = document.getElementById('device').value;
-        const model = document.getElementById('model').value.trim();
-        const problem = document.getElementById('problem').value.trim();
-        
-        if (!name || !phone) {
-            showMessage('Заполните имя и телефон', true);
-            return;
-        }
-        
-        const formData = {
-            name: name,
-            phone: phone,
-            deviceType: device,
-            model: model,
-            problem: problem
-        };
-        
+    async function sendToGoogleSheets(formData) {
         try {
             await fetch(GOOGLE_SCRIPT_URL, {
                 method: 'POST',
                 mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
             });
-            
-            showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
-            this.reset();
-            
+            return true;
         } catch (error) {
             console.error('Ошибка:', error);
-            showMessage('Произошла ошибка. Попробуйте позже или позвоните.', true);
+            return false;
         }
+    }
+
+    // Форма в теле страницы
+    document.getElementById('mainForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('formName').value.trim();
+        const phone = document.getElementById('formPhone').value.trim();
+        if (!name || !phone) { showMessage('Заполните имя и телефон', true); return; }
+        if (!document.getElementById('formPrivacy').checked) { showMessage('Подтвердите согласие на обработку данных', true); return; }
+        
+        await sendToGoogleSheets({
+            name: name,
+            phone: phone,
+            deviceType: document.getElementById('formDevice').value,
+            model: document.getElementById('formModel').value.trim(),
+            problem: document.getElementById('formProblem').value.trim()
+        });
+        showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+        document.getElementById('mainForm').reset();
     });
 
-    document.querySelectorAll('nav a, .hero .btn').forEach(anchor => {
+    // Попап
+    const popup = document.getElementById('popupForm');
+    document.getElementById('heroOpenBtn').addEventListener('click', () => popup.classList.add('active'));
+    document.getElementById('closePopupBtn').addEventListener('click', () => popup.classList.remove('active'));
+    document.getElementById('cancelPopupBtn').addEventListener('click', () => popup.classList.remove('active'));
+    popup.addEventListener('click', (e) => { if(e.target === popup) popup.classList.remove('active'); });
+
+    document.getElementById('popupFormElement').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        const name = document.getElementById('popupName').value.trim();
+        const phone = document.getElementById('popupPhone').value.trim();
+        if (!name || !phone) { showMessage('Заполните имя и телефон', true); return; }
+        if (!document.getElementById('popupPrivacy').checked) { showMessage('Подтвердите согласие на обработку данных', true); return; }
+        
+        await sendToGoogleSheets({
+            name: name,
+            phone: phone,
+            deviceType: document.getElementById('popupDevice').value,
+            model: document.getElementById('popupModel').value.trim(),
+            problem: document.getElementById('popupProblem').value.trim()
+        });
+        showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+        document.getElementById('popupFormElement').reset();
+        popup.classList.remove('active');
+    });
+
+    // Плавный скролл
+    document.querySelectorAll('a.nav-link, .footer-links a, .hero-btn').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
             if (href && href.startsWith('#')) {
                 e.preventDefault();
                 const target = document.querySelector(href);
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         });
     });
