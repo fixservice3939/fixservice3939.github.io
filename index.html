@@ -4,58 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     
-    <!-- SEO -->
     <title>FixService | REANIMATOR – Сервисный центр ремонта техники в Ликино-Дулёво</title>
     <meta name="description" content="FixService — профессиональный ремонт телефонов, планшетов и ноутбуков в Ликино-Дулёво. Диагностика бесплатно, гарантия 1 год, оригинальные запчасти. Честные цены, быстрый сервис.">
     <meta name="keywords" content="ремонт телефонов, ремонт планшетов, ремонт ноутбуков, сервисный центр Ликино-Дулёво, FixService, замена экрана, ремонт iPhone, диагностика бесплатно">
     <meta name="author" content="FixService | REANIMATOR">
     
-    <!-- Open Graph / Соцсети -->
     <meta property="og:title" content="FixService | REANIMATOR – Сервисный центр">
     <meta property="og:description" content="Профессиональный ремонт телефонов, планшетов и ноутбуков. Гарантия 1 год, честные цены.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fixservice3939.github.io">
     <meta property="og:image" content="https://fixservice3939.github.io/foto.webp">
     
-    <!-- Безопасность (исправленный CSP) -->
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://script.google.com; connect-src 'self' https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com data:; img-src 'self' data:; frame-src https://yandex.ru;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com; connect-src 'self' https://script.google.com; style-src 'self' 'unsafe-inline'; font-src 'self' data:; img-src 'self' data:; frame-src https://yandex.ru;">
     
-    <!-- Preconnect для ускорения загрузки -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
-    
-    <!-- Schema.org разметка для LocalBusiness -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "FixService | REANIMATOR",
-        "description": "Сервисный центр по ремонту телефонов, планшетов и ноутбуков",
-        "image": "https://fixservice3939.github.io/foto.webp",
-        "telephone": "+79778111666",
-        "email": "fixservice@example.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "ул. Советская 41, 2 этаж, пом.209",
-            "addressLocality": "Ликино-Дулёво",
-            "addressRegion": "Московская область",
-            "addressCountry": "RU"
-        },
-        "openingHours": "Mo-Su 10:00-18:00",
-        "priceRange": "₽₽",
-        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-        "hasMap": "https://yandex.ru/maps/-/CPdlF6Lt"
-    }
-    </script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -83,6 +52,16 @@
             z-index: -1;
             pointer-events: none;
         }
+        
+        /* ===== ВСТРОЕННЫЕ ИКОНКИ (работают всегда) ===== */
+        .icon-phone::before { content: "📞"; font-size: 1.1rem; display: inline-block; width: 24px; }
+        .icon-telegram::before { content: "✈️"; font-size: 1.1rem; display: inline-block; width: 24px; }
+        .icon-telegram-channel::before { content: "📢"; font-size: 1.1rem; display: inline-block; width: 24px; }
+        .icon-youtube::before { content: "▶️"; font-size: 1.1rem; display: inline-block; width: 24px; }
+        .icon-vk::before { content: "🔹"; font-size: 1.8rem; display: inline-block; }
+        .icon-wa::before { content: "📞"; font-size: 1.8rem; display: inline-block; }
+        .icon-user::before { content: "👤"; font-size: 1.8rem; display: inline-block; }
+        
         .navbar {
             position: sticky;
             top: 0;
@@ -630,6 +609,7 @@
         .footer-privacy { margin-top: 12px; }
         .footer-privacy a { color: #7EC8FF; text-decoration: none; font-size: 0.8rem; }
 
+        /* Мобильная версия */
         @media (max-width: 800px) {
             .master-block { flex-direction: column; text-align: center; }
             .master-left { flex: 0 0 auto; }
@@ -681,7 +661,6 @@
             .toast { white-space: normal; text-align: center; max-width: 85%; font-size: 0.8rem; bottom: 90px; }
             .logo { font-size: 1.2rem; }
             
-            /* ===== МОБИЛЬНАЯ ВЕРСИЯ КОНТАКТОВ ===== */
             .contacts-wrapper {
                 flex-direction: column;
                 gap: 1.8rem;
@@ -703,7 +682,7 @@
                 margin-bottom: 1rem;
             }
             
-            /* FixService: скрываем текстовые метки (strong), оставляем только иконку + значение */
+            /* FixService: скрываем текстовые метки, показываем иконки через псевдоэлементы */
             .contacts-col:first-child p strong {
                 display: none;
             }
@@ -718,12 +697,15 @@
                 border-radius: 48px;
             }
             
+            /* Заменяем i на псевдоэлементы (без FontAwesome) */
             .contacts-col:first-child p i {
-                width: 28px;
-                font-size: 1.2rem;
-                text-align: center;
-                color: #C5A3FF;
+                display: none;
             }
+            
+            .contacts-col:first-child p:nth-child(2)::before { content: "📞"; font-size: 1.2rem; width: 24px; display: inline-block; }
+            .contacts-col:first-child p:nth-child(3)::before { content: "✈️"; font-size: 1.2rem; width: 24px; display: inline-block; }
+            .contacts-col:first-child p:nth-child(4)::before { content: "📢"; font-size: 1.2rem; width: 24px; display: inline-block; }
+            .contacts-col:first-child p:nth-child(5)::before { content: "▶️"; font-size: 1.2rem; width: 24px; display: inline-block; }
             
             .contacts-col:first-child p a,
             .contacts-col:first-child p span {
@@ -732,7 +714,7 @@
                 word-break: break-all;
             }
             
-            /* ТОЧКА: иконки в ряд, номер, сайт, кнопка */
+            /* ТОЧКА: иконки в ряд через псевдоэлементы */
             .contacts-col:last-child .partner-icons {
                 display: flex;
                 justify-content: center;
@@ -741,15 +723,17 @@
             }
             
             .contacts-col:last-child .partner-icons i {
-                font-size: 2rem;
-                color: #C5A3FF;
-                cursor: default;
+                display: none;
             }
             
-            .contacts-col:last-child .partner-icons i:hover {
-                transform: none;
-                color: #C5A3FF;
-            }
+            .contacts-col:last-child .partner-icons i:nth-child(1) { display: inline-block !important; font-family: inherit; font-style: normal; font-size: 2rem; }
+            .contacts-col:last-child .partner-icons i:nth-child(1)::before { content: "🔹"; font-size: 2rem; }
+            .contacts-col:last-child .partner-icons i:nth-child(2) { display: inline-block !important; font-family: inherit; font-style: normal; font-size: 2rem; }
+            .contacts-col:last-child .partner-icons i:nth-child(2)::before { content: "✈️"; font-size: 2rem; }
+            .contacts-col:last-child .partner-icons i:nth-child(3) { display: inline-block !important; font-family: inherit; font-style: normal; font-size: 2rem; }
+            .contacts-col:last-child .partner-icons i:nth-child(3)::before { content: "📞"; font-size: 2rem; }
+            .contacts-col:last-child .partner-icons i:nth-child(4) { display: inline-block !important; font-family: inherit; font-style: normal; font-size: 2rem; }
+            .contacts-col:last-child .partner-icons i:nth-child(4)::before { content: "👤"; font-size: 2rem; }
             
             .contacts-col:last-child p {
                 flex-direction: row;
@@ -799,12 +783,12 @@
                 font-size: 0.75rem;
             }
             
-            .contacts-col:last-child .partner-icons i {
-                font-size: 1.6rem;
-            }
-            
             .contacts-col:last-child .partner-icons {
                 gap: 1.2rem;
+            }
+            
+            .contacts-col:last-child .partner-icons i::before {
+                font-size: 1.6rem;
             }
         }
     </style>
@@ -815,11 +799,11 @@
     <div class="container-nav">
         <div class="logo"><span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span></div>
         <div class="nav-links">
-            <a href="#services" class="nav-link" aria-label="Перейти к услугам">Услуги</a>
-            <a href="#master" class="nav-link" aria-label="Перейти к информации о мастере">Мастер</a>
-            <a href="#faq" class="nav-link" aria-label="Перейти к частым вопросам">FAQ</a>
-            <a href="#contacts" class="nav-link" aria-label="Перейти к контактам">Контакты</a>
-            <a href="#map" class="nav-link" aria-label="Перейти к карте">Карта</a>
+            <a href="#services" class="nav-link">Услуги</a>
+            <a href="#master" class="nav-link">Мастер</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#contacts" class="nav-link">Контакты</a>
+            <a href="#map" class="nav-link">Карта</a>
         </div>
     </div>
 </div>
@@ -829,14 +813,14 @@
         <div class="badge">СЕРВИСНЫЙ ЦЕНТР</div>
         <h1>Качественный ремонт вашей техники</h1>
         <div class="hero-description">Быстрая диагностика, оригинальные запчасти, гарантия на все виды работ.</div>
-        <button class="hero-btn" id="heroOpenBtn" aria-label="Оставить заявку">Оставить заявку</button>
+        <button class="hero-btn" id="heroOpenBtn">Оставить заявку</button>
     </div>
 
     <h2>Как мы работаем</h2>
     <div class="text-block">
         <p>FixService — сервисный центр, специализирующийся на ремонте мобильной техники: телефонов, планшетов и ноутбуков. Принимаем устройства любых брендов. Работаем с любыми неисправностями — от замены стекла до микропайки и восстановления данных. Прозрачная диагностика, фиксированные цены, гарантия 12 месяцев. Без скрытых платежей и необоснованных завышений. Достаточно принести устройство — мастер проведёт диагностику и предложит оптимальное решение.</p>
         <p>Крупная бытовая техника (телевизоры, кофемашины и т.д.) — не наш профиль. Для таких задач у нас есть надёжный партнёр — сервисный центр «Точка». Компания специализируется на сложной бытовой технике и гарантирует профессиональный подход. При обращении к нам мы оперативно перенаправим вас к партнёру. В свою очередь, «Точка» направляет клиентов с мобильной техникой к нам. Чёткое разделение компетенций — гарантия качества и отсутствия путаницы.</p>
-        <button class="partner-btn-inline" id="partnerOpenBtnInline" aria-label="Отправить заявку партнёрам">Отправить заявку в ТОЧКУ</button>
+        <button class="partner-btn-inline" id="partnerOpenBtnInline">Отправить заявку в ТОЧКУ</button>
     </div>
     
     <div class="stats-section">
@@ -890,10 +874,10 @@
 
     <h2>Качественные запчасти</h2>
     <div class="parts-grid">
-        <div class="part-card"><div class="part-icon"><i class="fas fa-tv" aria-hidden="true"></i></div><div class="part-title">Дисплеи класса Original</div><div class="part-desc">Яркость, цветопередача как у нового</div></div>
-        <div class="part-card"><div class="part-icon"><i class="fas fa-battery-full" aria-hidden="true"></i></div><div class="part-title">Аккумуляторы</div><div class="part-desc">1000+ циклов, контроль ёмкости</div></div>
-        <div class="part-card"><div class="part-icon"><i class="fas fa-plug" aria-hidden="true"></i></div><div class="part-title">Шлейфы и разъёмы</div><div class="part-desc">Полное соответствие стандартам</div></div>
-        <div class="part-card"><div class="part-icon"><i class="fas fa-cogs" aria-hidden="true"></i></div><div class="part-title">Кнопки и корпуса</div><div class="part-desc">Износостойкие, оригинальной формы</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-tv"></i></div><div class="part-title">Дисплеи класса Original</div><div class="part-desc">Яркость, цветопередача как у нового</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-battery-full"></i></div><div class="part-title">Аккумуляторы</div><div class="part-desc">1000+ циклов, контроль ёмкости</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-plug"></i></div><div class="part-title">Шлейфы и разъёмы</div><div class="part-desc">Полное соответствие стандартам</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-cogs"></i></div><div class="part-title">Кнопки и корпуса</div><div class="part-desc">Износостойкие, оригинальной формы</div></div>
     </div>
 
     <h2>Аксессуары</h2>
@@ -949,22 +933,22 @@
     <div class="contacts-wrapper">
         <div class="contacts-col">
             <h3>НАШИ КОНТАКТЫ</h3>
-            <p><i class="fas fa-phone-alt" aria-hidden="true"></i> <strong>Телефон:</strong> <a href="tel:89778111666">8 (977) 811-16-66</a></p>
-            <p><i class="fab fa-telegram-plane" aria-hidden="true"></i> <strong>Telegram (личный):</strong> <a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a></p>
-            <p><i class="fab fa-telegram-plane" aria-hidden="true"></i> <strong>Telegram-канал:</strong> <a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a></p>
-            <p><i class="fab fa-youtube" aria-hidden="true"></i> <strong>YouTube:</strong> <a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a></p>
+            <p><i class="fas fa-phone-alt"></i> <strong>Телефон:</strong> <a href="tel:89778111666">8 (977) 811-16-66</a></p>
+            <p><i class="fab fa-telegram-plane"></i> <strong>Telegram (личный):</strong> <a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a></p>
+            <p><i class="fab fa-telegram-plane"></i> <strong>Telegram-канал:</strong> <a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a></p>
+            <p><i class="fab fa-youtube"></i> <strong>YouTube:</strong> <a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a></p>
         </div>
         <div class="contacts-col">
             <h3>НАШИ ПАРТНЁРЫ — ТОЧКА</h3>
             <div class="partner-icons">
-                <i class="fab fa-vk" aria-hidden="true"></i>
-                <i class="fab fa-telegram-plane" aria-hidden="true"></i>
-                <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                <i class="fas fa-user" aria-hidden="true"></i>
+                <i class="fab fa-vk"></i>
+                <i class="fab fa-telegram-plane"></i>
+                <i class="fab fa-whatsapp"></i>
+                <i class="fas fa-user"></i>
             </div>
-            <p><i class="fas fa-phone-alt" aria-hidden="true"></i> <strong>Телефон:</strong> <a href="tel:89699993524">8 (969) 999-35-24</a></p>
-            <p><i class="fas fa-globe" aria-hidden="true"></i> <strong>Сайт:</strong> <a href="https://www.tochkaremonta24.ru" target="_blank">www.tochkaremonta24.ru</a></p>
-            <button class="partner-btn" id="partnerOpenBtn" aria-label="Отправить заявку партнёрам">Отправить заявку в ТОЧКУ</button>
+            <p><i class="fas fa-phone-alt"></i> <strong>Телефон:</strong> <a href="tel:89699993524">8 (969) 999-35-24</a></p>
+            <p><i class="fas fa-globe"></i> <strong>Сайт:</strong> <a href="https://www.tochkaremonta24.ru" target="_blank">www.tochkaremonta24.ru</a></p>
+            <button class="partner-btn" id="partnerOpenBtn">Отправить заявку в ТОЧКУ</button>
         </div>
     </div>
 
@@ -977,16 +961,16 @@
         <div class="map-wrapper">
             <iframe src="https://yandex.ru/map-widget/v1/?ll=38.957,55.724&z=17&pt=38.955609,55.720436,pm2rdm~38.958308,55.728053,pm2bl" allowfullscreen="true" title="Карта FixService и ТОЧКА"></iframe>
         </div>
-        <div class="work-hours"><i class="fas fa-clock" aria-hidden="true"></i> Режим работы: 10:00 – 18:00</div>
+        <div class="work-hours"><i class="fas fa-clock"></i> Режим работы: 10:00 – 18:00</div>
         <div class="map-link">
-            <a href="https://yandex.ru/maps/-/CPdlF6Lt" target="_blank"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Открыть FixService на Яндекс.Картах</a>
+            <a href="https://yandex.ru/maps/-/CPdlF6Lt" target="_blank"><i class="fas fa-external-link-alt"></i> Открыть FixService на Яндекс.Картах</a>
         </div>
     </div>
 </div>
 
 <div class="floating-buttons">
-    <a href="tel:89778111666" class="float-call" aria-label="Позвонить"><i class="fas fa-phone-alt" aria-hidden="true"></i> Позвонить</a>
-    <a href="https://t.me/AppleReanimator" class="float-telegram" target="_blank" aria-label="Написать в Telegram"><i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram</a>
+    <a href="tel:89778111666" class="float-call"><i class="fas fa-phone-alt"></i> Позвонить</a>
+    <a href="https://t.me/AppleReanimator" class="float-telegram" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
 </div>
 
 <footer>
@@ -1001,7 +985,7 @@
 
 <div id="popupForm" class="popup-overlay">
     <div class="popup-form">
-        <button class="close-popup" id="closePopupBtn" aria-label="Закрыть">×</button>
+        <button class="close-popup" id="closePopupBtn">×</button>
         <h3 id="popupTitle">Оставить заявку</h3>
         <form id="popupFormElement">
             <input type="hidden" id="popupType" value="main">
