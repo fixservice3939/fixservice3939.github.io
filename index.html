@@ -731,10 +731,8 @@
     <div class="master-block">
         <div class="master-left">
             <div class="master-photo">
-                <picture>
-                    <source srcset="foto.webp" type="image/webp">
-                    <img src="foto.jpg" alt="Мастер FixService Сергей" width="140" height="140" loading="lazy">
-                </picture>
+                <!-- Упрощённый тег img для гарантированной работы -->
+                <img src="foto.jpg" alt="Мастер FixService Сергей" width="140" height="140" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/140x140/3E9FDC/white?text=Фото'">
             </div>
         </div>
         <div class="quote-area">
@@ -930,13 +928,11 @@
             setTimeout(() => toast.classList.remove('show'), 3000);
         }
         
-        // Валидация телефона (10-11 цифр)
         function validatePhone(phone) {
             const numbers = phone.replace(/[^\d+]/g, '').replace(/\D/g, '');
             return numbers.length >= 10 && numbers.length <= 11;
         }
         
-        // Маска для телефона (+7 (XXX) XXX-XX-XX)
         function applyPhoneMask(input) {
             input.addEventListener('input', function(e) {
                 let value = this.value.replace(/\D/g, '');
@@ -951,7 +947,6 @@
             });
         }
         
-        // Установка загрузочного состояния кнопки
         function setLoading(btn, isLoading) {
             if (isLoading) {
                 btn.classList.add('loading');
@@ -962,7 +957,6 @@
             }
         }
         
-        // Отправка данных в Google Sheets (с обработкой ответа)
         async function sendToGoogleSheets(formData) {
             try {
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
@@ -970,11 +964,7 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}`);
-                }
-                
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 const result = await response.json();
                 return result.status === 'success';
             } catch (error) {
@@ -983,24 +973,7 @@
             }
         }
         
-        // Универсальная функция отправки заявки
-        async function submitApplication(formData, submitBtn) {
-            setLoading(submitBtn, true);
-            
-            const success = await sendToGoogleSheets(formData);
-            
-            setLoading(submitBtn, false);
-            
-            if (success) {
-                showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
-                return true;
-            } else {
-                showMessage('Ошибка отправки. Попробуйте позвонить по телефону.', true);
-                return false;
-            }
-        }
-        
-        // ========== ИНИЦИАЛИЗАЦИЯ МАСОК ТЕЛЕФОНОВ ==========
+        // ========== ИНИЦИАЛИЗАЦИЯ МАСОК ==========
         document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
         
         // ========== ОСНОВНАЯ ФОРМА ==========
@@ -1010,7 +983,6 @@
         if (mainForm) {
             mainForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                
                 const name = document.getElementById('formName').value.trim();
                 const phone = document.getElementById('formPhone').value.trim();
                 const privacyChecked = document.getElementById('formPrivacy').checked;
@@ -1028,17 +1000,22 @@
                     return;
                 }
                 
-                const formData = {
-                    name: name,
-                    phone: phone,
+                setLoading(mainSubmitBtn, true);
+                const success = await sendToGoogleSheets({
+                    name, phone,
                     deviceType: document.getElementById('formDevice').value,
                     model: document.getElementById('formModel').value.trim(),
                     problem: document.getElementById('formProblem').value.trim(),
                     timestamp: new Date().toISOString()
-                };
+                });
+                setLoading(mainSubmitBtn, false);
                 
-                await submitApplication(formData, mainSubmitBtn);
-                if (success) mainForm.reset();
+                if (success) {
+                    showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+                    mainForm.reset();
+                } else {
+                    showMessage('Ошибка отправки. Попробуйте позвонить по телефону.', true);
+                }
             });
         }
         
@@ -1057,24 +1034,20 @@
             popup.classList.add('active');
         }
         
-        // Кнопки открытия попапа
         document.getElementById('heroOpenBtn')?.addEventListener('click', openMainPopup);
         document.getElementById('partnerOpenBtn')?.addEventListener('click', openPartnerPopup);
         document.getElementById('partnerOpenBtnInline')?.addEventListener('click', openPartnerPopup);
         
-        // Закрытие попапа
         document.getElementById('closePopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
         document.getElementById('cancelPopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
         popup?.addEventListener('click', (e) => { if(e.target === popup) popup.classList.remove('active'); });
         
-        // Отправка из попапа
         const popupFormElement = document.getElementById('popupFormElement');
         const popupSubmitBtn = document.getElementById('popupSubmitBtn');
         
         if (popupFormElement) {
             popupFormElement.addEventListener('submit', async function(e) {
                 e.preventDefault();
-                
                 const name = document.getElementById('popupName').value.trim();
                 const phone = document.getElementById('popupPhone').value.trim();
                 const privacyChecked = document.getElementById('popupPrivacy').checked;
@@ -1094,7 +1067,6 @@
                 }
                 
                 if (type === 'partner') {
-                    // Имитация отправки партнёрам (без реальной отправки)
                     setLoading(popupSubmitBtn, true);
                     setTimeout(() => {
                         setLoading(popupSubmitBtn, false);
@@ -1104,17 +1076,14 @@
                         popup.classList.remove('active');
                     }, 500);
                 } else {
-                    const formData = {
-                        name: name,
-                        phone: phone,
+                    setLoading(popupSubmitBtn, true);
+                    const success = await sendToGoogleSheets({
+                        name, phone,
                         deviceType: document.getElementById('popupDevice').value,
                         model: document.getElementById('popupModel').value.trim(),
                         problem: document.getElementById('popupProblem').value.trim(),
                         timestamp: new Date().toISOString()
-                    };
-                    
-                    setLoading(popupSubmitBtn, true);
-                    const success = await sendToGoogleSheets(formData);
+                    });
                     setLoading(popupSubmitBtn, false);
                     
                     if (success) {
@@ -1129,75 +1098,17 @@
             });
         }
         
-        // ========== ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРНЫХ ССЫЛОК ==========
+        // ========== ПЛАВНАЯ ПРОКРУТКА ==========
         document.querySelectorAll('a.nav-link, .footer-links a, .hero-btn').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
                 if (href && href.startsWith('#')) {
                     e.preventDefault();
                     const target = document.querySelector(href);
-                    if (target) {
-                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+                    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
         });
-        
-        // Переменная для хранения статуса успеха в основной форме
-        let success = false;
-        // Переопределяем submitApplication для основной формы с сохранением статуса
-        const originalSubmit = submitApplication;
-        window.submitApplication = async function(formData, submitBtn) {
-            setLoading(submitBtn, true);
-            const result = await sendToGoogleSheets(formData);
-            setLoading(submitBtn, false);
-            if (result) {
-                showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
-                success = true;
-            } else {
-                showMessage('Ошибка отправки. Попробуйте позвонить по телефону.', true);
-                success = false;
-            }
-            return result;
-        };
-        
-        // Обновляем обработчик основной формы
-        if (mainForm) {
-            const newHandler = async function(e) {
-                e.preventDefault();
-                const name = document.getElementById('formName').value.trim();
-                const phone = document.getElementById('formPhone').value.trim();
-                const privacyChecked = document.getElementById('formPrivacy').checked;
-                
-                if (!name || !phone) {
-                    showMessage('Заполните имя и номер телефона', true);
-                    return;
-                }
-                if (!validatePhone(phone)) {
-                    showMessage('Введите корректный номер телефона (10-11 цифр)', true);
-                    return;
-                }
-                if (!privacyChecked) {
-                    showMessage('Подтвердите согласие на обработку данных', true);
-                    return;
-                }
-                
-                const formData = {
-                    name: name,
-                    phone: phone,
-                    deviceType: document.getElementById('formDevice').value,
-                    model: document.getElementById('formModel').value.trim(),
-                    problem: document.getElementById('formProblem').value.trim(),
-                    timestamp: new Date().toISOString()
-                };
-                
-                await window.submitApplication(formData, mainSubmitBtn);
-                if (success) mainForm.reset();
-            };
-            mainForm.removeEventListener('submit', mainForm._listener);
-            mainForm.addEventListener('submit', newHandler);
-            mainForm._listener = newHandler;
-        }
     })();
 </script>
 </body>
