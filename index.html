@@ -17,11 +17,11 @@
     <meta property="og:url" content="https://fixservice3939.github.io">
     <meta property="og:image" content="https://fixservice3939.github.io/foto.webp">
     
-    <!-- Безопасность (исправленный CSP) -->
+    <!-- Безопасность -->
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://script.google.com; connect-src 'self' https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; frame-src https://yandex.ru;">
     
-    <!-- Preconnect для ускорения загрузки -->
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     
-    <!-- Schema.org разметка для LocalBusiness -->
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -639,7 +639,6 @@
             .nav-links { justify-content: center; gap: 1rem; }
             .checkbox-label { font-size: 0.75rem; }
             .popup-checkbox { font-size: 0.7rem; }
-            .contacts-wrapper { flex-direction: column; }
             .floating-buttons { bottom: 24px; right: 16px; gap: 14px; }
             .float-call, .float-telegram { padding: 14px 22px; font-size: 0.9rem; border-radius: 50px; gap: 10px; }
             .master-years {
@@ -680,11 +679,142 @@
             .parts-grid { grid-template-columns: 1fr; gap: 16px; }
             .toast { white-space: normal; text-align: center; max-width: 85%; font-size: 0.8rem; bottom: 90px; }
             .logo { font-size: 1.2rem; }
+            
+            /* ===== МОБИЛЬНАЯ ВЕРСИЯ КОНТАКТОВ (только до 800px) ===== */
+            .contacts-wrapper {
+                flex-direction: column;
+                gap: 1.8rem;
+                padding: 1.5rem;
+            }
+            
+            .contacts-col {
+                width: 100%;
+            }
+            
+            .contacts-col h3 {
+                text-align: center;
+                border-left: none;
+                border-bottom: 2px solid #7EC8FF;
+                padding-left: 0;
+                padding-bottom: 0.5rem;
+                display: inline-block;
+                width: auto;
+                margin-bottom: 1rem;
+            }
+            
+            /* FixService: только иконка + значение (без текстовых меток) */
+            .contacts-col:first-child p {
+                flex-direction: row;
+                align-items: center;
+                gap: 12px;
+                margin-bottom: 1rem;
+                padding: 0.6rem 0.8rem;
+                background: rgba(126, 200, 255, 0.08);
+                border-radius: 48px;
+            }
+            
+            .contacts-col:first-child p i {
+                width: 28px;
+                font-size: 1.2rem;
+                text-align: center;
+                color: #C5A3FF;
+            }
+            
+            .contacts-col:first-child p strong {
+                display: none; /* скрываем текст "Телефон:", "Telegram:" и т.д. */
+            }
+            
+            .contacts-col:first-child p a,
+            .contacts-col:first-child p span {
+                flex: 1;
+                font-size: 0.85rem;
+                word-break: break-all;
+            }
+            
+            /* ТОЧКА: иконки в ряд, номер, сайт, кнопка */
+            .contacts-col:last-child p {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.3rem;
+                margin-bottom: 1rem;
+                padding: 0;
+                background: transparent;
+            }
+            
+            .contacts-col:last-child p i {
+                width: auto;
+                font-size: 1rem;
+                margin-right: 8px;
+            }
+            
+            .contacts-col:last-child p strong {
+                display: inline-block;
+                font-size: 0.85rem;
+            }
+            
+            /* Блок иконок партнёров (VK, TG, WA, МАКС) */
+            .partner-icons {
+                display: flex;
+                justify-content: center;
+                gap: 1.8rem;
+                margin: 0.5rem 0 1rem;
+            }
+            
+            .partner-icons i {
+                font-size: 2rem;
+                color: #C5A3FF;
+                cursor: default; /* не кликабельные */
+            }
+            
+            .partner-icons i:hover {
+                transform: none;
+                color: #C5A3FF;
+            }
+            
+            /* Номер телефона и сайт у ТОЧКИ */
+            .contacts-col:last-child p:has(.fa-phone-alt),
+            .contacts-col:last-child p:has(.fa-globe) {
+                flex-direction: row;
+                align-items: center;
+                flex-wrap: wrap;
+                background: rgba(126, 200, 255, 0.08);
+                border-radius: 48px;
+                padding: 0.6rem 1rem;
+                margin-top: 0.5rem;
+            }
+            
+            .contacts-col:last-child p:has(.fa-phone-alt) a,
+            .contacts-col:last-child p:has(.fa-globe) a {
+                font-size: 0.85rem;
+                word-break: break-all;
+            }
+            
+            .partner-btn {
+                width: 100%;
+                text-align: center;
+                margin-top: 1rem;
+                padding: 12px;
+                font-size: 0.9rem;
+            }
         }
         
         @media (max-width: 480px) {
             .review-card { flex: 0 0 85%; }
             .brand-card { min-width: 85px; }
+            
+            .contacts-col:first-child p {
+                padding: 0.5rem 0.7rem;
+            }
+            
+            .contacts-col:first-child p a,
+            .contacts-col:first-child p span {
+                font-size: 0.75rem;
+            }
+            
+            .partner-icons i {
+                font-size: 1.6rem;
+                gap: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -731,7 +861,6 @@
     <div class="master-block">
         <div class="master-left">
             <div class="master-photo">
-                <!-- Упрощённый тег img для гарантированной работы -->
                 <img src="foto.jpg" alt="Мастер FixService Сергей" width="140" height="140" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/140x140/3E9FDC/white?text=Фото'">
             </div>
         </div>
@@ -836,13 +965,13 @@
         </div>
         <div class="contacts-col">
             <h3>Наши партнеры — ТОЧКА</h3>
-            <p><i class="fas fa-phone-alt" aria-hidden="true"></i> <strong>Телефон:</strong> <a href="tel:89699993524">8 (969) 999-35-24</a></p>
             <div class="partner-icons">
+                <i class="fab fa-vk" aria-hidden="true"></i>
                 <i class="fab fa-telegram-plane" aria-hidden="true"></i>
                 <i class="fab fa-whatsapp" aria-hidden="true"></i>
-                <i class="fab fa-vk" aria-hidden="true"></i>
                 <i class="fas fa-user" aria-hidden="true"></i>
             </div>
+            <p><i class="fas fa-phone-alt" aria-hidden="true"></i> <strong>Телефон:</strong> <a href="tel:89699993524">8 (969) 999-35-24</a></p>
             <p><i class="fas fa-globe" aria-hidden="true"></i> <strong>Сайт:</strong> <a href="https://www.tochkaremonta24.ru" target="_blank">www.tochkaremonta24.ru</a></p>
             <button class="partner-btn" id="partnerOpenBtn" aria-label="Отправить заявку партнёрам">Отправить заявку в ТОЧКУ</button>
         </div>
@@ -910,17 +1039,14 @@
 
 <script>
     (function() {
-        // ========== КОНФИГУРАЦИЯ ==========
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZPz4T5TGfNLQbWzU3gDue63RSe6xvLKCtUNxIOpu8Kw684chKTeSMeajPrpImXrUrvg/exec';
         
-        // ========== DOM ЭЛЕМЕНТЫ ==========
         const toast = document.getElementById('toast');
         const popup = document.getElementById('popupForm');
         const popupType = document.getElementById('popupType');
         const popupTitle = document.getElementById('popupTitle');
         const popupDeviceSelect = document.querySelector('#popupForm .popup-device-select');
         
-        // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
         function showMessage(text, isError = false) {
             toast.textContent = text;
             toast.style.background = isError ? '#dc2626' : '#3E9FDC';
@@ -973,10 +1099,8 @@
             }
         }
         
-        // ========== ИНИЦИАЛИЗАЦИЯ МАСОК ==========
         document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
         
-        // ========== ОСНОВНАЯ ФОРМА ==========
         const mainForm = document.getElementById('mainForm');
         const mainSubmitBtn = document.getElementById('mainFormSubmit');
         
@@ -1019,7 +1143,6 @@
             });
         }
         
-        // ========== ПОПАП ==========
         function openPartnerPopup() {
             popupType.value = 'partner';
             popupTitle.textContent = 'Заявка в ТОЧКУ';
@@ -1098,7 +1221,6 @@
             });
         }
         
-        // ========== ПЛАВНАЯ ПРОКРУТКА ==========
         document.querySelectorAll('a.nav-link, .footer-links a, .hero-btn').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
