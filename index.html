@@ -3,13 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>FixService | REANIMATOR – Сервисный центр</title>
+    
+    <!-- SEO -->
+    <title>FixService | REANIMATOR – Сервисный центр ремонта техники в Ликино-Дулёво</title>
+    <meta name="description" content="FixService — профессиональный ремонт телефонов, планшетов и ноутбуков в Ликино-Дулёво. Диагностика бесплатно, гарантия 1 год, оригинальные запчасти. Честные цены, быстрый сервис.">
+    <meta name="keywords" content="ремонт телефонов, ремонт планшетов, ремонт ноутбуков, сервисный центр Ликино-Дулёво, FixService, замена экрана, ремонт iPhone, диагностика бесплатно">
+    <meta name="author" content="FixService | REANIMATOR">
+    
+    <!-- Open Graph / Соцсети -->
+    <meta property="og:title" content="FixService | REANIMATOR – Сервисный центр">
+    <meta property="og:description" content="Профессиональный ремонт телефонов, планшетов и ноутбуков. Гарантия 1 год, честные цены.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fixservice3939.github.io">
+    <meta property="og:image" content="https://fixservice3939.github.io/foto.webp">
+    
+    <!-- Безопасность (исправленный CSP) -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://script.google.com; connect-src 'self' https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; frame-src https://yandex.ru;">
+    
+    <!-- Preconnect для ускорения загрузки -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    
+    <!-- Schema.org разметка для LocalBusiness -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "FixService | REANIMATOR",
+        "description": "Сервисный центр по ремонту телефонов, планшетов и ноутбуков",
+        "image": "https://fixservice3939.github.io/foto.webp",
+        "telephone": "+79778111666",
+        "email": "fixservice@example.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ул. Советская 41, 2 этаж, пом.209",
+            "addressLocality": "Ликино-Дулёво",
+            "addressRegion": "Московская область",
+            "addressCountry": "RU"
+        },
+        "openingHours": "Mo-Su 10:00-18:00",
+        "priceRange": "₽₽",
+        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
+        "hasMap": "https://yandex.ru/maps/-/CPdlF6Lt"
+    }
+    </script>
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
@@ -288,12 +335,12 @@
             color: white;
             font-family: inherit;
         }
-        .form-group textarea { border-radius: 24px; resize: vertical; }
         .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
             outline: none;
             border-color: #7EC8FF;
             background: rgba(255,255,255,0.2);
         }
+        .form-group textarea { border-radius: 24px; resize: vertical; }
         .checkbox-label {
             display: flex;
             align-items: flex-start;
@@ -315,6 +362,25 @@
             color: white;
             cursor: pointer;
             transition: all 0.2s;
+            position: relative;
+        }
+        .btn-submit.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        .btn-submit.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            border: 2px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
         }
         .btn-submit:hover { background: #62B8F0; transform: scale(1.02); }
         .contacts-wrapper {
@@ -594,7 +660,7 @@
                 mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
                 -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
             }
-            .brand-card { flex: 0 0 auto; min-width: 90px; font-size: 0.8rem; }
+            .brand-card { flex: 0 0 auto; min-width: 100px; font-size: 0.8rem; }
             .accessories-grid {
                 display: flex;
                 flex-wrap: nowrap;
@@ -609,10 +675,16 @@
                 mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
                 -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
             }
+            .review-card { flex: 0 0 85%; }
             .services-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
             .parts-grid { grid-template-columns: 1fr; gap: 16px; }
             .toast { white-space: normal; text-align: center; max-width: 85%; font-size: 0.8rem; bottom: 90px; }
             .logo { font-size: 1.2rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .review-card { flex: 0 0 85%; }
+            .brand-card { min-width: 85px; }
         }
     </style>
 </head>
@@ -622,11 +694,11 @@
     <div class="container-nav">
         <div class="logo"><span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span></div>
         <div class="nav-links">
-            <a href="#services" class="nav-link">Услуги</a>
-            <a href="#master" class="nav-link">Мастер</a>
-            <a href="#faq" class="nav-link">FAQ</a>
-            <a href="#contacts" class="nav-link">Контакты</a>
-            <a href="#map" class="nav-link">Карта</a>
+            <a href="#services" class="nav-link" aria-label="Перейти к услугам">Услуги</a>
+            <a href="#master" class="nav-link" aria-label="Перейти к информации о мастере">Мастер</a>
+            <a href="#faq" class="nav-link" aria-label="Перейти к частым вопросам">FAQ</a>
+            <a href="#contacts" class="nav-link" aria-label="Перейти к контактам">Контакты</a>
+            <a href="#map" class="nav-link" aria-label="Перейти к карте">Карта</a>
         </div>
     </div>
 </div>
@@ -636,16 +708,16 @@
         <div class="badge">СЕРВИСНЫЙ ЦЕНТР</div>
         <h1>Качественный ремонт вашей техники</h1>
         <div class="hero-description">Быстрая диагностика, оригинальные запчасти, гарантия на все виды работ.</div>
-        <button class="hero-btn" id="heroOpenBtn">Оставить заявку</button>
+        <button class="hero-btn" id="heroOpenBtn" aria-label="Оставить заявку">Оставить заявку</button>
     </div>
 
     <h2>Как мы работаем</h2>
     <div class="text-block">
-        <p>FixService — это ремонт мобильной техники без компромиссов. Телефоны, планшеты, ноутбуки — всё, что можно положить в рюкзак и принести. Мастер работает с любыми брендами, любыми поломками: от треснувшего стекла до сложной микропайки и восстановления данных. Никаких «авось сойдёт» и завышенных чеков. Диагностика честная, цены прозрачные, гарантия — год. Просто приходите, мы посмотрим и скажем, как будет лучше.</p>
-        <p>Телевизоры, кофемашины и другую крупную бытовую технику не чиним — это не наш профиль. Зато у нас есть надёжные партнёры: сервис «Точка». Ребята с опытом, которые разбираются в телевизорах и кофемашинах как никто. Если сломалась такая техника — мы перенаправим к ним без лишних разговоров. А они, в свою очередь, знают, что телефоны и ноутбуки — это к нам. Удобно, честно и без путаницы.</p>
-        <button class="partner-btn-inline" id="partnerOpenBtnInline">Отправить заявку в ТОЧКУ</button>
+        <p>FixService — сервисный центр, специализирующийся на ремонте мобильной техники: телефонов, планшетов и ноутбуков. Принимаем устройства любых брендов. Работаем с любыми неисправностями — от замены стекла до микропайки и восстановления данных. Прозрачная диагностика, фиксированные цены, гарантия 12 месяцев. Без скрытых платежей и необоснованных завышений. Достаточно принести устройство — мастер проведёт диагностику и предложит оптимальное решение.</p>
+        <p>Крупная бытовая техника (телевизоры, кофемашины и т.д.) — не наш профиль. Для таких задач у нас есть надёжный партнёр — сервисный центр «Точка». Компания специализируется на сложной бытовой технике и гарантирует профессиональный подход. При обращении к нам мы оперативно перенаправим вас к партнёру. В свою очередь, «Точка» направляет клиентов с мобильной техникой к нам. Чёткое разделение компетенций — гарантия качества и отсутствия путаницы.</p>
+        <button class="partner-btn-inline" id="partnerOpenBtnInline" aria-label="Отправить заявку партнёрам">Отправить заявку в ТОЧКУ</button>
     </div>
-
+    
     <div class="stats-section">
         <div class="stats-grid">
             <div class="stat-item"><div class="stat-number">10 лет</div><div class="stat-label">опыта</div></div>
@@ -659,7 +731,10 @@
     <div class="master-block">
         <div class="master-left">
             <div class="master-photo">
-                <img src="foto.jpg" alt="Мастер FixService">
+                <picture>
+                    <source srcset="foto.webp" type="image/webp">
+                    <img src="foto.jpg" alt="Мастер FixService Сергей" width="140" height="140" loading="lazy">
+                </picture>
             </div>
         </div>
         <div class="quote-area">
@@ -697,10 +772,10 @@
 
     <h2>Качественные запчасти</h2>
     <div class="parts-grid">
-        <div class="part-card"><div class="part-icon"><i class="fas fa-tv"></i></div><div class="part-title">Дисплеи класса Original</div><div class="part-desc">Яркость, цветопередача как у нового</div></div>
-        <div class="part-card"><div class="part-icon"><i class="fas fa-battery-full"></i></div><div class="part-title">Аккумуляторы</div><div class="part-desc">1000+ циклов, контроль ёмкости</div></div>
-        <div class="part-card"><div class="part-icon"><i class="fas fa-plug"></i></div><div class="part-title">Шлейфы и разъёмы</div><div class="part-desc">Полное соответствие стандартам</div></div>
-        <div class="part-card"><div class="part-icon"><i class="fas fa-cogs"></i></div><div class="part-title">Кнопки и корпуса</div><div class="part-desc">Износостойкие, оригинальной формы</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-tv" aria-hidden="true"></i></div><div class="part-title">Дисплеи класса Original</div><div class="part-desc">Яркость, цветопередача как у нового</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-battery-full" aria-hidden="true"></i></div><div class="part-title">Аккумуляторы</div><div class="part-desc">1000+ циклов, контроль ёмкости</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-plug" aria-hidden="true"></i></div><div class="part-title">Шлейфы и разъёмы</div><div class="part-desc">Полное соответствие стандартам</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-cogs" aria-hidden="true"></i></div><div class="part-title">Кнопки и корпуса</div><div class="part-desc">Износостойкие, оригинальной формы</div></div>
     </div>
 
     <h2>Аксессуары</h2>
@@ -732,7 +807,7 @@
     <div class="form-block">
         <form id="mainForm">
             <div class="form-group"><input type="text" id="formName" placeholder="Ваше имя" required></div>
-            <div class="form-group"><input type="tel" id="formPhone" placeholder="Номер телефона" required></div>
+            <div class="form-group"><input type="tel" id="formPhone" placeholder="Номер телефона" required data-phone-mask></div>
             <div class="form-group">
                 <select id="formDevice">
                     <option value="Телефон">Телефон</option>
@@ -748,7 +823,7 @@
                     <span>Я принимаю условия <a href="privacy.html" target="_blank">Политики конфиденциальности</a> и даю согласие на обработку данных</span>
                 </label>
             </div>
-            <button type="submit" class="btn-submit">Отправить заявку</button>
+            <button type="submit" class="btn-submit" id="mainFormSubmit">Отправить заявку</button>
         </form>
     </div>
 
@@ -756,22 +831,22 @@
     <div class="contacts-wrapper">
         <div class="contacts-col">
             <h3>Наши контакты</h3>
-            <p><i class="fas fa-phone-alt"></i> <strong>Телефон:</strong> <a href="tel:89778111666">8 (977) 811-16-66</a></p>
-            <p><i class="fab fa-telegram-plane"></i> <strong>Telegram (личный):</strong> <a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a></p>
-            <p><i class="fab fa-telegram-plane"></i> <strong>Telegram-канал:</strong> <a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a></p>
-            <p><i class="fab fa-youtube"></i> <strong>YouTube:</strong> <a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a></p>
+            <p><i class="fas fa-phone-alt" aria-hidden="true"></i> <strong>Телефон:</strong> <a href="tel:89778111666">8 (977) 811-16-66</a></p>
+            <p><i class="fab fa-telegram-plane" aria-hidden="true"></i> <strong>Telegram (личный):</strong> <a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a></p>
+            <p><i class="fab fa-telegram-plane" aria-hidden="true"></i> <strong>Telegram-канал:</strong> <a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a></p>
+            <p><i class="fab fa-youtube" aria-hidden="true"></i> <strong>YouTube:</strong> <a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a></p>
         </div>
         <div class="contacts-col">
             <h3>Наши партнеры — ТОЧКА</h3>
-            <p><i class="fas fa-phone-alt"></i> <strong>Телефон:</strong> <a href="tel:89699993524">8 (969) 999-35-24</a></p>
+            <p><i class="fas fa-phone-alt" aria-hidden="true"></i> <strong>Телефон:</strong> <a href="tel:89699993524">8 (969) 999-35-24</a></p>
             <div class="partner-icons">
-                <i class="fab fa-telegram-plane"></i>
-                <i class="fab fa-whatsapp"></i>
-                <i class="fab fa-vk"></i>
-                <i class="fas fa-user"></i>
+                <i class="fab fa-telegram-plane" aria-hidden="true"></i>
+                <i class="fab fa-whatsapp" aria-hidden="true"></i>
+                <i class="fab fa-vk" aria-hidden="true"></i>
+                <i class="fas fa-user" aria-hidden="true"></i>
             </div>
-            <p><i class="fas fa-globe"></i> <strong>Сайт:</strong> <a href="https://www.tochkaremonta24.ru" target="_blank">www.tochkaremonta24.ru</a></p>
-            <button class="partner-btn" id="partnerOpenBtn">Отправить заявку в ТОЧКУ</button>
+            <p><i class="fas fa-globe" aria-hidden="true"></i> <strong>Сайт:</strong> <a href="https://www.tochkaremonta24.ru" target="_blank">www.tochkaremonta24.ru</a></p>
+            <button class="partner-btn" id="partnerOpenBtn" aria-label="Отправить заявку партнёрам">Отправить заявку в ТОЧКУ</button>
         </div>
     </div>
 
@@ -784,16 +859,16 @@
         <div class="map-wrapper">
             <iframe src="https://yandex.ru/map-widget/v1/?ll=38.957,55.724&z=17&pt=38.955609,55.720436,pm2rdm~38.958308,55.728053,pm2bl" allowfullscreen="true" title="Карта FixService и ТОЧКА"></iframe>
         </div>
-        <div class="work-hours"><i class="fas fa-clock"></i> Режим работы: 10:00 – 18:00</div>
+        <div class="work-hours"><i class="fas fa-clock" aria-hidden="true"></i> Режим работы: 10:00 – 18:00</div>
         <div class="map-link">
-            <a href="https://yandex.ru/maps/-/CPdlF6Lt" target="_blank"><i class="fas fa-external-link-alt"></i> Открыть FixService на Яндекс.Картах</a>
+            <a href="https://yandex.ru/maps/-/CPdlF6Lt" target="_blank"><i class="fas fa-external-link-alt" aria-hidden="true"></i> Открыть FixService на Яндекс.Картах</a>
         </div>
     </div>
 </div>
 
 <div class="floating-buttons">
-    <a href="tel:89778111666" class="float-call"><i class="fas fa-phone-alt"></i> Позвонить</a>
-    <a href="https://t.me/AppleReanimator" class="float-telegram" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+    <a href="tel:89778111666" class="float-call" aria-label="Позвонить"><i class="fas fa-phone-alt" aria-hidden="true"></i> Позвонить</a>
+    <a href="https://t.me/AppleReanimator" class="float-telegram" target="_blank" aria-label="Написать в Telegram"><i class="fab fa-telegram-plane" aria-hidden="true"></i> Telegram</a>
 </div>
 
 <footer>
@@ -808,12 +883,12 @@
 
 <div id="popupForm" class="popup-overlay">
     <div class="popup-form">
-        <button class="close-popup" id="closePopupBtn">×</button>
+        <button class="close-popup" id="closePopupBtn" aria-label="Закрыть">×</button>
         <h3 id="popupTitle">Оставить заявку</h3>
         <form id="popupFormElement">
             <input type="hidden" id="popupType" value="main">
             <input type="text" id="popupName" placeholder="Имя" required>
-            <input type="tel" id="popupPhone" placeholder="Номер телефона" required>
+            <input type="tel" id="popupPhone" placeholder="Номер телефона" required data-phone-mask>
             <select id="popupDevice" class="popup-device-select">
                 <option value="Телефон">Телефон</option>
                 <option value="Планшет">Планшет</option>
@@ -826,7 +901,7 @@
                 <label>Я принимаю <a href="privacy.html" target="_blank">Политику конфиденциальности</a></label>
             </div>
             <div class="form-buttons">
-                <button type="submit">Отправить</button>
+                <button type="submit" id="popupSubmitBtn">Отправить</button>
                 <button type="button" class="cancel-btn" id="cancelPopupBtn">Отмена</button>
             </div>
         </form>
@@ -836,104 +911,294 @@
 <div id="toast" class="toast">Заявка отправлена. Мастер свяжется с вами.</div>
 
 <script>
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZPz4T5TGfNLQbWzU3gDue63RSe6xvLKCtUNxIOpu8Kw684chKTeSMeajPrpImXrUrvg/exec';
-    const toast = document.getElementById('toast');
-    function showMessage(text, isError = false) {
-        toast.textContent = text;
-        toast.style.background = isError ? '#dc2626' : '#3E9FDC';
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-    async function sendToGoogleSheets(formData) {
-        try {
-            await fetch(GOOGLE_SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formData)
-            });
-            return true;
-        } catch (error) {
-            console.error('Ошибка:', error);
-            return false;
+    (function() {
+        // ========== КОНФИГУРАЦИЯ ==========
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZPz4T5TGfNLQbWzU3gDue63RSe6xvLKCtUNxIOpu8Kw684chKTeSMeajPrpImXrUrvg/exec';
+        
+        // ========== DOM ЭЛЕМЕНТЫ ==========
+        const toast = document.getElementById('toast');
+        const popup = document.getElementById('popupForm');
+        const popupType = document.getElementById('popupType');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupDeviceSelect = document.querySelector('#popupForm .popup-device-select');
+        
+        // ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
+        function showMessage(text, isError = false) {
+            toast.textContent = text;
+            toast.style.background = isError ? '#dc2626' : '#3E9FDC';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 3000);
         }
-    }
-
-    document.getElementById('mainForm').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const name = document.getElementById('formName').value.trim();
-        const phone = document.getElementById('formPhone').value.trim();
-        if (!name || !phone) { showMessage('Заполните имя и номер телефона', true); return; }
-        if (!document.getElementById('formPrivacy').checked) { showMessage('Подтвердите согласие на обработку данных', true); return; }
-        await sendToGoogleSheets({
-            name, phone,
-            deviceType: document.getElementById('formDevice').value,
-            model: document.getElementById('formModel').value.trim(),
-            problem: document.getElementById('formProblem').value.trim()
-        });
-        showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
-        document.getElementById('mainForm').reset();
-    });
-
-    const popup = document.getElementById('popupForm');
-    const popupTitle = document.getElementById('popupTitle');
-    const popupType = document.getElementById('popupType');
-    const popupDeviceSelect = document.querySelector('#popupForm .popup-device-select');
-
-    function openPartnerPopup() {
-        popupType.value = 'partner';
-        popupTitle.textContent = 'Заявка в ТОЧКУ';
-        if (popupDeviceSelect) popupDeviceSelect.style.display = 'none';
-        popup.classList.add('active');
-    }
-    function openMainPopup() {
-        popupType.value = 'main';
-        popupTitle.textContent = 'Оставить заявку';
-        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
-        popup.classList.add('active');
-    }
-    document.getElementById('heroOpenBtn').addEventListener('click', openMainPopup);
-    const partnerBtn1 = document.getElementById('partnerOpenBtn');
-    const partnerBtn2 = document.getElementById('partnerOpenBtnInline');
-    if (partnerBtn1) partnerBtn1.addEventListener('click', openPartnerPopup);
-    if (partnerBtn2) partnerBtn2.addEventListener('click', openPartnerPopup);
-
-    document.getElementById('closePopupBtn').addEventListener('click', () => popup.classList.remove('active'));
-    document.getElementById('cancelPopupBtn').addEventListener('click', () => popup.classList.remove('active'));
-    popup.addEventListener('click', (e) => { if(e.target === popup) popup.classList.remove('active'); });
-
-    document.getElementById('popupFormElement').addEventListener('submit', async function(e) {
-        e.preventDefault();
-        const name = document.getElementById('popupName').value.trim();
-        const phone = document.getElementById('popupPhone').value.trim();
-        if (!name || !phone) { showMessage('Заполните имя и номер телефона', true); return; }
-        if (!document.getElementById('popupPrivacy').checked) { showMessage('Подтвердите согласие на обработку данных', true); return; }
-        if (popupType.value === 'partner') {
-            showMessage('Спасибо! Заявка отправлена партнёрам. Они свяжутся с вами.');
-        } else {
-            await sendToGoogleSheets({
-                name, phone,
-                deviceType: document.getElementById('popupDevice').value,
-                model: document.getElementById('popupModel').value.trim(),
-                problem: document.getElementById('popupProblem').value.trim()
-            });
-            showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+        
+        // Валидация телефона (10-11 цифр)
+        function validatePhone(phone) {
+            const numbers = phone.replace(/[^\d+]/g, '').replace(/\D/g, '');
+            return numbers.length >= 10 && numbers.length <= 11;
         }
-        document.getElementById('popupFormElement').reset();
-        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
-        popup.classList.remove('active');
-    });
-
-    document.querySelectorAll('a.nav-link, .footer-links a, .hero-btn').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (href && href.startsWith('#')) {
-                e.preventDefault();
-                const target = document.querySelector(href);
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Маска для телефона (+7 (XXX) XXX-XX-XX)
+        function applyPhoneMask(input) {
+            input.addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                let formatted = '';
+                if (value.length > 0) formatted = '+7';
+                if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+                if (value.length > 4) formatted += ') ' + value.slice(4, 7);
+                if (value.length > 7) formatted += '-' + value.slice(7, 9);
+                if (value.length > 9) formatted += '-' + value.slice(9, 11);
+                this.value = formatted;
+            });
+        }
+        
+        // Установка загрузочного состояния кнопки
+        function setLoading(btn, isLoading) {
+            if (isLoading) {
+                btn.classList.add('loading');
+                btn.disabled = true;
+            } else {
+                btn.classList.remove('loading');
+                btn.disabled = false;
             }
+        }
+        
+        // Отправка данных в Google Sheets (с обработкой ответа)
+        async function sendToGoogleSheets(formData) {
+            try {
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                
+                const result = await response.json();
+                return result.status === 'success';
+            } catch (error) {
+                console.error('Ошибка отправки:', error);
+                return false;
+            }
+        }
+        
+        // Универсальная функция отправки заявки
+        async function submitApplication(formData, submitBtn) {
+            setLoading(submitBtn, true);
+            
+            const success = await sendToGoogleSheets(formData);
+            
+            setLoading(submitBtn, false);
+            
+            if (success) {
+                showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+                return true;
+            } else {
+                showMessage('Ошибка отправки. Попробуйте позвонить по телефону.', true);
+                return false;
+            }
+        }
+        
+        // ========== ИНИЦИАЛИЗАЦИЯ МАСОК ТЕЛЕФОНОВ ==========
+        document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
+        
+        // ========== ОСНОВНАЯ ФОРМА ==========
+        const mainForm = document.getElementById('mainForm');
+        const mainSubmitBtn = document.getElementById('mainFormSubmit');
+        
+        if (mainForm) {
+            mainForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('formName').value.trim();
+                const phone = document.getElementById('formPhone').value.trim();
+                const privacyChecked = document.getElementById('formPrivacy').checked;
+                
+                if (!name || !phone) {
+                    showMessage('Заполните имя и номер телефона', true);
+                    return;
+                }
+                if (!validatePhone(phone)) {
+                    showMessage('Введите корректный номер телефона (10-11 цифр)', true);
+                    return;
+                }
+                if (!privacyChecked) {
+                    showMessage('Подтвердите согласие на обработку данных', true);
+                    return;
+                }
+                
+                const formData = {
+                    name: name,
+                    phone: phone,
+                    deviceType: document.getElementById('formDevice').value,
+                    model: document.getElementById('formModel').value.trim(),
+                    problem: document.getElementById('formProblem').value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+                
+                await submitApplication(formData, mainSubmitBtn);
+                if (success) mainForm.reset();
+            });
+        }
+        
+        // ========== ПОПАП ==========
+        function openPartnerPopup() {
+            popupType.value = 'partner';
+            popupTitle.textContent = 'Заявка в ТОЧКУ';
+            if (popupDeviceSelect) popupDeviceSelect.style.display = 'none';
+            popup.classList.add('active');
+        }
+        
+        function openMainPopup() {
+            popupType.value = 'main';
+            popupTitle.textContent = 'Оставить заявку';
+            if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
+            popup.classList.add('active');
+        }
+        
+        // Кнопки открытия попапа
+        document.getElementById('heroOpenBtn')?.addEventListener('click', openMainPopup);
+        document.getElementById('partnerOpenBtn')?.addEventListener('click', openPartnerPopup);
+        document.getElementById('partnerOpenBtnInline')?.addEventListener('click', openPartnerPopup);
+        
+        // Закрытие попапа
+        document.getElementById('closePopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
+        document.getElementById('cancelPopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
+        popup?.addEventListener('click', (e) => { if(e.target === popup) popup.classList.remove('active'); });
+        
+        // Отправка из попапа
+        const popupFormElement = document.getElementById('popupFormElement');
+        const popupSubmitBtn = document.getElementById('popupSubmitBtn');
+        
+        if (popupFormElement) {
+            popupFormElement.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('popupName').value.trim();
+                const phone = document.getElementById('popupPhone').value.trim();
+                const privacyChecked = document.getElementById('popupPrivacy').checked;
+                const type = popupType.value;
+                
+                if (!name || !phone) {
+                    showMessage('Заполните имя и номер телефона', true);
+                    return;
+                }
+                if (!validatePhone(phone)) {
+                    showMessage('Введите корректный номер телефона (10-11 цифр)', true);
+                    return;
+                }
+                if (!privacyChecked) {
+                    showMessage('Подтвердите согласие на обработку данных', true);
+                    return;
+                }
+                
+                if (type === 'partner') {
+                    // Имитация отправки партнёрам (без реальной отправки)
+                    setLoading(popupSubmitBtn, true);
+                    setTimeout(() => {
+                        setLoading(popupSubmitBtn, false);
+                        showMessage('Спасибо! Заявка отправлена партнёрам. Они свяжутся с вами.');
+                        popupFormElement.reset();
+                        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
+                        popup.classList.remove('active');
+                    }, 500);
+                } else {
+                    const formData = {
+                        name: name,
+                        phone: phone,
+                        deviceType: document.getElementById('popupDevice').value,
+                        model: document.getElementById('popupModel').value.trim(),
+                        problem: document.getElementById('popupProblem').value.trim(),
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    setLoading(popupSubmitBtn, true);
+                    const success = await sendToGoogleSheets(formData);
+                    setLoading(popupSubmitBtn, false);
+                    
+                    if (success) {
+                        showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+                        popupFormElement.reset();
+                        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
+                        popup.classList.remove('active');
+                    } else {
+                        showMessage('Ошибка отправки. Попробуйте позвонить.', true);
+                    }
+                }
+            });
+        }
+        
+        // ========== ПЛАВНАЯ ПРОКРУТКА ДЛЯ ЯКОРНЫХ ССЫЛОК ==========
+        document.querySelectorAll('a.nav-link, .footer-links a, .hero-btn').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href && href.startsWith('#')) {
+                    e.preventDefault();
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
         });
-    });
+        
+        // Переменная для хранения статуса успеха в основной форме
+        let success = false;
+        // Переопределяем submitApplication для основной формы с сохранением статуса
+        const originalSubmit = submitApplication;
+        window.submitApplication = async function(formData, submitBtn) {
+            setLoading(submitBtn, true);
+            const result = await sendToGoogleSheets(formData);
+            setLoading(submitBtn, false);
+            if (result) {
+                showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+                success = true;
+            } else {
+                showMessage('Ошибка отправки. Попробуйте позвонить по телефону.', true);
+                success = false;
+            }
+            return result;
+        };
+        
+        // Обновляем обработчик основной формы
+        if (mainForm) {
+            const newHandler = async function(e) {
+                e.preventDefault();
+                const name = document.getElementById('formName').value.trim();
+                const phone = document.getElementById('formPhone').value.trim();
+                const privacyChecked = document.getElementById('formPrivacy').checked;
+                
+                if (!name || !phone) {
+                    showMessage('Заполните имя и номер телефона', true);
+                    return;
+                }
+                if (!validatePhone(phone)) {
+                    showMessage('Введите корректный номер телефона (10-11 цифр)', true);
+                    return;
+                }
+                if (!privacyChecked) {
+                    showMessage('Подтвердите согласие на обработку данных', true);
+                    return;
+                }
+                
+                const formData = {
+                    name: name,
+                    phone: phone,
+                    deviceType: document.getElementById('formDevice').value,
+                    model: document.getElementById('formModel').value.trim(),
+                    problem: document.getElementById('formProblem').value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+                
+                await window.submitApplication(formData, mainSubmitBtn);
+                if (success) mainForm.reset();
+            };
+            mainForm.removeEventListener('submit', mainForm._listener);
+            mainForm.addEventListener('submit', newHandler);
+            mainForm._listener = newHandler;
+        }
+    })();
 </script>
 </body>
 </html>
