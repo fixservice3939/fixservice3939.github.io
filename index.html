@@ -400,11 +400,12 @@
             color: #F0F9FF;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 8px;
             flex-wrap: wrap;
             background: rgba(126, 200, 255, 0.08);
             border-radius: 48px;
             padding: 0.6rem 0.8rem;
+            justify-content: flex-start;
         }
         /* На десктопе: иконки SVG видны, текстовые подписи скрыты */
         .contacts-col p .svg-icon {
@@ -426,6 +427,7 @@
         .contacts-col p a, .contacts-col p span {
             word-break: break-word;
             flex: 1;
+            text-align: left;
         }
         .contacts-col a {
             color: #7EC8FF;
@@ -668,7 +670,7 @@
         .footer-privacy { margin-top: 12px; }
         .footer-privacy a { color: #7EC8FF; text-decoration: none; font-size: 0.8rem; }
 
-        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (до 800px) – корректируем отступы ===== */
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (до 800px) ===== */
         @media (max-width: 800px) {
             .master-block { flex-direction: column; text-align: center; }
             .master-left { flex: 0 0 auto; }
@@ -754,11 +756,12 @@
             .contacts-col p {
                 flex-direction: row;
                 align-items: center;
-                gap: 12px;
+                gap: 8px;
                 margin-bottom: 1rem;
                 padding: 0.6rem 0.8rem;
                 background: rgba(126, 200, 255, 0.08);
                 border-radius: 48px;
+                justify-content: flex-start;
             }
             
             .contacts-col p .svg-icon img {
