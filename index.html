@@ -4,24 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     
-    <!-- SEO -->
     <title>FixService | REANIMATOR – Сервисный центр ремонта техники в Ликино-Дулёво</title>
     <meta name="description" content="FixService — профессиональный ремонт телефонов, планшетов и ноутбуков в Ликино-Дулёво. Диагностика бесплатно, гарантия 1 год, оригинальные запчасти. Честные цены, быстрый сервис.">
     <meta name="keywords" content="ремонт телефонов, ремонт планшетов, ремонт ноутбуков, сервисный центр Ликино-Дулёво, FixService, замена экрана, ремонт iPhone, диагностика бесплатно">
     <meta name="author" content="FixService | REANIMATOR">
     
-    <!-- Open Graph / Соцсети -->
     <meta property="og:title" content="FixService | REANIMATOR – Сервисный центр">
     <meta property="og:description" content="Профессиональный ремонт телефонов, планшетов и ноутбуков. Гарантия 1 год, честные цены.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fixservice3939.github.io">
     <meta property="og:image" content="https://fixservice3939.github.io/foto.webp">
     
-    <!-- Безопасность -->
     <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://script.google.com; connect-src 'self' https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; frame-src https://yandex.ru;">
     
-    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -33,7 +29,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
     
-    <!-- Schema.org -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -398,23 +393,67 @@
             margin-bottom: 1rem;
             border-left: 3px solid #7EC8FF;
             padding-left: 12px;
+            text-transform: uppercase;
         }
         .contacts-col p {
             margin-bottom: 0.8rem;
             color: #F0F9FF;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             flex-wrap: wrap;
+            background: rgba(126, 200, 255, 0.08);
+            border-radius: 48px;
+            padding: 0.6rem 0.8rem;
         }
-        .contacts-col p i { width: 24px; flex-shrink: 0; text-align: center; }
-        .contacts-col p strong { flex-shrink: 0; }
-        .contacts-col p a, .contacts-col p span { word-break: break-word; flex: 1; }
-        .contacts-col a { color: #7EC8FF; text-decoration: none; font-weight: 600; transition: all 0.2s; }
+        /* На десктопе: иконки SVG видны, текстовые подписи скрыты */
+        .contacts-col p .svg-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            flex-shrink: 0;
+        }
+        .contacts-col p .svg-icon img {
+            width: 28px;
+            height: 28px;
+            display: block;
+            filter: brightness(0) saturate(100%) invert(61%) sepia(88%) saturate(373%) hue-rotate(202deg) brightness(96%) contrast(92%);
+        }
+        .contacts-col p strong {
+            display: none;
+        }
+        .contacts-col p a, .contacts-col p span {
+            word-break: break-word;
+            flex: 1;
+        }
+        .contacts-col a {
+            color: #7EC8FF;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
         .contacts-col a:hover { color: #C5A3FF; }
-        .partner-icons { display: flex; gap: 20px; margin: 8px 0 12px; }
-        .partner-icons i { font-size: 1.8rem; color: #C5A3FF; transition: all 0.2s; cursor: pointer; }
-        .partner-icons i:hover { color: #7EC8FF; transform: scale(1.1); }
+        
+        .partner-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1.8rem;
+            margin: 0.5rem 0 1rem;
+        }
+        .partner-icons .svg-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .partner-icons .svg-icon img {
+            width: 32px;
+            height: 32px;
+            display: block;
+            filter: brightness(0) saturate(100%) invert(61%) sepia(88%) saturate(373%) hue-rotate(202deg) brightness(96%) contrast(92%);
+            cursor: default;
+        }
+        
         .partner-btn {
             background: #C5A3FF;
             color: #1F1B38;
@@ -629,7 +668,7 @@
         .footer-privacy { margin-top: 12px; }
         .footer-privacy a { color: #7EC8FF; text-decoration: none; font-size: 0.8rem; }
 
-        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (до 800px) ===== */
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (до 800px) – корректируем отступы ===== */
         @media (max-width: 800px) {
             .master-block { flex-direction: column; text-align: center; }
             .master-left { flex: 0 0 auto; }
@@ -681,18 +720,26 @@
             .toast { white-space: normal; text-align: center; max-width: 85%; font-size: 0.8rem; bottom: 90px; }
             .logo { font-size: 1.2rem; }
             
-            /* ===== КОНТАКТЫ МОБИЛЬНАЯ ВЕРСИЯ ===== */
+            /* Мобильные контакты */
             .contacts-wrapper {
                 flex-direction: column;
                 gap: 1.8rem;
                 padding: 1.5rem;
             }
+            .contacts-col { width: 100%; }
             
-            .contacts-col {
-                width: 100%;
+            .contacts-col:first-child h3 {
+                text-align: left;
+                border-left: none;
+                border-bottom: 2px solid #7EC8FF;
+                padding-left: 0;
+                padding-bottom: 0.5rem;
+                display: inline-block;
+                width: auto;
+                margin-bottom: 1rem;
+                text-transform: uppercase;
             }
-            
-            .contacts-col h3 {
+            .contacts-col:last-child h3 {
                 text-align: center;
                 border-left: none;
                 border-bottom: 2px solid #7EC8FF;
@@ -701,11 +748,10 @@
                 display: inline-block;
                 width: auto;
                 margin-bottom: 1rem;
-                text-transform: uppercase; /* ЗАГЛАВНЫЕ БУКВЫ */
+                text-transform: uppercase;
             }
             
-            /* FixService: только иконка + значение (без текстовых меток) */
-            .contacts-col:first-child p {
+            .contacts-col p {
                 flex-direction: row;
                 align-items: center;
                 gap: 12px;
@@ -715,90 +761,16 @@
                 border-radius: 48px;
             }
             
-            /* В левой колонке скрываем ВСЕ иконки FA (они заменяются SVG) */
-            .contacts-col:first-child p i {
-                display: none;
-            }
-            
-            .contacts-col:first-child p strong {
-                display: none; /* скрываем текст "Телефон:", "Telegram:" и т.д. */
-            }
-            
-            .contacts-col:first-child p a,
-            .contacts-col:first-child p span {
-                flex: 1;
-                font-size: 0.85rem;
-                word-break: break-all;
-            }
-            
-            /* ТОЧКА: переопределяем стили */
-            .contacts-col:last-child p {
-                flex-direction: row;
-                align-items: center;
-                gap: 12px;
-                margin-bottom: 1rem;
-                padding: 0.6rem 0.8rem;
-                background: rgba(126, 200, 255, 0.08);
-                border-radius: 48px;
-            }
-            
-            /* В правой колонке скрываем ВСЕ текстовые подписи */
-            .contacts-col:last-child p strong {
-                display: none;
-            }
-            
-            /* Для иконок телефона и сайта – оставляем видимыми (FA), для остальных – скрываем */
-            .contacts-col:last-child p i.fa-phone-alt,
-            .contacts-col:last-child p i.fa-globe {
-                display: inline-block;
-                width: 28px;
-                font-size: 1.2rem;
-                color: #C5A3FF;
-            }
-            .contacts-col:last-child p i:not(.fa-phone-alt):not(.fa-globe) {
-                display: none;
-            }
-            
-            /* Блок иконок партнёров (VK, TG, WA, МАКС) – все FA иконки скрываем */
-            .partner-icons i {
-                display: none;
-            }
-            
-            /* Показываем и стилизуем SVG-иконки */
-            .svg-icon-mobile {
-                display: inline-flex;
-                align-items: center;
-                justify-content: center;
-                width: 28px;
-                flex-shrink: 0;
-            }
-            .svg-icon-mobile img {
+            .contacts-col p .svg-icon img {
                 width: 22px;
                 height: 22px;
-                display: block;
-                filter: brightness(0) saturate(100%) invert(61%) sepia(88%) saturate(373%) hue-rotate(202deg) brightness(96%) contrast(92%);
             }
-            /* Для партнёров чуть крупнее */
-            .partner-icons .svg-icon-mobile img {
+            
+            .partner-icons .svg-icon img {
                 width: 28px;
                 height: 28px;
             }
             
-            /* Левая колонка: показываем SVG вместо скрытых FA */
-            .contacts-col:first-child p .svg-icon-mobile {
-                display: inline-flex;
-            }
-            
-            /* Правая колонка: для телефона и сайта SVG не добавляем, остаются FA */
-            .contacts-col:last-child p .svg-icon-mobile {
-                display: none;
-            }
-            /* Но для строк с партнёрскими иконками SVG видны */
-            .partner-icons .svg-icon-mobile {
-                display: inline-flex;
-            }
-            
-            /* Кнопка партнёра на всю ширину */
             .partner-btn {
                 width: 100%;
                 text-align: center;
@@ -811,25 +783,9 @@
         @media (max-width: 480px) {
             .review-card { flex: 0 0 85%; }
             .brand-card { min-width: 85px; }
-            
-            .contacts-col:first-child p {
-                padding: 0.5rem 0.7rem;
-            }
-            .contacts-col:first-child p a,
-            .contacts-col:first-child p span {
-                font-size: 0.75rem;
-            }
-            .svg-icon-mobile img {
-                width: 18px;
-                height: 18px;
-            }
-        }
-        
-        /* Десктопная версия: скрываем все мобильные SVG-контейнеры */
-        @media (min-width: 801px) {
-            .svg-icon-mobile {
-                display: none !important;
-            }
+            .contacts-col p { padding: 0.5rem 0.7rem; }
+            .contacts-col p a { font-size: 0.75rem; }
+            .contacts-col p .svg-icon img { width: 18px; height: 18px; }
         }
     </style>
 </head>
@@ -972,49 +928,39 @@
     <h2 id="contacts">Контакты</h2>
     <div class="contacts-wrapper">
         <div class="contacts-col">
-            <h3>Наши контакты</h3>
-            <!-- Телефон: иконка FA (на мобилке скроется, но для телефона нет SVG, поэтому оставляем как есть? Нет, на мобилке мы скрываем все i в левой колонке, значит телефон пропадёт. Это нехорошо. Надо для телефона в левой колонке тоже использовать FA, но мы же договорились, что телефон и сайт остаются в FA. Поэтому в левой колонке для телефона НЕ нужно скрывать i. Скорректируем CSS: в левой колонке скрываем все i, кроме i.fa-phone-alt. -->
+            <h3>НАШИ КОНТАКТЫ</h3>
             <p>
-                <i class="fas fa-phone-alt"></i>
-                <span class="svg-icon-mobile"><img src="Maks.svg" alt="phone"></span>
-                <strong>Телефон:</strong> <a href="tel:89778111666">8 (977) 811-16-66</a>
+                <span class="svg-icon"><img src="Phone.svg" alt="phone"></span>
+                <a href="tel:89778111666">8 (977) 811-16-66</a>
             </p>
             <p>
-                <i class="fab fa-telegram-plane"></i>
-                <span class="svg-icon-mobile"><img src="Telegram.svg" alt="telegram"></span>
-                <strong>Telegram (личный):</strong> <a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a>
+                <span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span>
+                <a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a>
             </p>
             <p>
-                <i class="fab fa-telegram-plane"></i>
-                <span class="svg-icon-mobile"><img src="Telegram.svg" alt="telegram"></span>
-                <strong>Telegram-канал:</strong> <a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a>
+                <span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span>
+                <a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a>
             </p>
             <p>
-                <i class="fab fa-youtube"></i>
-                <span class="svg-icon-mobile"><img src="Youtube.svg" alt="youtube"></span>
-                <strong>YouTube:</strong> <a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a>
+                <span class="svg-icon"><img src="Youtube.svg" alt="youtube"></span>
+                <a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a>
             </p>
         </div>
         <div class="contacts-col">
-            <h3>Наши партнеры — ТОЧКА</h3>
+            <h3>НАШИ ПАРТНЕРЫ — ТОЧКА</h3>
             <div class="partner-icons">
-                <i class="fab fa-vk"></i>
-                <span class="svg-icon-mobile"><img src="Vk.svg" alt="vk"></span>
-                <i class="fab fa-telegram-plane"></i>
-                <span class="svg-icon-mobile"><img src="Telegram.svg" alt="telegram"></span>
-                <i class="fab fa-whatsapp"></i>
-                <span class="svg-icon-mobile"><img src="Whatsapp.svg" alt="whatsapp"></span>
-                <i class="fas fa-user"></i>
-                <span class="svg-icon-mobile"><img src="Maks.svg" alt="user"></span>
+                <span class="svg-icon"><img src="Vk.svg" alt="vk"></span>
+                <span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span>
+                <span class="svg-icon"><img src="Whatsapp.svg" alt="whatsapp"></span>
+                <span class="svg-icon"><img src="Maks.svg" alt="user"></span>
             </div>
             <p>
-                <i class="fas fa-phone-alt"></i>
-                <!-- для телефона SVG нет, оставляем только FA -->
-                <strong>Телефон:</strong> <a href="tel:89699993524">8 (969) 999-35-24</a>
+                <span class="svg-icon"><img src="Phone.svg" alt="phone"></span>
+                <a href="tel:89699993524">8 (969) 999-35-24</a>
             </p>
             <p>
-                <i class="fas fa-globe"></i>
-                <strong>Сайт:</strong> <a href="https://www.tochkaremonta24.ru" target="_blank">www.tochkaremonta24.ru</a>
+                <span class="svg-icon"><img src="Site.svg" alt="site"></span>
+                <a href="https://www.tochkaremonta24.ru" target="_blank">www.tochkaremonta24.ru</a>
             </p>
             <button class="partner-btn" id="partnerOpenBtn">Отправить заявку в ТОЧКУ</button>
         </div>
