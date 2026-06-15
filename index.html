@@ -16,7 +16,7 @@
     <meta property="og:image" content="https://fixservice3939.github.io/foto.webp">
     
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://script.google.com; connect-src 'self' https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data:; frame-src https://yandex.ru;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://script.google.com; connect-src 'self' https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co; frame-src https://yandex.ru;">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -121,7 +121,6 @@
         .text-block { border-radius: 32px; padding: 2rem; margin: 20px 0 30px; }
         .text-block p { font-size: 1.1rem; line-height: 1.5; color: #E0F0FF; margin-bottom: 1rem; }
         
-        /* Блок О сервисе */
         .about-service-block {
             border-radius: 40px;
             padding: 2rem;
@@ -493,7 +492,6 @@
         .float-call:hover { transform: scale(1.05); background: #62B8F0; }
         .float-telegram:hover { transform: scale(1.05); background: #006699; }
         
-        /* Попап выбора модели */
         .popup-model-overlay {
             position: fixed;
             top: 0;
@@ -705,6 +703,72 @@
         .footer-text { font-size: 0.85rem; color: #aaa; margin-top: 10px; }
         .footer-privacy { margin-top: 12px; }
         .footer-privacy a { color: #7EC8FF; text-decoration: none; font-size: 0.8rem; }
+
+        /* Стили для лайтбокса (увеличенное фото) */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 3000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
+            cursor: pointer;
+        }
+        
+        .lightbox.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            cursor: default;
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            font-weight: bold;
+            color: #7EC8FF;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            z-index: 3001;
+            padding: 8px 16px;
+            border-radius: 50%;
+        }
+        
+        .close-lightbox:hover {
+            color: #C5A3FF;
+            transform: scale(1.1);
+        }
+        
+        @media (max-width: 768px) {
+            .close-lightbox {
+                top: 10px;
+                right: 15px;
+                font-size: 32px;
+            }
+            .lightbox-img {
+                max-width: 95%;
+                max-height: 85%;
+            }
+        }
 
         @media (max-width: 800px) {
             .about-service-block { flex-direction: column; text-align: center; }
@@ -942,19 +1006,19 @@
 </footer>
 
 <!-- Попап выбора модели по бренду -->
-<div id="modelSelectPopup" class="popup-model-overlay">
+<div id="modelSelectPopup" class="popup-model-overlay" role="dialog" aria-modal="true" aria-label="Выбор модели устройства">
     <div class="popup-model-container">
-        <button class="close-model-popup" id="closeModelPopupBtn">×</button>
+        <button class="close-model-popup" id="closeModelPopupBtn" aria-label="Закрыть окно выбора модели">×</button>
         <h3 id="modelPopupBrandTitle">Выберите модель</h3>
         <input type="text" id="modelSearchInput" class="popup-model-search" placeholder="Поиск модели...">
         <div id="popupModelsList" class="popup-models-grid"></div>
     </div>
 </div>
 
-<!-- Основной попап заявки (только для FixService) -->
-<div id="popupForm" class="popup-overlay">
+<!-- Основной попап заявки -->
+<div id="popupForm" class="popup-overlay" role="dialog" aria-modal="true" aria-label="Форма заявки на ремонт">
     <div class="popup-form">
-        <button class="close-popup" id="closePopupBtn">×</button>
+        <button class="close-popup" id="closePopupBtn" aria-label="Закрыть форму заявки">×</button>
         <h3 id="popupTitle">Оставить заявку</h3>
         <form id="popupFormElement">
             <input type="hidden" id="popupType" value="main">
@@ -981,7 +1045,7 @@
 
 <!-- Лайтбокс для увеличения фото -->
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <button class="close-lightbox" onclick="closeLightbox()">&times;</button>
+    <button class="close-lightbox" onclick="closeLightbox()" aria-label="Закрыть увеличенное фото">&times;</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="Увеличенное фото">
 </div>
 
@@ -989,40 +1053,19 @@
 
 <script>
     (function() {
+        // ========== КОНСТАНТЫ ==========
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZPz4T5TGfNLQbWzU3gDue63RSe6xvLKCtUNxIOpu8Kw684chKTeSMeajPrpImXrUrvg/exec';
         
         const previewPhotos = [
-    "Замена стекла дисплея/Zam.stcl1.jpg",
-    "Замена стекла дисплея/Zam.stcl2.jpg",
-    "Замена стекла дисплея/Zam.stcl3.jpg",
-    "Увеличение памяти на айфон/память айфон 1.jpg",
-    "Ремонт ноутбуков/ZamProcNout.jpg",
-    "Ремонт ноутбуков/ZamProcNout2.jpg",
-    "Сложный ремонт материнской платы/восстановление сети айфонk.jpg",
-    "Сложный ремонт материнской платы/ребол процессора.jpg"
-];
-        
-        const galleryGrid = document.getElementById('serviceGalleryGrid');
-        if (galleryGrid) {
-            galleryGrid.innerHTML = previewPhotos.map(src => `
-                <div class="service-gallery-item" onclick="openLightbox('${src.replace(/'/g, "\\'")}')">
-                    <img src="${src}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото'">
-                </div>
-            `).join('');
-        }
-        
-        window.openLightbox = function(imgSrc) {
-            const lb = document.getElementById('lightbox');
-            const img = document.getElementById('lightboxImg');
-            img.src = imgSrc;
-            lb.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        };
-        window.closeLightbox = function() {
-            const lb = document.getElementById('lightbox');
-            lb.classList.remove('active');
-            document.body.style.overflow = '';
-        };
+            "замена стекла дисплея/Zam.stcl1.jpg",
+            "замена стекла дисплея/Zam.stcl2.jpg",
+            "замена стекла дисплея/Zam.stcl3.jpg",
+            "увеличение памяти на айфон/память айфон 1.jpg",
+            "Ремонт ноутбуков/ZamProcNout.jpg",
+            "Ремонт ноутбуков/ZamProcNout2.jpg",
+            "Сложный ремонт материнской платы/восстановление сети айфонk.jpg",
+            "Сложный ремонт материнской платы/ребол процессора.jpg"
+        ];
         
         const modelsByBrand = {
             Apple: ["iPhone X", "iPhone XR", "iPhone XS", "iPhone XS Max", "iPhone 11", "iPhone 11 Pro", "iPhone 11 Pro Max", "iPhone 12", "iPhone 12 mini", "iPhone 12 Pro", "iPhone 12 Pro Max", "iPhone 13", "iPhone 13 mini", "iPhone 13 Pro", "iPhone 13 Pro Max", "iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro", "iPhone 14 Pro Max", "iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max", "iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro", "iPhone 16 Pro Max", "iPhone 16e", "iPhone 17", "iPhone 17 Pro", "iPhone 17 Pro Max", "iPhone Air", "iPhone 17e"],
@@ -1042,6 +1085,7 @@
             realme: ["realme GT 2", "realme 9 Pro", "realme C35"]
         };
         
+        // ========== DOM ЭЛЕМЕНТЫ ==========
         const toast = document.getElementById('toast');
         const popup = document.getElementById('popupForm');
         const modelPopup = document.getElementById('modelSelectPopup');
@@ -1053,11 +1097,36 @@
         
         let currentSelectedBrand = '';
         
+        // ========== ГАЛЕРЕЯ ==========
+        const galleryGrid = document.getElementById('serviceGalleryGrid');
+        if (galleryGrid) {
+            galleryGrid.innerHTML = previewPhotos.map(src => `
+                <div class="service-gallery-item" onclick="openLightbox('${src.replace(/'/g, "\\'")}')">
+                    <img src="${src}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото'">
+                </div>
+            `).join('');
+        }
+        
+        window.openLightbox = function(imgSrc) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = imgSrc;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        
+        window.closeLightbox = function() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        
+        // ========== ОБЩИЕ ФУНКЦИИ ==========
         function showMessage(text, isError = false) {
             toast.textContent = text;
             toast.style.background = isError ? '#dc2626' : '#3E9FDC';
             toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => toast.classList.remove('show'), 4000);
         }
         
         function validatePhone(phone) {
@@ -1091,22 +1160,68 @@
             }
         }
         
+        // ОБЩАЯ ФУНКЦИЯ ОТПРАВКИ (улучшенная с обработкой ошибок)
         async function sendToGoogleSheets(formData) {
             try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
+                
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(formData)
+                    body: JSON.stringify(formData),
+                    signal: controller.signal
                 });
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                
+                clearTimeout(timeoutId);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
                 const result = await response.json();
-                return result.status === 'success';
+                
+                if (result && result.status === 'success') {
+                    return true;
+                } else {
+                    throw new Error('Сервер вернул ошибку');
+                }
             } catch (error) {
                 console.error('Ошибка отправки:', error);
-                return false;
+                
+                if (error.name === 'AbortError') {
+                    throw new Error('Превышено время ожидания. Попробуйте позже.');
+                } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    throw new Error('Нет соединения с интернетом. Проверьте связь.');
+                } else {
+                    throw new Error('Ошибка сервера. Попробуйте позже или позвоните нам.');
+                }
             }
         }
         
+        // ОБЩАЯ ФУНКЦИЯ ДЛЯ ОТПРАВКИ ЛЮБОЙ ФОРМЫ
+        async function submitForm(formDataObj, submitBtn, resetFormCallback) {
+            setLoading(submitBtn, true);
+            
+            try {
+                const success = await sendToGoogleSheets(formDataObj);
+                
+                if (success) {
+                    showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+                    if (resetFormCallback) resetFormCallback();
+                    return true;
+                } else {
+                    throw new Error('Отправка не удалась');
+                }
+            } catch (error) {
+                showMessage(error.message || 'Ошибка отправки. Попробуйте позже или позвоните нам.', true);
+                return false;
+            } finally {
+                setLoading(submitBtn, false);
+            }
+        }
+        
+        // ========== МОДЕЛИ И БРЕНДЫ ==========
         function openModelSelectPopup(brand) {
             currentSelectedBrand = brand;
             document.getElementById('modelPopupBrandTitle').textContent = `Выберите модель ${brand}`;
@@ -1175,12 +1290,14 @@
             });
         });
         
+        // ========== ОСНОВНАЯ ФОРМА ==========
         const mainForm = document.getElementById('mainForm');
         const mainSubmitBtn = document.getElementById('mainFormSubmit');
         
         if (mainForm) {
             mainForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                
                 const name = document.getElementById('formName').value.trim();
                 const phone = document.getElementById('formPhone').value.trim();
                 const privacyChecked = document.getElementById('formPrivacy').checked;
@@ -1198,25 +1315,19 @@
                     return;
                 }
                 
-                setLoading(mainSubmitBtn, true);
-                const success = await sendToGoogleSheets({
+                const formData = {
                     name, phone,
                     deviceType: document.getElementById('formDevice').value,
                     model: document.getElementById('formModel').value.trim(),
                     problem: document.getElementById('formProblem').value.trim(),
                     timestamp: new Date().toISOString()
-                });
-                setLoading(mainSubmitBtn, false);
+                };
                 
-                if (success) {
-                    showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
-                    mainForm.reset();
-                } else {
-                    showMessage('Ошибка отправки. Попробуйте позвонить по телефону.', true);
-                }
+                await submitForm(formData, mainSubmitBtn, () => mainForm.reset());
             });
         }
         
+        // ========== ПОПАП ФОРМА ==========
         function openMainPopup() {
             popupType.value = 'main';
             popupTitle.textContent = 'Оставить заявку';
@@ -1225,7 +1336,6 @@
         }
         
         document.getElementById('heroOpenBtn')?.addEventListener('click', openMainPopup);
-        
         document.getElementById('closePopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
         document.getElementById('cancelPopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
         popup?.addEventListener('click', (e) => { if(e.target === popup) popup.classList.remove('active'); });
@@ -1236,6 +1346,7 @@
         if (popupFormElement) {
             popupFormElement.addEventListener('submit', async function(e) {
                 e.preventDefault();
+                
                 const name = document.getElementById('popupName').value.trim();
                 const phone = document.getElementById('popupPhone').value.trim();
                 const privacyChecked = document.getElementById('popupPrivacy').checked;
@@ -1253,27 +1364,23 @@
                     return;
                 }
                 
-                setLoading(popupSubmitBtn, true);
-                const success = await sendToGoogleSheets({
+                const formData = {
                     name, phone,
                     deviceType: document.getElementById('popupDevice').value,
                     model: document.getElementById('popupModel').value.trim(),
                     problem: document.getElementById('popupProblem').value.trim(),
                     timestamp: new Date().toISOString()
-                });
-                setLoading(popupSubmitBtn, false);
+                };
                 
-                if (success) {
-                    showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+                const success = await submitForm(formData, popupSubmitBtn, () => {
                     popupFormElement.reset();
                     if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
                     popup.classList.remove('active');
-                } else {
-                    showMessage('Ошибка отправки. Попробуйте позвонить.', true);
-                }
+                });
             });
         }
         
+        // ========== ПЛАВНАЯ ПРОКРУТКА ==========
         document.querySelectorAll('a.nav-link, .footer-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');

@@ -296,22 +296,22 @@
             font-size: 0.8rem;
         }
         
+        /* ===== ЛАЙТБОКС ===== */
         .lightbox {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.94);
+            background: rgba(0, 0, 0, 0.95);
             backdrop-filter: blur(15px);
-            z-index: 2000;
+            z-index: 9999;
             display: flex;
             align-items: center;
             justify-content: center;
             visibility: hidden;
             opacity: 0;
-            transition: 0.2s;
-            cursor: pointer;
+            transition: visibility 0.2s, opacity 0.2s;
         }
         
         .lightbox.active {
@@ -326,24 +326,86 @@
             border-radius: 16px;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
             border: 2px solid rgba(126, 200, 255, 0.6);
+            background: #1a1a2e;
         }
         
         .close-lightbox {
             position: absolute;
             top: 20px;
-            right: 25px;
-            font-size: 2.2rem;
-            color: white;
+            right: 30px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7EC8FF;
             background: none;
             border: none;
             cursor: pointer;
             transition: 0.2s;
-            z-index: 2001;
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         
         .close-lightbox:hover {
-            color: #7EC8FF;
+            color: #C5A3FF;
             transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+            z-index: 10000;
+        }
+        
+        .lightbox-nav button {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(126, 200, 255, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+            color: #7EC8FF;
+            cursor: pointer;
+            transition: 0.2s;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-nav button:hover {
+            background: #3E9FDC;
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        @media (max-width: 480px) {
+            .lightbox-nav button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .close-lightbox {
+                top: 10px;
+                right: 15px;
+                font-size: 2rem;
+                width: 40px;
+                height: 40px;
+            }
+            .lightbox-img {
+                max-width: 95%;
+                max-height: 80%;
+            }
         }
         
         footer {
@@ -494,13 +556,18 @@
     <div class="footer-text">© 2025 FixService | REANIMATOR — Сервисный центр. Примеры наших работ.</div>
 </footer>
 
+<!-- ЛАЙТБОКС -->
 <div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <button class="close-lightbox" onclick="closeLightbox()">&times;</button>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="Увеличенное фото">
+    <button class="close-lightbox" onclick="event.stopPropagation(); closeLightbox();">&times;</button>
+    <div class="lightbox-nav">
+        <button onclick="event.stopPropagation(); prevImage();">&#10094;</button>
+        <button onclick="event.stopPropagation(); nextImage();">&#10095;</button>
+    </div>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Увеличенное фото" onclick="event.stopPropagation();">
 </div>
 
 <script>
-    // Фотографии для категорий (пути исправлены: большая буква в названиях папок)
+    // Фотографии для категорий (ПУТИ ИСПРАВЛЕНЫ - с большой буквы)
     
     // 1. Замена стекла дисплея
     const displayPhotos = [
@@ -571,6 +638,22 @@
         }
     ];
     
+    // Собираем все фото в единый массив для навигации
+    let allPhotos = [];
+    let currentPhotoIndex = 0;
+    
+    function buildPhotoArray() {
+        allPhotos = [];
+        displayPhotos.forEach(photo => allPhotos.push(photo));
+        upgradePhotos.forEach(photo => allPhotos.push(photo));
+        laptopPhotos.forEach(photo => allPhotos.push(photo));
+        motherboardSubcats.forEach(sub => {
+            sub.files.forEach(file => {
+                allPhotos.push(`${sub.folder}/${file}`);
+            });
+        });
+    }
+    
     function renderGrid(containerId, photosArray) {
         const container = document.getElementById(containerId);
         if (!container) return;
@@ -579,10 +662,11 @@
             return;
         }
         let html = '';
-        for (let photoPath of photosArray) {
-            const safePath = photoPath.replace(/'/g, "\\'");
+        for (let i = 0; i < photosArray.length; i++) {
+            const photoPath = photosArray[i];
+            const globalIndex = allPhotos.indexOf(photoPath);
             html += `
-                <div class="photo-card" onclick="openLightbox('${safePath}')">
+                <div class="photo-card" onclick="openLightboxByIndex(${globalIndex})">
                     <img src="${photoPath}" alt="Работа мастера" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото+не+найдено'">
                 </div>
             `;
@@ -601,10 +685,11 @@
                 gridHtml = '<div class="no-photos">Нет фотографий</div>';
             } else {
                 gridHtml = '<div class="photo-grid">';
-                for (let path of fullPaths) {
-                    const safePath = path.replace(/'/g, "\\'");
+                for (let i = 0; i < fullPaths.length; i++) {
+                    const path = fullPaths[i];
+                    const globalIndex = allPhotos.indexOf(path);
                     gridHtml += `
-                        <div class="photo-card" onclick="openLightbox('${safePath}')">
+                        <div class="photo-card" onclick="openLightboxByIndex(${globalIndex})">
                             <img src="${path}" alt="${sub.title}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото+не+найдено'">
                         </div>
                     `;
@@ -630,21 +715,13 @@
     function toggleCategory(headerElement) {
         const section = headerElement.closest('.category-section');
         if (!section) return;
-        if (section.classList.contains('open')) {
-            section.classList.remove('open');
-        } else {
-            section.classList.add('open');
-        }
+        section.classList.toggle('open');
     }
     
     function toggleSubcategory(subId) {
         const subcat = document.getElementById(subId);
         if (!subcat) return;
-        if (subcat.classList.contains('open')) {
-            subcat.classList.remove('open');
-        } else {
-            subcat.classList.add('open');
-        }
+        subcat.classList.toggle('open');
     }
     
     function openLightbox(imgSrc) {
@@ -655,22 +732,56 @@
         document.body.style.overflow = 'hidden';
     }
     
+    function openLightboxByIndex(index) {
+        currentPhotoIndex = index;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        lightboxImg.src = allPhotos[currentPhotoIndex];
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
     function closeLightbox() {
         const lightbox = document.getElementById('lightbox');
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
     }
     
+    function prevImage() {
+        currentPhotoIndex--;
+        if (currentPhotoIndex < 0) {
+            currentPhotoIndex = allPhotos.length - 1;
+        }
+        document.getElementById('lightboxImg').src = allPhotos[currentPhotoIndex];
+    }
+    
+    function nextImage() {
+        currentPhotoIndex++;
+        if (currentPhotoIndex >= allPhotos.length) {
+            currentPhotoIndex = 0;
+        }
+        document.getElementById('lightboxImg').src = allPhotos[currentPhotoIndex];
+    }
+    
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') closeLightbox();
+        const lightbox = document.getElementById('lightbox');
+        if (!lightbox.classList.contains('active')) return;
+        if (e.key === 'Escape') {
+            closeLightbox();
+        } else if (e.key === 'ArrowLeft') {
+            prevImage();
+        } else if (e.key === 'ArrowRight') {
+            nextImage();
+        }
     });
     
     window.addEventListener('DOMContentLoaded', () => {
+        buildPhotoArray();
         renderGrid('displayGrid', displayPhotos);
         renderGrid('upgradeGrid', upgradePhotos);
         renderGrid('laptopGrid', laptopPhotos);
         renderMotherboardSubcats();
-        // Открываем первую категорию (Сложный ремонт) для наглядности
+        // Открываем первую категорию
         const firstCat = document.querySelector('.category-section');
         if (firstCat && !firstCat.classList.contains('open')) {
             firstCat.classList.add('open');
@@ -680,7 +791,10 @@
     window.toggleCategory = toggleCategory;
     window.toggleSubcategory = toggleSubcategory;
     window.openLightbox = openLightbox;
+    window.openLightboxByIndex = openLightboxByIndex;
     window.closeLightbox = closeLightbox;
+    window.prevImage = prevImage;
+    window.nextImage = nextImage;
 </script>
 </body>
 </html>
