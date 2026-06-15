@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Наши работы | FixService | REANIMATOR – Примеры ремонта техники</title>
+    <meta name="description" content="Реальные примеры работ сервисного центра FixService: сложный ремонт материнской платы, замена стекла дисплея, увеличение памяти iPhone, ремонт ноутбуков. Фото до/после.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            background-image: url('fon2.jpeg');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            color: #FFFFFF;
+            line-height: 1.4;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(20, 15, 35, 0.55);
+            backdrop-filter: blur(1px);
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            width: 100%;
+            background: rgba(20, 15, 35, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(126, 200, 255, 0.3);
+            padding: 16px 0;
+        }
+        
+        .container-nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+        }
+        
+        .logo .fix { color: #FFFFFF; }
+        .logo .service { color: #7EC8FF; }
+        .logo .reanimator { color: #C5A3FF; font-weight: 800; }
+        
+        .nav-links {
+            display: flex;
+            gap: 1.2rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .nav-link {
+            text-decoration: none;
+            font-weight: 600;
+            color: #F0F9FF;
+            transition: 0.2s;
+            cursor: pointer;
+            padding: 6px 0;
+            font-size: 0.9rem;
+        }
+        
+        .nav-link:hover {
+            color: #7EC8FF;
+            transform: translateY(-1px);
+        }
+        
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 16px 60px 16px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .page-header {
+            margin: 20px 0 20px;
+            text-align: left;
+        }
+        
+        .page-header h1 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            background: rgba(128, 90, 180, 0.35);
+            backdrop-filter: blur(8px);
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            border-radius: 60px;
+            border-left: 5px solid #7EC8FF;
+            color: white;
+            margin-bottom: 0;
+        }
+        
+        .page-header p {
+            margin-top: 0.6rem;
+            color: #E0F0FF;
+            font-size: 0.85rem;
+            background: rgba(0,0,0,0.2);
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+        }
+        
+        .category-section {
+            background: rgba(128, 90, 180, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(126, 200, 255, 0.35);
+            border-radius: 28px;
+            margin-bottom: 1.2rem;
+            overflow: hidden;
+        }
+        
+        .category-header {
+            padding: 0.8rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.2s;
+            background: rgba(128, 90, 180, 0.3);
+            border-bottom: 1px solid transparent;
+        }
+        
+        .category-header:hover {
+            background: rgba(128, 90, 180, 0.5);
+        }
+        
+        .category-header h2 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #7EC8FF;
+            margin: 0;
+            background: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .category-header i {
+            font-size: 1.1rem;
+        }
+        
+        .category-header .chevron {
+            font-size: 1rem;
+            color: #C5A3FF;
+        }
+        
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            padding: 0 1rem;
+        }
+        
+        .category-section.open .category-content {
+            max-height: none;
+            padding: 1rem 1rem 1.2rem 1rem;
+        }
+        
+        .category-section.open .category-header {
+            border-bottom-color: rgba(126, 200, 255, 0.3);
+        }
+        
+        .category-section.open .chevron i {
+            transform: rotate(180deg);
+        }
+        
+        .subcategory {
+            background: rgba(20, 15, 35, 0.5);
+            border-radius: 20px;
+            margin-bottom: 0.8rem;
+            border: 1px solid rgba(126, 200, 255, 0.2);
+            overflow: hidden;
+        }
+        
+        .subcategory-header {
+            padding: 0.6rem 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(126, 200, 255, 0.1);
+            transition: background 0.2s;
+        }
+        
+        .subcategory-header:hover {
+            background: rgba(126, 200, 255, 0.2);
+        }
+        
+        .subcategory-header h3 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #C5A3FF;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .subcategory-header h3 i {
+            font-size: 0.75rem;
+        }
+        
+        .subcategory-header .sub-chevron {
+            color: #7EC8FF;
+            transition: transform 0.3s;
+            font-size: 0.8rem;
+        }
+        
+        .subcategory.open .subcategory-header .sub-chevron i {
+            transform: rotate(180deg);
+        }
+        
+        .subcategory-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s ease-out;
+            padding: 0 1rem;
+        }
+        
+        .subcategory.open .subcategory-content {
+            max-height: none;
+            padding: 0.8rem 1rem 1rem 1rem;
+        }
+        
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+        
+        .photo-card {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid rgba(126, 200, 255, 0.3);
+        }
+        
+        .photo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-color: #7EC8FF;
+        }
+        
+        .photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .no-photos {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 1rem;
+            color: #aaa;
+            font-style: italic;
+            font-size: 0.8rem;
+        }
+        
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.94);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+        
+        .lightbox.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .lightbox-img {
+            max-width: 90%;
+            max-height: 85%;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(126, 200, 255, 0.6);
+        }
+        
+        .close-lightbox {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 2.2rem;
+            color: white;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 2001;
+        }
+        
+        .close-lightbox:hover {
+            color: #7EC8FF;
+            transform: scale(1.1);
+        }
+        
+        footer {
+            padding: 20px 0 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(126, 200, 255, 0.3);
+            text-align: center;
+        }
+        
+        .footer-text {
+            font-size: 0.7rem;
+            color: #aaa;
+        }
+        
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(126, 200, 255, 0.15);
+            padding: 6px 14px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #7EC8FF;
+            font-weight: 600;
+            font-size: 0.75rem;
+            margin-bottom: 15px;
+            transition: 0.2s;
+        }
+        
+        .back-link:hover {
+            background: rgba(126, 200, 255, 0.3);
+            transform: translateX(-2px);
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 12px 40px 12px;
+            }
+            .photo-grid {
+                gap: 6px;
+            }
+            .category-header {
+                padding: 0.7rem 1rem;
+            }
+            .category-header h2 {
+                font-size: 1rem;
+            }
+            .category-section.open .category-content {
+                padding: 0.8rem 0.8rem 1rem 0.8rem;
+            }
+            .subcategory-header {
+                padding: 0.5rem 0.8rem;
+            }
+            .subcategory-header h3 {
+                font-size: 0.8rem;
+            }
+            .subcategory.open .subcategory-content {
+                padding: 0.6rem 0.8rem 0.8rem 0.8rem;
+            }
+            .nav-links {
+                gap: 0.8rem;
+            }
+            .nav-link {
+                font-size: 0.8rem;
+            }
+            .logo {
+                font-size: 1rem;
+            }
+            .page-header h1 {
+                font-size: 1.3rem;
+                padding: 0.3rem 1rem;
+            }
+            .page-header p {
+                font-size: 0.75rem;
+            }
+        }
+        
+        .chevron, .sub-chevron {
+            transition: transform 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="container-nav">
+        <div class="logo"><span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span></div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="index.html#services" class="nav-link">Услуги</a>
+            <a href="index.html#master" class="nav-link">Мастер</a>
+            <a href="index.html#faq" class="nav-link">FAQ</a>
+            <a href="index.html#contacts" class="nav-link">Контакты</a>
+            <a href="biblioteka.html" class="nav-link" style="color: #C5A3FF; border-bottom: 2px solid #C5A3FF;">Галерея</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <a href="index.html" class="back-link"><i class="fas fa-arrow-left"></i> На главную</a>
+        <h1><i class="fas fa-tools"></i> Наши работы</h1>
+        <p>Реальные примеры ремонта — честное портфолио мастера</p>
+    </div>
+
+    <!-- 1. Сложный ремонт материнской платы (ПЕРВЫЙ) -->
+    <div class="category-section" id="cat-motherboard">
+        <div class="category-header" onclick="toggleCategory(this)">
+            <h2><i class="fas fa-microchip"></i> Сложный ремонт материнской платы</h2>
+            <div class="chevron"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="category-content" id="motherboardContent"></div>
+    </div>
+
+    <!-- 2. Замена стекла дисплея -->
+    <div class="category-section" id="cat-display">
+        <div class="category-header" onclick="toggleCategory(this)">
+            <h2><i class="fas fa-mobile-alt"></i> Замена стекла дисплея</h2>
+            <div class="chevron"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="category-content">
+            <div class="photo-grid" id="displayGrid"></div>
+        </div>
+    </div>
+
+    <!-- 3. Увеличение памяти на айфон -->
+    <div class="category-section" id="cat-upgrade">
+        <div class="category-header" onclick="toggleCategory(this)">
+            <h2><i class="fas fa-microchip"></i> Увеличение памяти на iPhone</h2>
+            <div class="chevron"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="category-content">
+            <div class="photo-grid" id="upgradeGrid"></div>
+        </div>
+    </div>
+
+    <!-- 4. Ремонт ноутбуков -->
+    <div class="category-section" id="cat-laptop">
+        <div class="category-header" onclick="toggleCategory(this)">
+            <h2><i class="fas fa-laptop"></i> Ремонт ноутбуков</h2>
+            <div class="chevron"><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="category-content">
+            <div class="photo-grid" id="laptopGrid"></div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="logo" style="font-size:1rem; justify-content: center; display: flex; margin-bottom: 0.5rem;">
+        <span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span>
+    </div>
+    <div class="footer-text">© 2025 FixService | REANIMATOR — Сервисный центр. Примеры наших работ.</div>
+</footer>
+
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="close-lightbox" onclick="closeLightbox()">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Увеличенное фото">
+</div>
+
+<script>
+    // Фотографии для категорий
+    
+    // 1. Замена стекла дисплея
+    const displayPhotos = [
+        "замена стекла дисплея/Zam.stcl1.jpg",
+        "замена стекла дисплея/Zam.stcl2.jpg",
+        "замена стекла дисплея/Zam.stcl3.jpg",
+        "замена стекла дисплея/Zam.stcl4.jpg",
+        "замена стекла дисплея/Zam.stcl5.jpg",
+        "замена стекла дисплея/Zam.stcl7.jpg",
+        "замена стекла дисплея/Zam.stcl8.jpg"
+    ];
+    
+    // 2. Увеличение памяти на iPhone
+    const upgradePhotos = [
+        "увеличение памяти на айфон/память айфон 1.jpg",
+        "увеличение памяти на айфон/память айфон 2.jpg"
+    ];
+    
+    // 3. Ремонт ноутбуков
+    const laptopPhotos = [
+        "Ремонт ноутбуков/ZamProcNout.jpg",
+        "Ремонт ноутбуков/ZamProcNout2.jpg",
+        "Ремонт ноутбуков/ZamProcNout3.jpg"
+    ];
+    
+    // 4. Сложный ремонт материнской платы
+    const motherboardSubcats = [
+        {
+            title: "Восстановление данных Android",
+            folder: "Сложный ремонт материнской платы",
+            files: ["восстановление данных андроид.jpg"]
+        },
+        {
+            title: "Восстановление сети iPhone",
+            folder: "Сложный ремонт материнской платы",
+            files: ["восстановление сети айфонk.jpg", "свап мат платы айфон.jpg"]
+        },
+        {
+            title: "Восстановление процессора после другого сервиса",
+            folder: "Сложный ремонт материнской платы",
+            files: ["восстонавление процессора айфон после другого сервиса.jpg"]
+        },
+        {
+            title: "Замена Type-C контроллера",
+            folder: "Сложный ремонт материнской платы",
+            files: ["замена тайпси контроллера-айфон 15-2.jpg"]
+        },
+        {
+            title: "Ребол процессора",
+            folder: "Сложный ремонт материнской платы",
+            files: [
+                "ребол процессора айпад.jpg",
+                "ребол процессора айпад (2).jpg",
+                "ребол процессора айфон .jpg",
+                "ребол процессора.jpg",
+                "ребол процессора2.jpg"
+            ]
+        },
+        {
+            title: "Ремонт материнской платы",
+            folder: "Сложный ремонт материнской платы",
+            files: ["ремонт мат платы 2.jpg"]
+        },
+        {
+            title: "Удаление блокировки Google",
+            folder: "Сложный ремонт материнской платы",
+            files: ["удаление блокировки гугл.jpg"]
+        }
+    ];
+    
+    function renderGrid(containerId, photosArray) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        if (!photosArray || photosArray.length === 0) {
+            container.innerHTML = '<div class="no-photos">Фотографии временно отсутствуют</div>';
+            return;
+        }
+        let html = '';
+        for (let photoPath of photosArray) {
+            const safePath = photoPath.replace(/'/g, "\\'");
+            html += `
+                <div class="photo-card" onclick="openLightbox('${safePath}')">
+                    <img src="${photoPath}" alt="Работа мастера" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото+не+найдено'">
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
+    
+    function renderMotherboardSubcats() {
+        const container = document.getElementById('motherboardContent');
+        if (!container) return;
+        let html = '';
+        for (let sub of motherboardSubcats) {
+            const fullPaths = sub.files.map(file => `${sub.folder}/${file}`);
+            let gridHtml = '';
+            if (fullPaths.length === 0) {
+                gridHtml = '<div class="no-photos">Нет фотографий</div>';
+            } else {
+                gridHtml = '<div class="photo-grid">';
+                for (let path of fullPaths) {
+                    const safePath = path.replace(/'/g, "\\'");
+                    gridHtml += `
+                        <div class="photo-card" onclick="openLightbox('${safePath}')">
+                            <img src="${path}" alt="${sub.title}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото+не+найдено'">
+                        </div>
+                    `;
+                }
+                gridHtml += '</div>';
+            }
+            const subId = `sub_${sub.title.replace(/[^a-zA-Z0-9]/g, '_')}`;
+            html += `
+                <div class="subcategory" id="${subId}">
+                    <div class="subcategory-header" onclick="toggleSubcategory('${subId}')">
+                        <h3><i class="fas fa-wrench"></i> ${sub.title}</h3>
+                        <div class="sub-chevron"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                    <div class="subcategory-content">
+                        ${gridHtml}
+                    </div>
+                </div>
+            `;
+        }
+        container.innerHTML = html;
+    }
+    
+    function toggleCategory(headerElement) {
+        const section = headerElement.closest('.category-section');
+        if (!section) return;
+        if (section.classList.contains('open')) {
+            section.classList.remove('open');
+        } else {
+            section.classList.add('open');
+        }
+    }
+    
+    function toggleSubcategory(subId) {
+        const subcat = document.getElementById(subId);
+        if (!subcat) return;
+        if (subcat.classList.contains('open')) {
+            subcat.classList.remove('open');
+        } else {
+            subcat.classList.add('open');
+        }
+    }
+    
+    function openLightbox(imgSrc) {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        lightboxImg.src = imgSrc;
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeLightbox() {
+        const lightbox = document.getElementById('lightbox');
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') closeLightbox();
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+        renderGrid('displayGrid', displayPhotos);
+        renderGrid('upgradeGrid', upgradePhotos);
+        renderGrid('laptopGrid', laptopPhotos);
+        renderMotherboardSubcats();
+        // Открываем первую категорию (Сложный ремонт) для наглядности
+        const firstCat = document.querySelector('.category-section');
+        if (firstCat && !firstCat.classList.contains('open')) {
+            firstCat.classList.add('open');
+        }
+    });
+    
+    window.toggleCategory = toggleCategory;
+    window.toggleSubcategory = toggleSubcategory;
+    window.openLightbox = openLightbox;
+    window.closeLightbox = closeLightbox;
+</script>
+</body>
+</html>

@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     
-    <title>FixService | REANIMATOR – Сервисный центр ремонта техники в Ликино-Дулёво</title>
+    <title>FixService | Apple REANIMATOR – Сервисный центр ремонта техники в Ликино-Дулёво</title>
     <meta name="description" content="FixService — профессиональный ремонт телефонов, планшетов и ноутбуков в Ликино-Дулёво. Диагностика бесплатно, гарантия 1 год, оригинальные запчасти. Честные цены, быстрый сервис.">
     <meta name="keywords" content="ремонт телефонов, ремонт планшетов, ремонт ноутбуков, сервисный центр Ликино-Дулёво, FixService, замена экрана, ремонт iPhone, диагностика бесплатно">
-    <meta name="author" content="FixService | REANIMATOR">
+    <meta name="author" content="FixService | Apple REANIMATOR">
     
-    <meta property="og:title" content="FixService | REANIMATOR – Сервисный центр">
+    <meta property="og:title" content="FixService | Apple REANIMATOR – Сервисный центр">
     <meta property="og:description" content="Профессиональный ремонт телефонов, планшетов и ноутбуков. Гарантия 1 год, честные цены.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://fixservice3939.github.io">
@@ -28,29 +28,6 @@
     <link rel="manifest" href="/site.webmanifest">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
-    
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "FixService | REANIMATOR",
-        "description": "Сервисный центр по ремонту телефонов, планшетов и ноутбуков",
-        "image": "https://fixservice3939.github.io/foto.webp",
-        "telephone": "+79778111666",
-        "email": "fixservice@example.com",
-        "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "ул. Советская 41, 2 этаж, пом.209",
-            "addressLocality": "Ликино-Дулёво",
-            "addressRegion": "Московская область",
-            "addressCountry": "RU"
-        },
-        "openingHours": "Mo-Su 10:00-18:00",
-        "priceRange": "₽₽",
-        "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-        "hasMap": "https://yandex.ru/maps/-/CPdlF6Lt"
-    }
-    </script>
     
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -106,7 +83,7 @@
             z-index: 2;
         }
         h1, h2, h3, .logo, .btn, .stat-number { font-weight: 800; letter-spacing: -0.02em; }
-        .hero-block, .text-block, .master-block, .stats-section, .faq-block, .reviews-block,
+        .hero-block, .text-block, .about-service-block, .stats-section, .faq-block, .reviews-block,
         .brands-grid .brand-card, .services-grid .service-card, .parts-grid .part-card,
         .accessories-grid .accessory-card, .form-block, .contacts-wrapper, .map-block {
             background: rgba(128, 90, 180, 0.25);
@@ -143,22 +120,9 @@
         .hero-btn:hover { background: #62B8F0; transform: scale(1.02); }
         .text-block { border-radius: 32px; padding: 2rem; margin: 20px 0 30px; }
         .text-block p { font-size: 1.1rem; line-height: 1.5; color: #E0F0FF; margin-bottom: 1rem; }
-        .partner-btn-inline {
-            background: #C5A3FF;
-            color: #1F1B38;
-            padding: 12px 28px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 1rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 16px;
-            width: auto;
-            display: inline-block;
-        }
-        .partner-btn-inline:hover { background: #7EC8FF; transform: scale(1.02); }
-        .master-block {
+        
+        /* Блок О сервисе */
+        .about-service-block {
             border-radius: 40px;
             padding: 2rem;
             margin: 1rem 0 2rem;
@@ -167,8 +131,8 @@
             align-items: center;
             gap: 2rem;
         }
-        .master-left { flex: 0 0 160px; text-align: center; }
-        .master-photo img {
+        .service-left { flex: 0 0 160px; text-align: center; }
+        .service-photo img {
             width: 140px;
             height: 140px;
             object-fit: cover;
@@ -178,9 +142,9 @@
             background: #2a2350;
             transition: transform 0.2s;
         }
-        .master-photo img:hover { transform: scale(1.02); }
-        .quote-area { flex: 1; align-self: center; }
-        .master-quote-text {
+        .service-photo img:hover { transform: scale(1.02); }
+        .service-quote-area { flex: 1; align-self: center; }
+        .service-quote-text {
             font-size: 1.2rem;
             font-weight: 500;
             color: #F0F9FF;
@@ -190,27 +154,53 @@
             border-radius: 20px;
             line-height: 1.4;
         }
-        .master-years {
+        .service-gallery-block {
             width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 1rem;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
-        .year-card {
-            flex: 1;
-            background: rgba(128, 90, 180, 0.5);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(126, 200, 255, 0.5);
-            border-radius: 24px;
-            padding: 1rem 0.8rem;
-            text-align: center;
+        .service-gallery-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #C5A3FF;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .gallery-link-btn {
+            background: rgba(62, 159, 220, 0.8);
+            padding: 5px 14px;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        .gallery-link-btn:hover { background: #3E9FDC; transform: translateY(-2px); }
+        .service-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 8px;
+        }
+        .service-gallery-item {
+            background: rgba(0,0,0,0.4);
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1 / 1;
+            cursor: pointer;
+            border: 1px solid rgba(126,200,255,0.3);
             transition: all 0.2s;
         }
-        .year-card:hover { background: rgba(126, 200, 255, 0.2); transform: translateY(-3px); border-color: #7EC8FF; }
-        .year { font-weight: 800; font-size: 1.3rem; color: #7EC8FF; margin-bottom: 0.4rem; }
-        .year-desc { font-size: 0.75rem; color: #E0F0FF; line-height: 1.3; }
+        .service-gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .service-gallery-item:hover { transform: scale(1.02); border-color: #7EC8FF; }
+        
         .stats-section { border-radius: 40px; padding: 30px 20px; margin: 25px 0; }
         .stats-grid {
             display: grid;
@@ -224,7 +214,7 @@
         .stat-label { color: #E0F0FF; font-weight: 600; }
         .brands-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
             gap: 14px;
             margin: 1rem 0;
         }
@@ -233,10 +223,17 @@
             padding: 0.8rem 0.5rem;
             text-align: center;
             font-weight: 600;
-            transition: all 0.2s;
             cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(128, 90, 180, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(126, 200, 255, 0.35);
         }
-        .brand-card:hover { background: #3E9FDC; transform: scale(1.03); }
+        .brand-card:hover {
+            background: #3E9FDC;
+            transform: scale(1.03);
+            border-color: #C5A3FF;
+        }
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -249,6 +246,9 @@
             text-align: center;
             transition: all 0.2s;
             cursor: pointer;
+            display: block;
+            text-decoration: none;
+            color: inherit;
         }
         .service-card:hover { transform: translateY(-4px); background: rgba(128, 90, 180, 0.45); border-color: #7EC8FF; }
         .service-title { font-weight: 700; font-size: 0.95rem; }
@@ -420,56 +420,8 @@
             display: block;
             filter: brightness(0) saturate(100%) invert(61%) sepia(88%) saturate(373%) hue-rotate(202deg) brightness(96%) contrast(92%);
         }
-        .contacts-col p strong {
-            display: none;
-        }
-        .contacts-col p a {
-            word-break: break-word;
-            flex: 1;
-            text-align: left;
-            margin: 0;
-            padding: 0;
-        }
-        .contacts-col a {
-            color: #7EC8FF;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.2s;
-        }
+        .contacts-col p a { word-break: break-word; flex: 1; text-align: left; margin: 0; padding: 0; color: #7EC8FF; text-decoration: none; font-weight: 600; transition: all 0.2s; }
         .contacts-col a:hover { color: #C5A3FF; }
-        
-        .partner-icons {
-            display: flex;
-            justify-content: center;
-            gap: 1.8rem;
-            margin: 0.5rem 0 1rem;
-        }
-        .partner-icons .svg-icon {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .partner-icons .svg-icon img {
-            width: 32px;
-            height: 32px;
-            display: block;
-            filter: brightness(0) saturate(100%) invert(61%) sepia(88%) saturate(373%) hue-rotate(202deg) brightness(96%) contrast(92%);
-            cursor: default;
-        }
-        
-        .partner-btn {
-            background: #C5A3FF;
-            color: #1F1B38;
-            padding: 12px 28px;
-            border-radius: 60px;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            margin-top: 8px;
-        }
-        .partner-btn:hover { background: #7EC8FF; transform: scale(1.02); }
         .map-block { border-radius: 32px; padding: 1.8rem; margin: 1rem 0 1.5rem; }
         .map-wrapper iframe {
             width: 100%;
@@ -496,10 +448,11 @@
             border-radius: 60px;
             border-left: 5px solid #7EC8FF;
         }
-        .logo { font-size: 1.8rem; font-weight: 800; }
+        .logo { font-size: 1.8rem; font-weight: 800; display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
         .logo .fix { color: #FFFFFF; }
         .logo .service { color: #7EC8FF; }
-        .logo .reanimator { color: #C5A3FF; font-weight: 800; }
+        .logo .separator { color: #7EC8FF; font-weight: 600; }
+        .logo .apple-reanimator { color: #C5A3FF; font-weight: 800; }
         .nav-links { display: flex; gap: 1.8rem; flex-wrap: wrap; align-items: center; }
         .nav-link {
             text-decoration: none;
@@ -528,7 +481,6 @@
             transition: all 0.2s ease;
             box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
             text-decoration: none;
-            border: none;
             text-align: center;
             font-family: inherit;
             display: flex;
@@ -540,6 +492,89 @@
         .float-telegram { background: #0088cc; color: white; }
         .float-call:hover { transform: scale(1.05); background: #62B8F0; }
         .float-telegram:hover { transform: scale(1.05); background: #006699; }
+        
+        /* Попап выбора модели */
+        .popup-model-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.2s;
+        }
+        .popup-model-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .popup-model-container {
+            background: rgba(30, 25, 55, 0.95);
+            backdrop-filter: blur(16px);
+            max-width: 600px;
+            width: 90%;
+            border-radius: 40px;
+            padding: 1.8rem;
+            border: 1px solid rgba(126,200,255,0.6);
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .popup-model-container h3 {
+            color: #7EC8FF;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .popup-model-search {
+            width: 100%;
+            padding: 12px 18px;
+            margin-bottom: 1rem;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(126,200,255,0.5);
+            border-radius: 60px;
+            font-size: 1rem;
+            color: white;
+        }
+        .popup-model-search:focus {
+            outline: none;
+            border-color: #7EC8FF;
+        }
+        .popup-models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .popup-model-card {
+            background: rgba(126,200,255,0.1);
+            border: 1px solid rgba(126,200,255,0.3);
+            border-radius: 28px;
+            padding: 10px 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .popup-model-card:hover {
+            background: #3E9FDC;
+            transform: translateY(-2px);
+        }
+        .close-model-popup {
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #7EC8FF;
+            background: transparent;
+            border: none;
+            line-height: 1;
+        }
+        .close-model-popup:hover { color: #C5A3FF; }
+        
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -671,124 +706,29 @@
         .footer-privacy { margin-top: 12px; }
         .footer-privacy a { color: #7EC8FF; text-decoration: none; font-size: 0.8rem; }
 
-        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (до 800px) ===== */
         @media (max-width: 800px) {
-            .master-block { flex-direction: column; text-align: center; }
-            .master-left { flex: 0 0 auto; }
-            .hero-block { text-align: center; }
-            .hero-block h1 { text-align: center; }
-            .hero-description { font-size: 1.1rem; }
+            .about-service-block { flex-direction: column; text-align: center; }
+            .service-left { flex: 0 0 auto; }
+            .service-gallery-grid { grid-template-columns: repeat(4, 1fr); gap: 8px; }
             .navbar .container-nav { flex-direction: column; }
             .nav-links { justify-content: center; gap: 1rem; }
-            .checkbox-label { font-size: 0.75rem; }
-            .popup-checkbox { font-size: 0.7rem; }
-            .floating-buttons { bottom: 24px; right: 16px; gap: 14px; }
-            .float-call, .float-telegram { padding: 14px 22px; font-size: 0.9rem; border-radius: 50px; gap: 10px; }
-            .master-years {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                -webkit-overflow-scrolling: touch;
-                mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-                -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-            }
-            .year-card { flex: 0 0 160px; }
-            .brands-grid {
-                display: flex;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                gap: 12px;
-                -webkit-overflow-scrolling: touch;
-                mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-                -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-            }
-            .brand-card { flex: 0 0 auto; min-width: 100px; font-size: 0.8rem; }
-            .accessories-grid {
-                display: flex;
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                gap: 12px;
-                -webkit-overflow-scrolling: touch;
-                mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-                -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-            }
-            .accessory-card { flex: 0 0 auto; min-width: 140px; }
-            .reviews-grid {
-                mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-                -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-            }
-            .review-card { flex: 0 0 85%; }
+            .brands-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+            .brand-card { flex: 0 0 auto; min-width: 90px; font-size: 0.8rem; }
             .services-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
             .parts-grid { grid-template-columns: 1fr; gap: 16px; }
+            .reviews-grid { mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); }
+            .review-card { flex: 0 0 85%; }
             .toast { white-space: normal; text-align: center; max-width: 85%; font-size: 0.8rem; bottom: 90px; }
             .logo { font-size: 1.2rem; }
-            
-            .contacts-wrapper {
-                flex-direction: column;
-                gap: 1.8rem;
-                padding: 1.5rem;
-            }
-            .contacts-col { width: 100%; }
-            
-            .contacts-col:first-child h3 {
-                text-align: left;
-                border-left: none;
-                border-bottom: 2px solid #7EC8FF;
-                padding-left: 0;
-                padding-bottom: 0.5rem;
-                display: inline-block;
-                width: auto;
-                margin-bottom: 1rem;
-                text-transform: uppercase;
-            }
-            .contacts-col:last-child h3 {
-                text-align: center;
-                border-left: none;
-                border-bottom: 2px solid #7EC8FF;
-                padding-left: 0;
-                padding-bottom: 0.5rem;
-                display: inline-block;
-                width: auto;
-                margin-bottom: 1rem;
-                text-transform: uppercase;
-            }
-            
-            .contacts-col p {
-                flex-direction: row;
-                align-items: center;
-                gap: 8px;
-                margin-bottom: 1rem;
-                padding: 0.6rem 0.8rem;
-                background: rgba(126, 200, 255, 0.08);
-                border-radius: 48px;
-                justify-content: flex-start;
-            }
-            
-            .contacts-col p .svg-icon img {
-                width: 22px;
-                height: 22px;
-            }
-            
-            .partner-icons .svg-icon img {
-                width: 28px;
-                height: 28px;
-            }
-            
-            .partner-btn {
-                width: 100%;
-                text-align: center;
-                margin-top: 1rem;
-                padding: 12px;
-                font-size: 0.9rem;
-            }
+            .contacts-wrapper { flex-direction: column; gap: 1.8rem; padding: 1.5rem; }
+            .contacts-col:first-child h3 { border-left: none; border-bottom: 2px solid #7EC8FF; padding-left: 0; padding-bottom: 0.5rem; display: inline-block; width: auto; margin-bottom: 1rem; text-transform: uppercase; }
+            .contacts-col p { flex-direction: row; align-items: center; gap: 8px; margin-bottom: 1rem; padding: 0.6rem 0.8rem; background: rgba(126, 200, 255, 0.08); border-radius: 48px; justify-content: flex-start; }
+            .contacts-col p .svg-icon img { width: 22px; height: 22px; }
         }
-        
         @media (max-width: 480px) {
             .review-card { flex: 0 0 85%; }
-            .brand-card { min-width: 85px; }
-            .contacts-col p { padding: 0.5rem 0.7rem; }
-            .contacts-col p a { font-size: 0.75rem; }
-            .contacts-col p .svg-icon img { width: 18px; height: 18px; }
+            .brand-card { min-width: 80px; font-size: 0.7rem; padding: 0.5rem 0.3rem; }
+            .service-gallery-grid { grid-template-columns: repeat(4, 1fr); gap: 6px; }
         }
     </style>
 </head>
@@ -796,13 +736,19 @@
 
 <div class="navbar">
     <div class="container-nav">
-        <div class="logo"><span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span></div>
+        <div class="logo">
+            <span class="fix">Fix</span><span class="service">Service</span>
+            <span class="separator">|</span>
+            <span class="apple-reanimator">Apple REANIMATOR</span>
+        </div>
         <div class="nav-links">
             <a href="#services" class="nav-link">Услуги</a>
-            <a href="#master" class="nav-link">Мастер</a>
+            <a href="#service" class="nav-link">Сервис</a>
             <a href="#faq" class="nav-link">FAQ</a>
             <a href="#contacts" class="nav-link">Контакты</a>
             <a href="#map" class="nav-link">Карта</a>
+            <a href="biblioteka.html" class="nav-link">Галерея</a>
+            <a href="partners.html" class="nav-link">Партнёры</a>
         </div>
     </div>
 </div>
@@ -819,7 +765,6 @@
     <div class="text-block">
         <p>FixService — сервисный центр, специализирующийся на ремонте мобильной техники: телефонов, планшетов и ноутбуков. Принимаем устройства любых брендов. Работаем с любыми неисправностями — от замены стекла до микропайки и восстановления данных. Прозрачная диагностика, фиксированные цены, гарантия 12 месяцев. Без скрытых платежей и необоснованных завышений. Достаточно принести устройство — мастер проведёт диагностику и предложит оптимальное решение.</p>
         <p>Крупная бытовая техника (телевизоры, кофемашины и т.д.) — не наш профиль. Для таких задач у нас есть надёжный партнёр — сервисный центр «Точка». Компания специализируется на сложной бытовой технике и гарантирует профессиональный подход. При обращении к нам мы оперативно перенаправим вас к партнёру. В свою очередь, «Точка» направляет клиентов с мобильной техникой к нам. Чёткое разделение компетенций — гарантия качества и отсутствия путаницы.</p>
-        <button class="partner-btn-inline" id="partnerOpenBtnInline">Отправить заявку в ТОЧКУ</button>
     </div>
     
     <div class="stats-section">
@@ -831,44 +776,66 @@
         </div>
     </div>
 
-    <h2 id="master">О мастере</h2>
-    <div class="master-block">
-        <div class="master-left">
-            <div class="master-photo">
-                <img src="foto.jpg" alt="Мастер FixService Сергей" width="140" height="140" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/140x140/3E9FDC/white?text=Фото'">
+    <h2 id="service">О сервисе</h2>
+    <div class="about-service-block">
+        <div class="service-left">
+            <div class="service-photo">
+                <img src="FixService.jpg" alt="Логотип FixService" width="140" height="140" loading="lazy" onerror="this.onerror=null; this.src='https://placehold.co/140x140/3E9FDC/white?text=Логотип'">
             </div>
         </div>
-        <div class="quote-area">
-            <div class="master-quote-text">
+        <div class="service-quote-area">
+            <div class="service-quote-text">
                 Ваша сломанная техника не проблема, а задача. Десять лет стажа — это тысяча решённых задач. Приносите — посмотрим, что можно сделать.
             </div>
         </div>
-        <div class="master-years">
-            <div class="year-card"><div class="year">2017</div><div class="year-desc">Починил первый iPhone 5s, понял что это моё</div></div>
-            <div class="year-card"><div class="year">2019</div><div class="year-desc">Курсы по микропайке, восстановил 50+ ноутбуков</div></div>
-            <div class="year-card"><div class="year">2024</div><div class="year-desc">Открыл FixService в Ликино-Дулёво, 400+ клиентов</div></div>
-            <div class="year-card"><div class="year">2026</div><div class="year-desc">Расширил перечень услуг</div></div>
+        <div class="service-gallery-block">
+            <div class="service-gallery-title">
+                <span><i class="fas fa-camera"></i> Наши работы</span>
+                <a href="biblioteka.html" class="gallery-link-btn"><i class="fas fa-arrow-right"></i> Посмотреть все работы</a>
+            </div>
+            <div class="service-gallery-grid" id="serviceGalleryGrid"></div>
         </div>
     </div>
 
     <h2>Бренды</h2>
-    <div class="brands-grid">
-        <div class="brand-card">Oneplus</div><div class="brand-card">Oppo</div><div class="brand-card">Infinix</div>
-        <div class="brand-card">Nokia</div><div class="brand-card">Vivo</div><div class="brand-card">itel</div>
-        <div class="brand-card">Tecno</div><div class="brand-card">Honor</div><div class="brand-card">Xiaomi</div>
-        <div class="brand-card">Gresso</div><div class="brand-card">BlackBerry</div><div class="brand-card">Vertu</div>
-        <div class="brand-card">Sony</div><div class="brand-card">realme</div><div class="brand-card">Samsung</div>
-        <div class="brand-card">Huawei</div><div class="brand-card">Apple</div>
+    <div class="brands-grid" id="brandsGrid">
+        <div class="brand-card" data-brand="Apple">Apple</div>
+        <div class="brand-card" data-brand="Samsung">Samsung</div>
+        <div class="brand-card" data-brand="Xiaomi">Xiaomi</div>
+        <div class="brand-card" data-brand="Honor">Honor</div>
+        <div class="brand-card" data-brand="Huawei">Huawei</div>
+        <div class="brand-card" data-brand="Oneplus">Oneplus</div>
+        <div class="brand-card" data-brand="Oppo">Oppo</div>
+        <div class="brand-card" data-brand="Infinix">Infinix</div>
+        <div class="brand-card" data-brand="Nokia">Nokia</div>
+        <div class="brand-card" data-brand="Vivo">Vivo</div>
+        <div class="brand-card" data-brand="itel">itel</div>
+        <div class="brand-card" data-brand="Tecno">Tecno</div>
+        <div class="brand-card" data-brand="BlackBerry">BlackBerry</div>
+        <div class="brand-card" data-brand="Sony">Sony</div>
+        <div class="brand-card" data-brand="realme">realme</div>
     </div>
 
     <h2 id="services">Виды работ</h2>
     <div class="services-grid">
-        <div class="service-card"><div class="service-title">Замена дисплея и стекла</div></div>
-        <div class="service-card"><div class="service-title">Замена разъёма и АКБ</div></div>
-        <div class="service-card"><div class="service-title">Ремонт материнской платы</div></div>
-        <div class="service-card"><div class="service-title">Восстановление данных</div></div>
-        <div class="service-card"><div class="service-title">Увеличение памяти iPhone</div></div>
-        <div class="service-card"><div class="service-title">Ремонт джойстиков</div></div>
+        <a href="services/screen-replacement.html" class="service-card">
+            <div class="service-title">Замена дисплея и стекла</div>
+        </a>
+        <a href="services/battery-repair.html" class="service-card">
+            <div class="service-title">Замена разъёма и АКБ</div>
+        </a>
+        <a href="services/motherboard-repair.html" class="service-card">
+            <div class="service-title">Ремонт материнской платы</div>
+        </a>
+        <a href="services/data-recovery.html" class="service-card">
+            <div class="service-title">Восстановление данных</div>
+        </a>
+        <a href="services/iphone-storage-upgrade.html" class="service-card">
+            <div class="service-title">Увеличение памяти iPhone</div>
+        </a>
+        <a href="services/joystick-repair.html" class="service-card">
+            <div class="service-title">Ремонт джойстиков</div>
+        </a>
     </div>
 
     <h2>Качественные запчасти</h2>
@@ -932,40 +899,10 @@
     <div class="contacts-wrapper">
         <div class="contacts-col">
             <h3>НАШИ КОНТАКТЫ</h3>
-            <p>
-                <span class="svg-icon"><img src="Phone.svg" alt="phone"></span>
-                <a href="tel:89778111666">8 (977) 811-16-66</a>
-            </p>
-            <p>
-                <span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span>
-                <a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a>
-            </p>
-            <p>
-                <span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span>
-                <a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a>
-            </p>
-            <p>
-                <span class="svg-icon"><img src="Youtube.svg" alt="youtube"></span>
-                <a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a>
-            </p>
-        </div>
-        <div class="contacts-col">
-            <h3>НАШИ ПАРТНЕРЫ — ТОЧКА</h3>
-            <div class="partner-icons">
-                <span class="svg-icon"><img src="Vk.svg" alt="vk"></span>
-                <span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span>
-                <span class="svg-icon"><img src="Whatsapp.svg" alt="whatsapp"></span>
-                <span class="svg-icon"><img src="Maks.svg" alt="user"></span>
-            </div>
-            <p>
-                <span class="svg-icon"><img src="Phone.svg" alt="phone"></span>
-                <a href="tel:89699993524">8 (969) 999-35-24</a>
-            </p>
-            <p>
-                <span class="svg-icon"><img src="Site.svg" alt="site"></span>
-                <a href="https://www.tochkaremonta24.ru" target="_blank">www.tochkaremonta24.ru</a>
-            </p>
-            <button class="partner-btn" id="partnerOpenBtn">Отправить заявку в ТОЧКУ</button>
+            <p><span class="svg-icon"><img src="Phone.svg" alt="phone"></span><a href="tel:89778111666">8 (977) 811-16-66</a></p>
+            <p><span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span><a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a></p>
+            <p><span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span><a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a></p>
+            <p><span class="svg-icon"><img src="Youtube.svg" alt="youtube"></span><a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a></p>
         </div>
     </div>
 
@@ -973,10 +910,9 @@
     <div class="map-block">
         <div class="map-address-list">
             <p><strong>FixService:</strong> ул. Советская 41, 2 этаж, пом.209</p>
-            <p><strong>ТОЧКА:</strong> ул. Советская 10</p>
         </div>
         <div class="map-wrapper">
-            <iframe src="https://yandex.ru/map-widget/v1/?ll=38.957,55.724&z=17&pt=38.955609,55.720436,pm2rdm~38.958308,55.728053,pm2bl" allowfullscreen="true" title="Карта FixService и ТОЧКА"></iframe>
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=38.957,55.724&z=17&pt=38.955609,55.720436,pm2rdm" allowfullscreen="true" title="Карта FixService"></iframe>
         </div>
         <div class="work-hours"><i class="fas fa-clock"></i> Режим работы: 10:00 – 18:00</div>
         <div class="map-link">
@@ -991,15 +927,31 @@
 </div>
 
 <footer>
-    <div class="logo" style="font-size:1.4rem; justify-content: center; display: flex;"><span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span></div>
-    <div class="footer-links">
-        <a href="#services">Услуги</a><a href="#master">Мастер</a><a href="#faq">FAQ</a>
-        <a href="#contacts">Контакты</a><a href="#map">Карта</a>
+    <div class="logo" style="font-size:1.4rem; justify-content: center; display: flex;">
+        <span class="fix">Fix</span><span class="service">Service</span>
+        <span class="separator">|</span>
+        <span class="apple-reanimator">Apple REANIMATOR</span>
     </div>
-    <div class="footer-text">© 2025 FixService | REANIMATOR — Сервисный центр. Качественный ремонт вашей техники.</div>
+    <div class="footer-links">
+        <a href="#services">Услуги</a><a href="#service">Сервис</a><a href="#faq">FAQ</a>
+        <a href="#contacts">Контакты</a><a href="#map">Карта</a>
+        <a href="biblioteka.html">Галерея</a>
+    </div>
+    <div class="footer-text">© 2025 FixService | Apple REANIMATOR — Сервисный центр. Качественный ремонт вашей техники.</div>
     <div class="footer-privacy"><a href="privacy.html">Политика конфиденциальности</a></div>
 </footer>
 
+<!-- Попап выбора модели по бренду -->
+<div id="modelSelectPopup" class="popup-model-overlay">
+    <div class="popup-model-container">
+        <button class="close-model-popup" id="closeModelPopupBtn">×</button>
+        <h3 id="modelPopupBrandTitle">Выберите модель</h3>
+        <input type="text" id="modelSearchInput" class="popup-model-search" placeholder="Поиск модели...">
+        <div id="popupModelsList" class="popup-models-grid"></div>
+    </div>
+</div>
+
+<!-- Основной попап заявки (только для FixService) -->
 <div id="popupForm" class="popup-overlay">
     <div class="popup-form">
         <button class="close-popup" id="closePopupBtn">×</button>
@@ -1027,17 +979,79 @@
     </div>
 </div>
 
+<!-- Лайтбокс для увеличения фото -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="close-lightbox" onclick="closeLightbox()">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Увеличенное фото">
+</div>
+
 <div id="toast" class="toast">Заявка отправлена. Мастер свяжется с вами.</div>
 
 <script>
     (function() {
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzZPz4T5TGfNLQbWzU3gDue63RSe6xvLKCtUNxIOpu8Kw684chKTeSMeajPrpImXrUrvg/exec';
         
+        const previewPhotos = [
+            "замена стекла дисплея/Zam.stcl1.jpg",
+            "замена стекла дисплея/Zam.stcl2.jpg",
+            "замена стекла дисплея/Zam.stcl3.jpg",
+            "увеличение памяти на айфон/память айфон 1.jpg",
+            "Ремонт ноутбуков/ZamProcNout.jpg",
+            "Ремонт ноутбуков/ZamProcNout2.jpg",
+            "Сложный ремонт материнской платы/восстановление сети айфонk.jpg",
+            "Сложный ремонт материнской платы/ребол процессора.jpg"
+        ];
+        
+        const galleryGrid = document.getElementById('serviceGalleryGrid');
+        if (galleryGrid) {
+            galleryGrid.innerHTML = previewPhotos.map(src => `
+                <div class="service-gallery-item" onclick="openLightbox('${src.replace(/'/g, "\\'")}')">
+                    <img src="${src}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото'">
+                </div>
+            `).join('');
+        }
+        
+        window.openLightbox = function(imgSrc) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lightboxImg');
+            img.src = imgSrc;
+            lb.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
+        window.closeLightbox = function() {
+            const lb = document.getElementById('lightbox');
+            lb.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        
+        const modelsByBrand = {
+            Apple: ["iPhone X", "iPhone XR", "iPhone XS", "iPhone XS Max", "iPhone 11", "iPhone 11 Pro", "iPhone 11 Pro Max", "iPhone 12", "iPhone 12 mini", "iPhone 12 Pro", "iPhone 12 Pro Max", "iPhone 13", "iPhone 13 mini", "iPhone 13 Pro", "iPhone 13 Pro Max", "iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro", "iPhone 14 Pro Max", "iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max", "iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro", "iPhone 16 Pro Max", "iPhone 16e", "iPhone 17", "iPhone 17 Pro", "iPhone 17 Pro Max", "iPhone Air", "iPhone 17e"],
+            Samsung: ["Samsung Galaxy S21", "Samsung Galaxy S22", "Samsung Galaxy S23", "Samsung Galaxy A52", "Samsung Galaxy A53", "Samsung Galaxy Z Fold3", "Samsung Galaxy Z Flip3"],
+            Xiaomi: ["Xiaomi Mi 11", "Xiaomi Mi 12", "Xiaomi Redmi Note 10", "Xiaomi Redmi Note 11", "Xiaomi 12T Pro", "Xiaomi Poco F3"],
+            Honor: ["Honor 50", "Honor 70", "Honor X8", "Honor Magic4 Pro"],
+            Huawei: ["Huawei P30", "Huawei P40", "Huawei Mate 40", "Huawei Nova 9"],
+            Oneplus: ["OnePlus 9", "OnePlus 10 Pro", "OnePlus Nord 2"],
+            Oppo: ["Oppo Find X5", "Oppo Reno 8", "Oppo A96"],
+            Infinix: ["Infinix Note 11", "Infinix Zero 20", "Infinix Hot 12"],
+            Nokia: ["Nokia G21", "Nokia X20", "Nokia 5.4"],
+            Vivo: ["Vivo V23", "Vivo X80", "Vivo Y75"],
+            itel: ["itel A60", "itel P40", "itel S23"],
+            Tecno: ["Tecno Spark 9", "Tecno Camon 19", "Tecno Pova 4"],
+            BlackBerry: ["BlackBerry Key2", "BlackBerry Motion"],
+            Sony: ["Sony Xperia 1 III", "Sony Xperia 5 III", "Sony Xperia 10 III"],
+            realme: ["realme GT 2", "realme 9 Pro", "realme C35"]
+        };
+        
         const toast = document.getElementById('toast');
         const popup = document.getElementById('popupForm');
+        const modelPopup = document.getElementById('modelSelectPopup');
         const popupType = document.getElementById('popupType');
         const popupTitle = document.getElementById('popupTitle');
         const popupDeviceSelect = document.querySelector('#popupForm .popup-device-select');
+        const formModelInput = document.getElementById('formModel');
+        const popupModelInput = document.getElementById('popupModel');
+        
+        let currentSelectedBrand = '';
         
         function showMessage(text, isError = false) {
             toast.textContent = text;
@@ -1065,6 +1079,8 @@
             });
         }
         
+        document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
+        
         function setLoading(btn, isLoading) {
             if (isLoading) {
                 btn.classList.add('loading');
@@ -1091,7 +1107,73 @@
             }
         }
         
-        document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
+        function openModelSelectPopup(brand) {
+            currentSelectedBrand = brand;
+            document.getElementById('modelPopupBrandTitle').textContent = `Выберите модель ${brand}`;
+            document.getElementById('modelSearchInput').value = '';
+            renderModelList(brand, '');
+            modelPopup.classList.add('active');
+        }
+        
+        function renderModelList(brand, searchTerm) {
+            const models = modelsByBrand[brand] || [`${brand} (модели уточняйте)`];
+            const filtered = models.filter(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
+            const container = document.getElementById('popupModelsList');
+            container.innerHTML = '';
+            if (filtered.length === 0) {
+                container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:20px; color:#7EC8FF;">Моделей не найдено</div>';
+                return;
+            }
+            filtered.forEach(model => {
+                const card = document.createElement('div');
+                card.className = 'popup-model-card';
+                card.textContent = model;
+                card.addEventListener('click', () => {
+                    if (formModelInput) formModelInput.value = model;
+                    if (popupModelInput) popupModelInput.value = model;
+                    modelPopup.classList.remove('active');
+                    showMessage(`Выбрана модель: ${model}`);
+                    setTimeout(() => {
+                        if (popupType) {
+                            popupType.value = 'main';
+                            popupTitle.textContent = 'Оставить заявку';
+                            if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
+                            popup.classList.add('active');
+                        }
+                    }, 200);
+                });
+                container.appendChild(card);
+            });
+        }
+        
+        const searchInput = document.getElementById('modelSearchInput');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                renderModelList(currentSelectedBrand, e.target.value);
+            });
+        }
+        
+        document.getElementById('closeModelPopupBtn')?.addEventListener('click', () => modelPopup.classList.remove('active'));
+        modelPopup?.addEventListener('click', (e) => { if(e.target === modelPopup) modelPopup.classList.remove('active'); });
+        
+        document.querySelectorAll('.brand-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const brand = card.getAttribute('data-brand');
+                if (brand && modelsByBrand[brand]) {
+                    openModelSelectPopup(brand);
+                } else if (brand) {
+                    if (formModelInput) formModelInput.value = brand;
+                    if (popupModelInput) popupModelInput.value = brand;
+                    showMessage(`Выбран бренд: ${brand}. Уточните модель мастеру.`);
+                    setTimeout(() => {
+                        popupType.value = 'main';
+                        popupTitle.textContent = 'Оставить заявку';
+                        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
+                        popup.classList.add('active');
+                    }, 200);
+                }
+            });
+        });
         
         const mainForm = document.getElementById('mainForm');
         const mainSubmitBtn = document.getElementById('mainFormSubmit');
@@ -1135,13 +1217,6 @@
             });
         }
         
-        function openPartnerPopup() {
-            popupType.value = 'partner';
-            popupTitle.textContent = 'Заявка в ТОЧКУ';
-            if (popupDeviceSelect) popupDeviceSelect.style.display = 'none';
-            popup.classList.add('active');
-        }
-        
         function openMainPopup() {
             popupType.value = 'main';
             popupTitle.textContent = 'Оставить заявку';
@@ -1150,8 +1225,6 @@
         }
         
         document.getElementById('heroOpenBtn')?.addEventListener('click', openMainPopup);
-        document.getElementById('partnerOpenBtn')?.addEventListener('click', openPartnerPopup);
-        document.getElementById('partnerOpenBtnInline')?.addEventListener('click', openPartnerPopup);
         
         document.getElementById('closePopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
         document.getElementById('cancelPopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
@@ -1166,7 +1239,6 @@
                 const name = document.getElementById('popupName').value.trim();
                 const phone = document.getElementById('popupPhone').value.trim();
                 const privacyChecked = document.getElementById('popupPrivacy').checked;
-                const type = popupType.value;
                 
                 if (!name || !phone) {
                     showMessage('Заполните имя и номер телефона', true);
@@ -1181,42 +1253,31 @@
                     return;
                 }
                 
-                if (type === 'partner') {
-                    setLoading(popupSubmitBtn, true);
-                    setTimeout(() => {
-                        setLoading(popupSubmitBtn, false);
-                        showMessage('Спасибо! Заявка отправлена партнёрам. Они свяжутся с вами.');
-                        popupFormElement.reset();
-                        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
-                        popup.classList.remove('active');
-                    }, 500);
+                setLoading(popupSubmitBtn, true);
+                const success = await sendToGoogleSheets({
+                    name, phone,
+                    deviceType: document.getElementById('popupDevice').value,
+                    model: document.getElementById('popupModel').value.trim(),
+                    problem: document.getElementById('popupProblem').value.trim(),
+                    timestamp: new Date().toISOString()
+                });
+                setLoading(popupSubmitBtn, false);
+                
+                if (success) {
+                    showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
+                    popupFormElement.reset();
+                    if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
+                    popup.classList.remove('active');
                 } else {
-                    setLoading(popupSubmitBtn, true);
-                    const success = await sendToGoogleSheets({
-                        name, phone,
-                        deviceType: document.getElementById('popupDevice').value,
-                        model: document.getElementById('popupModel').value.trim(),
-                        problem: document.getElementById('popupProblem').value.trim(),
-                        timestamp: new Date().toISOString()
-                    });
-                    setLoading(popupSubmitBtn, false);
-                    
-                    if (success) {
-                        showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
-                        popupFormElement.reset();
-                        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
-                        popup.classList.remove('active');
-                    } else {
-                        showMessage('Ошибка отправки. Попробуйте позвонить.', true);
-                    }
+                    showMessage('Ошибка отправки. Попробуйте позвонить.', true);
                 }
             });
         }
         
-        document.querySelectorAll('a.nav-link, .footer-links a, .hero-btn').forEach(anchor => {
+        document.querySelectorAll('a.nav-link, .footer-links a').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 const href = this.getAttribute('href');
-                if (href && href.startsWith('#')) {
+                if (href && href.startsWith('#') && href.length > 1) {
                     e.preventDefault();
                     const target = document.querySelector(href);
                     if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
