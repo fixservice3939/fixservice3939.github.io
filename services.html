@@ -14,6 +14,9 @@
     <!-- ===== ОБЩИЙ CSS ===== -->
     <link rel="stylesheet" href="css/style.css">
     
+    <!-- ===== ПОДКЛЮЧАЕМ КОНФИГ (ТОКЕНЫ И НАСТРОЙКИ) ===== -->
+    <script src="js/config.js"></script>
+    
     <style>
         /* ===== УНИКАЛЬНЫЕ СТИЛИ ДЛЯ SERVICES.HTML ===== */
         .service-detail-block {
@@ -41,7 +44,6 @@
             opacity: 0.9;
         }
 
-        /* Услуги */
         .service-tabs {
             display: flex;
             gap: 12px;
@@ -75,7 +77,6 @@
             border-color: #7EC8FF;
         }
 
-        /* Бренды */
         .brand-tabs {
             display: flex;
             gap: 12px;
@@ -109,7 +110,6 @@
             border-color: #7EC8FF;
         }
 
-        /* Поиск */
         .search-wrapper {
             margin: 0 0 20px;
         }
@@ -139,7 +139,6 @@
             font-weight: 400;
         }
 
-        /* Сетка моделей */
         .models-grid {
             margin: 0 0 24px;
             display: grid;
@@ -182,7 +181,6 @@
             letter-spacing: -0.2px;
         }
 
-        /* ===== ПРИМЕЧАНИЕ К МОДЕЛИ ===== */
         .model-note {
             font-size: 0.7rem;
             color: #C5A3FF;
@@ -191,7 +189,6 @@
             opacity: 0.9;
         }
 
-        /* Качество (только для дисплея) */
         .quality-selector {
             margin: 20px 0 20px;
             padding: 0 4px;
@@ -241,7 +238,6 @@
             display: none;
         }
 
-        /* Цена */
         .final-price {
             text-align: center;
             margin: 16px 0 20px;
@@ -398,9 +394,10 @@
 <div class="navbar">
     <div class="container-nav">
         <div class="logo">
-            <span style="color:#fff;">Fix</span><span style="color:#7EC8FF;">Service</span>
-            <span style="color:#C5A3FF;">| REANIMATOR</span>
-        </div>
+    <span class="fix">Fix</span><span class="service">Service</span>
+    <span class="separator">|</span>
+    <span class="apple-reanimator">Apple REANIMATOR</span>
+</div>
         <div class="nav-links">
             <a href="index.html" class="nav-link">Главная</a>
             <a href="biblioteka.html" class="nav-link">Галерея</a>
@@ -414,7 +411,6 @@
         <h1>Ремонт вашей техники</h1>
         <div class="subtitle">Выберите услугу, бренд и модель — мы рассчитаем стоимость</div>
         
-        <!-- ===== ВЫБОР УСЛУГИ ===== -->
         <div class="service-tabs" id="serviceTabs">
             <button class="service-btn-tab active" data-service="display">Замена дисплея и стекла</button>
             <button class="service-btn-tab" data-service="battery">Замена разъёма и АКБ</button>
@@ -424,12 +420,10 @@
             <button class="service-btn-tab" data-service="joystick">Ремонт джойстиков</button>
         </div>
 
-        <!-- ===== ОПИСАНИЕ УСЛУГИ ===== -->
         <div class="service-description" id="serviceDescription">
             Замена разбитого экрана, треснувшего стекла или битого дисплея на телефонах любых брендов.
         </div>
 
-        <!-- ===== ВЫБОР БРЕНДА ===== -->
         <div class="brand-tabs" id="brandTabs">
             <button class="brand-btn active" data-brand="apple">Apple</button>
             <button class="brand-btn" data-brand="samsung">Samsung</button>
@@ -448,17 +442,14 @@
             <button class="brand-btn" data-brand="realme">realme</button>
         </div>
 
-        <!-- ===== ПОИСК ===== -->
         <div class="search-wrapper">
             <input type="text" id="searchModel" class="search-input" placeholder="🔍 Начните вводить модель, например iPhone 15 или S23">
         </div>
 
-        <!-- ===== МОДЕЛИ ===== -->
         <div id="modelsContainer" class="models-grid">
             <div class="empty-models">Введите запрос, чтобы найти модель</div>
         </div>
 
-        <!-- ===== КАЧЕСТВО (только для дисплея) ===== -->
         <div class="quality-selector" id="qualitySelector">
             <label>Выберите качество дисплея:</label>
             <div class="quality-buttons">
@@ -467,17 +458,14 @@
             </div>
         </div>
 
-        <!-- ===== ЦЕНА ===== -->
         <div class="final-price" id="finalPrice">
             Итоговая цена: <span id="totalPrice">0</span> ₽
         </div>
 
-        <!-- ===== КНОПКА ===== -->
         <button class="order-btn" id="openOrderBtn">Оставить заявку</button>
         <a href="index.html" class="back-home-btn">На главную</a>
     </div>
 
-    <!-- ===== КОНТАКТЫ ===== -->
     <h2 id="contacts">Контакты</h2>
     <div class="contacts-wrapper">
         <div class="contacts-col">
@@ -494,7 +482,6 @@
         </div>
     </div>
 
-    <!-- ===== КАРТА ===== -->
     <h2 id="map">Как нас найти</h2>
     <div class="map-block">
         <div class="map-wrapper">
@@ -503,7 +490,6 @@
     </div>
 </div>
 
-<!-- ===== ПОПАП ===== -->
 <div id="popupForm" class="popup-overlay">
     <div class="popup-form">
         <button class="close-popup" id="closePopupBtn">×</button>
@@ -544,11 +530,6 @@
 <div id="toast" class="toast">Заявка отправлена. Мастер свяжется с вами.</div>
 
 <script>
-    // ========== НАСТРОЙКИ БОТА ==========
-    const BOT_TOKEN = '8676096132:AAE0LDxXgNk4_8n0waZtf-6aiQR0g1-lnx8';
-    const CHAT_ID = '6634773779';
-    const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-
     // ========== ОПИСАНИЯ УСЛУГ ==========
     const serviceDescriptions = {
         display: 'Замена разбитого экрана, треснувшего стекла или битого дисплея на телефонах любых брендов.',
@@ -559,7 +540,6 @@
         joystick: 'Ремонт джойстиков: замена стиков, кнопок, восстановление сенсоров и плат.'
     };
 
-    // ========== ПЛЕЙСХОЛДЕРЫ ДЛЯ ПОИСКА ПО БРЕНДУ ==========
     const brandPlaceholders = {
         apple: '🔍 Начните вводить модель iPhone, например 15 или 15 Pro',
         samsung: '🔍 Начните вводить модель Samsung, например S23 или A53',
@@ -578,7 +558,6 @@
         realme: '🔍 Начните вводить модель realme, например GT 2 или 9 Pro'
     };
 
-    // ========== НАЗВАНИЯ УСЛУГ ДЛЯ ПОПАПА ==========
     const serviceNames = {
         display: 'Замена дисплея и стекла',
         battery: 'Замена разъёма и АКБ',
@@ -592,47 +571,38 @@
     const priceDatabase = {
         display: {
             apple: [
-                // ===== iPhone X =====
                 { name: "iPhone X", priceOriginal: 5800, priceAnalog: 4200, note: "OLED" },
                 { name: "iPhone XR", priceOriginal: 4000, priceAnalog: 3000, note: "без ошибки" },
                 { name: "iPhone XS", priceOriginal: 6000, priceAnalog: 4500, note: "OLED, без ошибки" },
                 { name: "iPhone XS Max", priceOriginal: 7000, priceAnalog: 5000, note: "OLED, без ошибки" },
-                // ===== iPhone 11 =====
                 { name: "iPhone 11", priceOriginal: 4500, priceAnalog: 3800, note: "без ошибки" },
                 { name: "iPhone 11 Pro", priceOriginal: 7800, priceAnalog: 5000, note: "без ошибки" },
                 { name: "iPhone 11 Pro Max", priceOriginal: 9000, priceAnalog: 6200, note: "без ошибки" },
-                // ===== iPhone 12 =====
                 { name: "iPhone 12", priceOriginal: 7000, priceAnalog: 5200, note: "без ошибки" },
                 { name: "iPhone 12 mini", priceOriginal: 8500, priceAnalog: 6500, note: "без ошибки" },
                 { name: "iPhone 12 Pro", priceOriginal: 7500, priceAnalog: 5700, note: "без ошибки" },
                 { name: "iPhone 12 Pro Max", priceOriginal: 9500, priceAnalog: 7000, note: "без ошибки" },
-                // ===== iPhone 13 =====
                 { name: "iPhone 13", priceOriginal: 8000, priceAnalog: 6500, note: "без ошибки" },
                 { name: "iPhone 13 mini", priceOriginal: 10000, priceAnalog: 6700, note: "без ошибки" },
                 { name: "iPhone 13 Pro", priceOriginal: 10000, priceAnalog: 7700, note: "без ошибки, 120 Гц" },
                 { name: "iPhone 13 Pro Max", priceOriginal: 11000, priceAnalog: 7500, note: "без ошибки, 120 Гц" },
-                // ===== iPhone 14 =====
                 { name: "iPhone 14", priceOriginal: 8000, priceAnalog: 6500, note: "без ошибки" },
                 { name: "iPhone 14 Plus", priceOriginal: 13000, priceAnalog: 8500, note: "без ошибки" },
                 { name: "iPhone 14 Pro", priceOriginal: 15000, priceAnalog: 9000, note: "без ошибки, 120 Гц" },
                 { name: "iPhone 14 Pro Max", priceOriginal: 17000, priceAnalog: 8700, note: "без ошибки, 120 Гц" },
-                // ===== iPhone 15 =====
                 { name: "iPhone 15", priceOriginal: 16000, priceAnalog: 8000, note: "без ошибки" },
                 { name: "iPhone 15 Plus", priceOriginal: 18000, priceAnalog: 14000, note: "без ошибки" },
                 { name: "iPhone 15 Pro", priceOriginal: 21000, priceAnalog: 9500, note: "без ошибки, 120 Гц" },
                 { name: "iPhone 15 Pro Max", priceOriginal: 23000, priceAnalog: 11000, note: "без ошибки, 120 Гц" },
-                // ===== iPhone 16 =====
                 { name: "iPhone 16", priceOriginal: 19000, priceAnalog: 9000, note: "без ошибки, 120 Гц" },
                 { name: "iPhone 16 Plus", priceOriginal: 15000, priceAnalog: 11000, note: "без ошибки, 120 Гц" },
                 { name: "iPhone 16 Pro", priceOriginal: 20000, priceAnalog: 11000, note: "без ошибки, 120 Гц" },
                 { name: "iPhone 16 Pro Max", priceOriginal: 27000, priceAnalog: 15000, note: "без ошибки, 120 Гц" },
                 { name: "iPhone 16e", priceOriginal: 10000, priceAnalog: 7000, note: "без ошибки, 120 Гц" },
-                // ===== iPhone 17 =====
                 { name: "iPhone 17", priceOriginal: 25000, priceAnalog: 11000, note: "120 Гц" },
                 { name: "iPhone 17 Pro", priceOriginal: 17000, priceAnalog: 13200, note: "120 Гц" },
                 { name: "iPhone 17 Pro Max", priceOriginal: 37000, priceAnalog: 19000, note: "120 Гц" },
                 { name: "iPhone 17e", priceOriginal: 19000, priceAnalog: 0, note: "120 Гц" },
-                // ===== iPhone Air =====
                 { name: "iPhone Air", priceOriginal: 38000, priceAnalog: 0, note: "" }
             ],
             samsung: [
@@ -665,91 +635,11 @@
             sony: [],
             realme: []
         },
-        battery: {
-            apple: [],
-            samsung: [],
-            xiaomi: [],
-            honor: [],
-            huawei: [],
-            oneplus: [],
-            oppo: [],
-            infinix: [],
-            nokia: [],
-            vivo: [],
-            itel: [],
-            tecno: [],
-            blackberry: [],
-            sony: [],
-            realme: []
-        },
-        motherboard: {
-            apple: [],
-            samsung: [],
-            xiaomi: [],
-            honor: [],
-            huawei: [],
-            oneplus: [],
-            oppo: [],
-            infinix: [],
-            nokia: [],
-            vivo: [],
-            itel: [],
-            tecno: [],
-            blackberry: [],
-            sony: [],
-            realme: []
-        },
-        'data-recovery': {
-            apple: [],
-            samsung: [],
-            xiaomi: [],
-            honor: [],
-            huawei: [],
-            oneplus: [],
-            oppo: [],
-            infinix: [],
-            nokia: [],
-            vivo: [],
-            itel: [],
-            tecno: [],
-            blackberry: [],
-            sony: [],
-            realme: []
-        },
-        'storage-upgrade': {
-            apple: [],
-            samsung: [],
-            xiaomi: [],
-            honor: [],
-            huawei: [],
-            oneplus: [],
-            oppo: [],
-            infinix: [],
-            nokia: [],
-            vivo: [],
-            itel: [],
-            tecno: [],
-            blackberry: [],
-            sony: [],
-            realme: []
-        },
-        joystick: {
-            apple: [],
-            samsung: [],
-            xiaomi: [],
-            honor: [],
-            huawei: [],
-            oneplus: [],
-            oppo: [],
-            infinix: [],
-            nokia: [],
-            vivo: [],
-            itel: [],
-            tecno: [],
-            blackberry: [],
-            sony: [],
-            realme: []
-        }
+        battery: { apple: [], samsung: [], xiaomi: [], honor: [], huawei: [], oneplus: [], oppo: [], infinix: [], nokia: [], vivo: [], itel: [], tecno: [], blackberry: [], sony: [], realme: [] },
+        motherboard: { apple: [], samsung: [], xiaomi: [], honor: [], huawei: [], oneplus: [], oppo: [], infinix: [], nokia: [], vivo: [], itel: [], tecno: [], blackberry: [], sony: [], realme: [] },
+        'data-recovery': { apple: [], samsung: [], xiaomi: [], honor: [], huawei: [], oneplus: [], oppo: [], infinix: [], nokia: [], vivo: [], itel: [], tecno: [], blackberry: [], sony: [], realme: [] },
+        'storage-upgrade': { apple: [], samsung: [], xiaomi: [], honor: [], huawei: [], oneplus: [], oppo: [], infinix: [], nokia: [], vivo: [], itel: [], tecno: [], blackberry: [], sony: [], realme: [] },
+        joystick: { apple: [], samsung: [], xiaomi: [], honor: [], huawei: [], oneplus: [], oppo: [], infinix: [], nokia: [], vivo: [], itel: [], tecno: [], blackberry: [], sony: [], realme: [] }
     };
 
     // ========== СОСТОЯНИЕ ==========
@@ -784,7 +674,6 @@
         
         modelsContainer.innerHTML = '';
         
-        // Если у бренда нет моделей для этой услуги
         if (allModels.length === 0) {
             const emptyDiv = document.createElement('div');
             emptyDiv.className = 'empty-models';
@@ -811,7 +700,6 @@
             if (currentModelObj && currentModelObj.name === model.name) {
                 card.classList.add('selected');
             }
-            // Добавляем note, если есть
             const noteHtml = model.note ? `<div class="model-note">${model.note}</div>` : '';
             card.innerHTML = `
                 <div class="model-name">${model.name}</div>
@@ -1001,13 +889,11 @@
 
             const response = await fetch(TELEGRAM_API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     chat_id: CHAT_ID,
                     text: message,
-                    parse_mode: 'Markdown',
+                    parse_mode: 'Markdown'
                 }),
                 signal: controller.signal
             });
@@ -1036,6 +922,45 @@
             } else {
                 throw new Error('Ошибка отправки. Попробуйте позже или позвоните нам.');
             }
+        }
+    }
+
+    // ========== ОТПРАВКА В GOOGLE ТАБЛИЦУ ==========
+    async function sendToGoogleSheets(formData) {
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const result = await response.json();
+            return result.status === 'success';
+        } catch (error) {
+            console.error('Ошибка отправки в таблицу:', error);
+            return false;
+        }
+    }
+
+    // ========== ОБЩАЯ ОТПРАВКА ==========
+    async function sendToBoth(formData, submitBtn) {
+        setLoading(submitBtn, true);
+        
+        try {
+            await sendToTelegram(formData);
+            const success = await sendToGoogleSheets(formData);
+            
+            if (success) {
+                showMessage('Спасибо! Заявка отправлена.');
+                return true;
+            } else {
+                showMessage('Заявка отправлена, но есть проблемы с таблицей.', true);
+                return false;
+            }
+        } catch (error) {
+            showMessage('Ошибка отправки. Попробуйте позже.', true);
+            return false;
+        } finally {
+            setLoading(submitBtn, false);
         }
     }
 
@@ -1100,21 +1025,11 @@
             timestamp: new Date().toISOString()
         };
         
-        try {
-            const success = await sendToTelegram(formData);
-            
-            if (success) {
-                showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
-                popupFormElement.reset();
-                popup.classList.remove('active');
-                document.getElementById('popupPrivacy').checked = false;
-            } else {
-                showMessage('Ошибка отправки. Попробуйте позвонить по телефону.', true);
-            }
-        } catch (error) {
-            showMessage(error.message || 'Ошибка отправки. Попробуйте позвонить.', true);
-        } finally {
-            setLoading(popupSubmitBtn, false);
+        const success = await sendToBoth(formData, popupSubmitBtn);
+        if (success) {
+            popupFormElement.reset();
+            popup.classList.remove('active');
+            document.getElementById('popupPrivacy').checked = false;
         }
     });
 
