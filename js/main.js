@@ -1,9 +1,15 @@
 // ============================================================
-// ОСНОВНОЙ JS-ФАЙЛ ДЛЯ ВСЕГО САЙТА
+// ОСНОВНОЙ JS-ФАЙЛ (отправка в Telegram + Google Таблица)
 // ============================================================
 
 (function() {
-    // ========== КОНСТАНТЫ ==========
+    // ========== НАСТРОЙКИ ==========
+    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVg38t8MiCuD0SbdOO3U8Wdr2HmG49V8yIevcpIJfS70X7QpalM5vIgR00jhMTVym0AQ/exec';
+    const BOT_TOKEN = '8877207809:AAFhA1S8UZfJfpUbNKrGh7Z5ZjQzlwxs2rY';
+    const CHAT_ID = '6634773779';
+    const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    
+    // ========== ГАЛЕРЕЯ ==========
     const previewPhotos = [
         "photos/display/Zam.stcl1.jpg",
         "photos/display/Zam.stcl2.jpg",
@@ -15,37 +21,6 @@
         "photos/motherboard/ребол процессора.jpg"
     ];
     
-    const modelsByBrand = {
-        Apple: ["iPhone X", "iPhone XR", "iPhone XS", "iPhone XS Max", "iPhone 11", "iPhone 11 Pro", "iPhone 11 Pro Max", "iPhone 12", "iPhone 12 mini", "iPhone 12 Pro", "iPhone 12 Pro Max", "iPhone 13", "iPhone 13 mini", "iPhone 13 Pro", "iPhone 13 Pro Max", "iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro", "iPhone 14 Pro Max", "iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max", "iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro", "iPhone 16 Pro Max", "iPhone 16e", "iPhone 17", "iPhone 17 Pro", "iPhone 17 Pro Max", "iPhone Air", "iPhone 17e"],
-        Samsung: ["Samsung Galaxy S21", "Samsung Galaxy S22", "Samsung Galaxy S23", "Samsung Galaxy A52", "Samsung Galaxy A53", "Samsung Galaxy Z Fold3", "Samsung Galaxy Z Flip3"],
-        Xiaomi: ["Xiaomi Mi 11", "Xiaomi Mi 12", "Xiaomi Redmi Note 10", "Xiaomi Redmi Note 11", "Xiaomi 12T Pro", "Xiaomi Poco F3"],
-        Honor: ["Honor 50", "Honor 70", "Honor X8", "Honor Magic4 Pro"],
-        Huawei: ["Huawei P30", "Huawei P40", "Huawei Mate 40", "Huawei Nova 9"],
-        Oneplus: ["OnePlus 9", "OnePlus 10 Pro", "OnePlus Nord 2"],
-        Oppo: ["Oppo Find X5", "Oppo Reno 8", "Oppo A96"],
-        Infinix: ["Infinix Note 11", "Infinix Zero 20", "Infinix Hot 12"],
-        Nokia: ["Nokia G21", "Nokia X20", "Nokia 5.4"],
-        Vivo: ["Vivo V23", "Vivo X80", "Vivo Y75"],
-        itel: ["itel A60", "itel P40", "itel S23"],
-        Tecno: ["Tecno Spark 9", "Tecno Camon 19", "Tecno Pova 4"],
-        BlackBerry: ["BlackBerry Key2", "BlackBerry Motion"],
-        Sony: ["Sony Xperia 1 III", "Sony Xperia 5 III", "Sony Xperia 10 III"],
-        realme: ["realme GT 2", "realme 9 Pro", "realme C35"]
-    };
-    
-    // ========== DOM ЭЛЕМЕНТЫ ==========
-    const toast = document.getElementById('toast');
-    const popup = document.getElementById('popupForm');
-    const modelPopup = document.getElementById('modelSelectPopup');
-    const popupType = document.getElementById('popupType');
-    const popupTitle = document.getElementById('popupTitle');
-    const popupDeviceSelect = document.querySelector('#popupForm .popup-device-select');
-    const formModelInput = document.getElementById('formModel');
-    const popupModelInput = document.getElementById('popupModel');
-    
-    let currentSelectedBrand = '';
-    
-    // ========== ГАЛЕРЕЯ ==========
     const galleryGrid = document.getElementById('serviceGalleryGrid');
     if (galleryGrid) {
         galleryGrid.innerHTML = previewPhotos.map(src => `
@@ -69,19 +44,7 @@
         document.body.style.overflow = '';
     };
     
-    // ========== ОБЩИЕ ФУНКЦИИ ==========
-    function showMessage(text, isError = false) {
-        toast.textContent = text;
-        toast.style.background = isError ? '#dc2626' : '#3E9FDC';
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 4000);
-    }
-    
-    function validatePhone(phone) {
-        const numbers = phone.replace(/[^\d+]/g, '').replace(/\D/g, '');
-        return numbers.length >= 10 && numbers.length <= 11;
-    }
-    
+    // ========== МАСКА ТЕЛЕФОНА ==========
     function applyPhoneMask(input) {
         input.addEventListener('input', function(e) {
             let value = this.value.replace(/\D/g, '');
@@ -95,17 +58,15 @@
             this.value = formatted;
         });
     }
-    
     document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
     
-    function setLoading(btn, isLoading) {
-        if (isLoading) {
-            btn.classList.add('loading');
-            btn.disabled = true;
-        } else {
-            btn.classList.remove('loading');
-            btn.disabled = false;
-        }
+    // ========== TOAST ==========
+    const toast = document.getElementById('toast');
+    function showMessage(text, isError = false) {
+        toast.textContent = text;
+        toast.style.background = isError ? '#dc2626' : '#3E9FDC';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
     }
     
     // ========== ОТПРАВКА В TELEGRAM ==========
@@ -118,143 +79,83 @@
 📟 *Тип устройства:* ${formData.deviceType || 'Не указан'}
 📱 *Модель:* ${formData.model || 'Не указана'}
 📝 *Проблема:* ${formData.problem || 'Не указана'}
-🕐 *Время заявки:* ${new Date(formData.timestamp).toLocaleString('ru-RU')}
+🕐 *Время заявки:* ${new Date().toLocaleString('ru-RU')}
         `;
 
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
-
             const response = await fetch(TELEGRAM_API_URL, {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     chat_id: CHAT_ID,
                     text: message,
-                    parse_mode: 'Markdown',
-                }),
-                signal: controller.signal
+                    parse_mode: 'Markdown'
+                })
             });
-
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Telegram API error:', errorData);
-                throw new Error(`Ошибка ${response.status}: ${errorData.description || 'Неизвестная ошибка'}`);
-            }
-
-            const result = await response.json();
-            if (!result.ok) {
-                throw new Error('Telegram не подтвердил отправку');
-            }
-
-            return true;
+            return response.ok;
         } catch (error) {
             console.error('Ошибка отправки в Telegram:', error);
-            
-            if (error.name === 'AbortError') {
-                throw new Error('Превышено время ожидания. Попробуйте позже.');
-            } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                throw new Error('Нет соединения с интернетом. Проверьте связь.');
-            } else {
-                throw new Error('Ошибка отправки. Попробуйте позже или позвоните нам.');
-            }
+            return false;
         }
     }
     
-    // ========== ОБЩАЯ ФУНКЦИЯ ДЛЯ ОТПРАВКИ ЛЮБОЙ ФОРМЫ ==========
-    async function submitForm(formDataObj, submitBtn, resetFormCallback) {
+    // ========== ОТПРАВКА В GOOGLE ТАБЛИЦУ ==========
+    async function sendToGoogleSheets(formData) {
+        try {
+            const response = await fetch(GOOGLE_SCRIPT_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
+            });
+            const result = await response.json();
+            return result.status === 'success';
+        } catch (error) {
+            console.error('Ошибка отправки в таблицу:', error);
+            return false;
+        }
+    }
+    
+    // ========== ОБЩАЯ ОТПРАВКА (В ОБА МЕСТА) ==========
+    async function sendToBoth(formData, submitBtn) {
         setLoading(submitBtn, true);
         
         try {
-            const success = await sendToTelegram(formDataObj);
+            // Отправляем в Telegram
+            await sendToTelegram(formData);
+            
+            // Отправляем в Google Таблицу
+            const success = await sendToGoogleSheets(formData);
             
             if (success) {
-                showMessage('Спасибо! Заявка отправлена. Мастер свяжется с вами.');
-                if (resetFormCallback) resetFormCallback();
+                showMessage('Спасибо! Заявка отправлена.');
                 return true;
             } else {
-                throw new Error('Отправка не удалась');
+                showMessage('Заявка отправлена, но есть проблемы с таблицей.', true);
+                return false;
             }
         } catch (error) {
-            showMessage(error.message || 'Ошибка отправки. Попробуйте позже или позвоните нам.', true);
+            showMessage('Ошибка отправки. Попробуйте позже.', true);
             return false;
         } finally {
             setLoading(submitBtn, false);
         }
     }
     
-    // ========== МОДЕЛИ И БРЕНДЫ ==========
-    function openModelSelectPopup(brand) {
-        currentSelectedBrand = brand;
-        document.getElementById('modelPopupBrandTitle').textContent = `Выберите модель ${brand}`;
-        document.getElementById('modelSearchInput').value = '';
-        renderModelList(brand, '');
-        modelPopup.classList.add('active');
+    // ========== ФОРМЫ ==========
+    function validatePhone(phone) {
+        const numbers = phone.replace(/[^\d+]/g, '').replace(/\D/g, '');
+        return numbers.length >= 10 && numbers.length <= 11;
     }
     
-    function renderModelList(brand, searchTerm) {
-        const models = modelsByBrand[brand] || [`${brand} (модели уточняйте)`];
-        const filtered = models.filter(m => m.toLowerCase().includes(searchTerm.toLowerCase()));
-        const container = document.getElementById('popupModelsList');
-        container.innerHTML = '';
-        if (filtered.length === 0) {
-            container.innerHTML = '<div style="grid-column:1/-1; text-align:center; padding:20px; color:#7EC8FF;">Моделей не найдено</div>';
-            return;
+    function setLoading(btn, isLoading) {
+        if (isLoading) {
+            btn.classList.add('loading');
+            btn.disabled = true;
+        } else {
+            btn.classList.remove('loading');
+            btn.disabled = false;
         }
-        filtered.forEach(model => {
-            const card = document.createElement('div');
-            card.className = 'popup-model-card';
-            card.textContent = model;
-            card.addEventListener('click', () => {
-                if (formModelInput) formModelInput.value = model;
-                if (popupModelInput) popupModelInput.value = model;
-                modelPopup.classList.remove('active');
-                showMessage(`Выбрана модель: ${model}`);
-                setTimeout(() => {
-                    if (popupType) {
-                        popupType.value = 'main';
-                        popupTitle.textContent = 'Оставить заявку';
-                        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
-                        popup.classList.add('active');
-                    }
-                }, 200);
-            });
-            container.appendChild(card);
-        });
     }
-    
-    const searchInput = document.getElementById('modelSearchInput');
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            renderModelList(currentSelectedBrand, e.target.value);
-        });
-    }
-    
-    document.getElementById('closeModelPopupBtn')?.addEventListener('click', () => modelPopup.classList.remove('active'));
-    modelPopup?.addEventListener('click', (e) => { if(e.target === modelPopup) modelPopup.classList.remove('active'); });
-    
-    document.querySelectorAll('.brand-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const brand = card.getAttribute('data-brand');
-            if (brand && modelsByBrand[brand]) {
-                openModelSelectPopup(brand);
-            } else if (brand) {
-                if (formModelInput) formModelInput.value = brand;
-                if (popupModelInput) popupModelInput.value = brand;
-                showMessage(`Выбран бренд: ${brand}. Уточните модель мастеру.`);
-                setTimeout(() => {
-                    popupType.value = 'main';
-                    popupTitle.textContent = 'Оставить заявку';
-                    if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
-                    popup.classList.add('active');
-                }, 200);
-            }
-        });
-    });
     
     // ========== ОСНОВНАЯ ФОРМА ==========
     const mainForm = document.getElementById('mainForm');
@@ -263,7 +164,6 @@
     if (mainForm) {
         mainForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const name = document.getElementById('formName').value.trim();
             const phone = document.getElementById('formPhone').value.trim();
             const privacyChecked = document.getElementById('formPrivacy').checked;
@@ -285,34 +185,36 @@
                 name, phone,
                 deviceType: document.getElementById('formDevice').value,
                 model: document.getElementById('formModel').value.trim(),
-                problem: document.getElementById('formProblem').value.trim(),
-                timestamp: new Date().toISOString()
+                problem: document.getElementById('formProblem').value.trim()
             };
             
-            await submitForm(formData, mainSubmitBtn, () => mainForm.reset());
+            const success = await sendToBoth(formData, mainSubmitBtn);
+            if (success) {
+                mainForm.reset();
+            }
         });
     }
     
     // ========== ПОПАП ФОРМА ==========
-    function openMainPopup() {
-        popupType.value = 'main';
-        popupTitle.textContent = 'Оставить заявку';
-        if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
-        popup.classList.add('active');
-    }
-    
-    document.getElementById('heroOpenBtn')?.addEventListener('click', openMainPopup);
-    document.getElementById('closePopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
-    document.getElementById('cancelPopupBtn')?.addEventListener('click', () => popup.classList.remove('active'));
-    popup?.addEventListener('click', (e) => { if(e.target === popup) popup.classList.remove('active'); });
-    
+    const popup = document.getElementById('popupForm');
     const popupFormElement = document.getElementById('popupFormElement');
     const popupSubmitBtn = document.getElementById('popupSubmitBtn');
+    
+    document.getElementById('heroOpenBtn')?.addEventListener('click', function() {
+        popup.classList.add('active');
+    });
+    
+    document.getElementById('closePopupBtn')?.addEventListener('click', function() {
+        popup.classList.remove('active');
+    });
+    
+    document.getElementById('cancelPopupBtn')?.addEventListener('click', function() {
+        popup.classList.remove('active');
+    });
     
     if (popupFormElement) {
         popupFormElement.addEventListener('submit', async function(e) {
             e.preventDefault();
-            
             const name = document.getElementById('popupName').value.trim();
             const phone = document.getElementById('popupPhone').value.trim();
             const privacyChecked = document.getElementById('popupPrivacy').checked;
@@ -334,15 +236,14 @@
                 name, phone,
                 deviceType: document.getElementById('popupDevice').value,
                 model: document.getElementById('popupModel').value.trim(),
-                problem: document.getElementById('popupProblem').value.trim(),
-                timestamp: new Date().toISOString()
+                problem: document.getElementById('popupProblem').value.trim()
             };
             
-            const success = await submitForm(formData, popupSubmitBtn, () => {
+            const success = await sendToBoth(formData, popupSubmitBtn);
+            if (success) {
                 popupFormElement.reset();
-                if (popupDeviceSelect) popupDeviceSelect.style.display = 'block';
                 popup.classList.remove('active');
-            });
+            }
         });
     }
     
