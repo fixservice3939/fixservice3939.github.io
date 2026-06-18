@@ -16,7 +16,9 @@
     <meta property="og:image" content="https://fixservice3939.github.io/foto.webp">
     
     <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.telegram.org; connect-src 'self' https://api.telegram.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co; frame-src https://yandex.ru;">
+    
+    <!-- ===== ИСПРАВЛЕННАЯ ПОЛИТИКА БЕЗОПАСНОСТИ ===== -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.telegram.org https://script.google.com; connect-src 'self' https://api.telegram.org https://script.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co; frame-src https://yandex.ru;">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -188,7 +190,7 @@
         <div class="brand-card" data-brand="Tecno">Tecno</div>
         <div class="brand-card" data-brand="BlackBerry">BlackBerry</div>
         <div class="brand-card" data-brand="Sony">Sony</div>
-        <div class="brand-card" data-brand="Realme">realme</div>
+        <div class="brand-card" data-brand="Realme">Realme</div>
     </div>
 
     <!-- ===== ВИДЫ РАБОТ ===== -->
@@ -375,7 +377,7 @@
 
 <div id="toast" class="toast">Заявка отправлена. Мастер свяжется с вами.</div>
 
-<!-- ===== ПОДКЛЮЧАЕМ ВНЕШНИЙ JS ===== -->
+
 <script src="js/config.js"></script>
 <script src="js/main.js"></script>
 
