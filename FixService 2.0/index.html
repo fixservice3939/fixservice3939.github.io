@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    
+    <title>FixService | Apple REANIMATOR – Сервисный центр ремонта техники в Ликино-Дулёво</title>
+    <meta name="description" content="FixService — профессиональный ремонт телефонов, планшетов и ноутбуков в Ликино-Дулёво. Диагностика бесплатно, гарантия 1 год, оригинальные запчасти. Честные цены, быстрый сервис.">
+    <meta name="keywords" content="ремонт телефонов, ремонт планшетов, ремонт ноутбуков, сервисный центр Ликино-Дулёво, FixService, замена экрана, ремонт iPhone, диагностика бесплатно">
+    <meta name="author" content="FixService | Apple REANIMATOR">
+    
+    <meta property="og:title" content="FixService | Apple REANIMATOR – Сервисный центр">
+    <meta property="og:description" content="Профессиональный ремонт телефонов, планшетов и ноутбуков. Гарантия 1 год, честные цены.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://fixservice3939.github.io">
+    <meta property="og:image" content="https://fixservice3939.github.io/foto.webp">
+    
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.telegram.org; connect-src 'self' https://api.telegram.org; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co; frame-src https://yandex.ru;">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    
+    <!-- ===== ПОДКЛЮЧАЕМ ВНЕШНИЙ CSS ===== -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* ===== НОВЫЙ СТИЛЬ ДЛЯ БЛОКА «КАК МЫ РАБОТАЕМ» ===== */
+        .work-block {
+            background: rgba(128, 90, 180, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(126, 200, 255, 0.35);
+            border-radius: 40px;
+            padding: 2rem 2.5rem;
+            margin: 20px 0 30px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .work-content {
+            display: flex;
+            gap: 2.5rem;
+            align-items: flex-start;
+        }
+
+        .work-photo {
+            flex: 0 0 140px;
+            text-align: center;
+        }
+
+        .work-photo img {
+            width: 140px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid #C5A3FF;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            background: #2a2350;
+        }
+
+        .work-text {
+            flex: 1;
+        }
+
+        .work-text p {
+            font-size: 1.05rem;
+            line-height: 1.6;
+            color: #E0F0FF;
+            margin-bottom: 1.2rem;
+        }
+
+        /* ===== КНОПКА ===== */
+        .gallery-link-btn-large {
+            display: inline-block;
+            background: rgba(62, 159, 220, 0.85);
+            padding: 10px 28px;
+            border-radius: 60px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+            transition: all 0.2s;
+            border: 1px solid rgba(126, 200, 255, 0.5);
+        }
+
+        .gallery-link-btn-large:hover {
+            background: #3E9FDC;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(62, 159, 220, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .work-content {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .work-photo {
+                flex: 0 0 auto;
+            }
+            .work-block {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="container-nav">
+        <div class="logo">
+            <span class="fix">Fix</span><span class="service">Service</span>
+            <span class="separator">|</span>
+            <span class="apple-reanimator">Apple REANIMATOR</span>
+        </div>
+        <div class="nav-links">
+            <a href="#services" class="nav-link">Услуги</a>
+            <a href="#service" class="nav-link">Сервис</a>
+            <a href="#faq" class="nav-link">FAQ</a>
+            <a href="#contacts" class="nav-link">Контакты</a>
+            <a href="#map" class="nav-link">Карта</a>
+            <a href="biblioteka.html" class="nav-link">Галерея</a>
+            <a href="partners.html" class="nav-link">Партнёры</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <!-- ===== HERO ===== -->
+    <div class="hero-block">
+        <div class="badge">СЕРВИСНЫЙ ЦЕНТР</div>
+        <h1>Качественный ремонт вашей техники</h1>
+        <div class="hero-description">Быстрая диагностика, оригинальные запчасти, гарантия на все виды работ.</div>
+        <button class="hero-btn" id="heroOpenBtn">Оставить заявку</button>
+    </div>
+
+    <!-- ===== БЛОК «КАК МЫ РАБОТАЕМ» ===== -->
+    <div class="work-block">
+        <h2>Как мы работаем</h2>
+
+        <div class="work-content">
+            <div class="work-photo">
+                <img src="FixService.jpg" alt="FixService" onerror="this.src='https://placehold.co/140x140/3E9FDC/white?text=Логотип'">
+            </div>
+            <div class="work-text">
+                <p>
+                    FixService — это сервисный центр, который специализируется на ремонте мобильной техники: телефонов, планшетов и ноутбуков. Мы принимаем устройства любых брендов — от Apple и Samsung до Xiaomi, Honor, Huawei и других. Работаем с самыми разными неисправностями: от замены разбитого стекла до микропайки материнской платы и восстановления удалённых данных. Диагностика занимает всего 5 минут. Цены фиксированные, гарантия на все виды работ составляет 12 месяцев. Без скрытых платежей, без необоснованных завышений. Достаточно просто принести устройство — мастер проведёт диагностику и предложит оптимальное решение.
+                </p>
+                <a href="biblioteka.html" class="gallery-link-btn-large">
+                    ➜ Посмотреть все работы
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== СТАТИСТИКА ===== -->
+    <div class="stats-section">
+        <div class="stats-grid">
+            <div class="stat-item"><div class="stat-number">10 лет</div><div class="stat-label">опыта</div></div>
+            <div class="stat-item"><div class="stat-number">400+</div><div class="stat-label">клиентов</div></div>
+            <div class="stat-item"><div class="stat-number">12 мес</div><div class="stat-label">гарантии</div></div>
+            <div class="stat-item"><div class="stat-number">5 мин</div><div class="stat-label">диагностика</div></div>
+        </div>
+    </div>
+
+    <!-- ===== БРЕНДЫ ===== -->
+    <h2>Бренды</h2>
+    <div class="brands-grid" id="brandsGrid">
+        <div class="brand-card" data-brand="Apple">Apple</div>
+        <div class="brand-card" data-brand="Samsung">Samsung</div>
+        <div class="brand-card" data-brand="Xiaomi">Xiaomi</div>
+        <div class="brand-card" data-brand="Honor">Honor</div>
+        <div class="brand-card" data-brand="Huawei">Huawei</div>
+        <div class="brand-card" data-brand="Oneplus">Oneplus</div>
+        <div class="brand-card" data-brand="Oppo">Oppo</div>
+        <div class="brand-card" data-brand="Infinix">Infinix</div>
+        <div class="brand-card" data-brand="Nokia">Nokia</div>
+        <div class="brand-card" data-brand="Vivo">Vivo</div>
+        <div class="brand-card" data-brand="itel">itel</div>
+        <div class="brand-card" data-brand="Tecno">Tecno</div>
+        <div class="brand-card" data-brand="BlackBerry">BlackBerry</div>
+        <div class="brand-card" data-brand="Sony">Sony</div>
+        <div class="brand-card" data-brand="Realme">realme</div>
+    </div>
+
+    <!-- ===== ВИДЫ РАБОТ ===== -->
+    <h2 id="services">Виды работ</h2>
+    <div class="services-grid">
+        <a href="services.html?service=display" class="service-card">
+            <div class="service-title">Замена дисплея и стекла</div>
+        </a>
+        <a href="services.html?service=battery" class="service-card">
+            <div class="service-title">Замена разъёма и АКБ</div>
+        </a>
+        <a href="services.html?service=motherboard" class="service-card">
+            <div class="service-title">Ремонт материнской платы</div>
+        </a>
+        <a href="services.html?service=data-recovery" class="service-card">
+            <div class="service-title">Восстановление данных</div>
+        </a>
+        <a href="services.html?service=storage-upgrade" class="service-card">
+            <div class="service-title">Увеличение памяти iPhone</div>
+        </a>
+        <a href="services.html?service=joystick" class="service-card">
+            <div class="service-title">Ремонт джойстиков</div>
+        </a>
+    </div>
+
+    <!-- ===== ЗАПЧАСТИ ===== -->
+    <h2>Качественные запчасти</h2>
+    <div class="parts-grid">
+        <div class="part-card"><div class="part-icon"><i class="fas fa-tv"></i></div><div class="part-title">Дисплеи класса Original</div><div class="part-desc">Яркость, цветопередача как у нового</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-battery-full"></i></div><div class="part-title">Аккумуляторы</div><div class="part-desc">1000+ циклов, контроль ёмкости</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-plug"></i></div><div class="part-title">Шлейфы и разъёмы</div><div class="part-desc">Полное соответствие стандартам</div></div>
+        <div class="part-card"><div class="part-icon"><i class="fas fa-cogs"></i></div><div class="part-title">Кнопки и корпуса</div><div class="part-desc">Износостойкие, оригинальной формы</div></div>
+    </div>
+
+    <!-- ===== АКСЕССУАРЫ ===== -->
+    <h2>Аксессуары</h2>
+    <div class="accessories-grid">
+        <div class="accessory-card">Защитные стёкла</div><div class="accessory-card">Гидрогелевые плёнки</div>
+        <div class="accessory-card">Чехлы и бамперы</div><div class="accessory-card">Зарядки и кабели</div>
+        <div class="accessory-card">Наушники и колонки</div><div class="accessory-card">Адаптеры и переходники</div>
+        <div class="accessory-card">Повербанки</div><div class="accessory-card">Карты памяти и флешки</div>
+        <div class="accessory-card">Держатели и автодержатели</div>
+    </div>
+
+    <!-- ===== FAQ ===== -->
+    <h2 id="faq">Частые вопросы</h2>
+    <div class="faq-block">
+        <div class="faq-item"><div class="faq-question">Гарантия</div><div class="faq-answer">1 год на все работы.</div></div>
+        <div class="faq-item"><div class="faq-question">Сколько по времени</div><div class="faq-answer">Экран на iPhone 2 часа. Ноутбук сложнее скажу точный срок.</div></div>
+        <div class="faq-item"><div class="faq-question">Залили телефон</div><div class="faq-answer">Не включайте. Сразу приносите шанс спасти выше.</div></div>
+    </div>
+
+    <!-- ===== ОТЗЫВЫ ===== -->
+    <h2>Отзывы</h2>
+    <div class="reviews-block">
+        <div class="reviews-grid">
+            <div class="review-card"><div class="review-author">Дмитрий</div><div class="review-rating">★★★★★</div><div class="review-text">Хороший мастер, отремонтировал мой айфон за 2 часа, никто в городе не взялся, только в Москву ехать сказали. Переклеил мне экран, оставив оригинальность. Рекомендую специалиста всем!</div></div>
+            <div class="review-card"><div class="review-author">Алиса</div><div class="review-rating">★★★★★</div><div class="review-text">Залила MacBook кофе и уже готовилась к поминкам. Ни один сервис не взялся — все только крестились и сочувствовали. А этот мастер просто взял и воскресил мой ноут за час! Настоящий мастер от Бога, руки — золото, нервы — сталь. Спасибо, что спасли моего «яблочного утопленника»!</div></div>
+            <div class="review-card"><div class="review-author">Вадим Логвиненко</div><div class="review-rating">★★★★★</div><div class="review-text">Отличная мастерская! Все четко и по делу, без лишних разговоров и набивания себе цены. Обратился с iPhone 11 Pro, в другом месте не могли полтора года сделать, перекидывали все компоненты с платы на плату, а проблема вообще в другом была, тут практически за сутки оживил трубку! Успехов в этом нелегком деле!</div></div>
+        </div>
+    </div>
+
+    <!-- ===== ФОРМА ЗАЯВКИ ===== -->
+    <h2>Оставить заявку</h2>
+    <div class="form-block">
+        <form id="mainForm">
+            <div class="form-group"><input type="text" id="formName" placeholder="Ваше имя" required></div>
+            <div class="form-group"><input type="tel" id="formPhone" placeholder="Номер телефона" required data-phone-mask></div>
+            <div class="form-group">
+                <select id="formDevice">
+                    <option value="Телефон">Телефон</option>
+                    <option value="Планшет">Планшет</option>
+                    <option value="Ноутбук">Ноутбук</option>
+                </select>
+            </div>
+            <div class="form-group"><input type="text" id="formModel" placeholder="Модель (iPhone 13, Samsung S22...)"></div>
+            <div class="form-group"><textarea id="formProblem" rows="2" placeholder="Описание проблемы"></textarea></div>
+            <div class="form-group">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="formPrivacy" required> 
+                    <span>Я принимаю условия <a href="privacy.html" target="_blank">Политики конфиденциальности</a> и даю согласие на обработку данных</span>
+                </label>
+            </div>
+            <button type="submit" class="btn-submit" id="mainFormSubmit">Отправить заявку</button>
+        </form>
+    </div>
+
+    <!-- ===== КОНТАКТЫ ===== -->
+    <h2 id="contacts">Контакты</h2>
+    <div class="contacts-wrapper">
+        <div class="contacts-col">
+            <h3>НАШИ КОНТАКТЫ</h3>
+            <p><span class="svg-icon"><img src="Phone.svg" alt="phone"></span><a href="tel:89778111666">8 (977) 811-16-66</a></p>
+            <p><span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span><a href="https://t.me/AppleReanimator" target="_blank">@AppleReanimator</a></p>
+            <p><span class="svg-icon"><img src="Telegram.svg" alt="telegram"></span><a href="https://t.me/AppleReanimator_Group" target="_blank">@AppleReanimator_Group</a></p>
+            <p><span class="svg-icon"><img src="Youtube.svg" alt="youtube"></span><a href="https://youtube.com/@fixservices" target="_blank">youtube.com/@fixservices</a></p>
+        </div>
+    </div>
+
+    <!-- ===== КАРТА ===== -->
+    <h2 id="map">Как нас найти</h2>
+    <div class="map-block">
+        <div class="map-address-list">
+            <p><strong>FixService:</strong> ул. Советская 41, 2 этаж, пом.209</p>
+        </div>
+        <div class="map-wrapper">
+            <iframe src="https://yandex.ru/map-widget/v1/?ll=38.957,55.724&z=17&pt=38.955609,55.720436,pm2rdm" allowfullscreen="true" title="Карта FixService"></iframe>
+        </div>
+        <div class="work-hours"><i class="fas fa-clock"></i> Режим работы: 10:00 – 18:00</div>
+        <div class="map-link">
+            <a href="https://yandex.ru/maps/-/CPdlF6Lt" target="_blank"><i class="fas fa-external-link-alt"></i> Открыть FixService на Яндекс.Картах</a>
+        </div>
+    </div>
+</div>
+
+<!-- ===== ПЛАВАЮЩИЕ КНОПКИ ===== -->
+<div class="floating-buttons">
+    <a href="tel:89778111666" class="float-call"><i class="fas fa-phone-alt"></i> Позвонить</a>
+    <a href="https://t.me/AppleReanimator" class="float-telegram" target="_blank"><i class="fab fa-telegram-plane"></i> Telegram</a>
+</div>
+
+<!-- ===== ФУТЕР ===== -->
+<footer>
+    <div class="logo" style="font-size:1.4rem; justify-content: center; display: flex;">
+        <span class="fix">Fix</span><span class="service">Service</span>
+        <span class="separator">|</span>
+        <span class="apple-reanimator">Apple REANIMATOR</span>
+    </div>
+    <div class="footer-links">
+        <a href="#services">Услуги</a>
+        <a href="#service">Сервис</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacts">Контакты</a>
+        <a href="#map">Карта</a>
+        <a href="biblioteka.html">Галерея</a>
+    </div>
+    <div class="footer-text">© 2025 FixService | Apple REANIMATOR — Сервисный центр. Качественный ремонт вашей техники.</div>
+    <div class="footer-privacy"><a href="privacy.html">Политика конфиденциальности</a></div>
+</footer>
+
+<!-- ===== ПОПАП ВЫБОРА МОДЕЛИ ===== -->
+<div id="modelSelectPopup" class="popup-model-overlay" role="dialog" aria-modal="true" aria-label="Выбор модели устройства">
+    <div class="popup-model-container">
+        <button class="close-model-popup" id="closeModelPopupBtn" aria-label="Закрыть окно выбора модели">×</button>
+        <h3 id="modelPopupBrandTitle">Выберите модель</h3>
+        <input type="text" id="modelSearchInput" class="popup-model-search" placeholder="Поиск модели...">
+        <div id="popupModelsList" class="popup-models-grid"></div>
+    </div>
+</div>
+
+<!-- ===== ОСНОВНОЙ ПОПАП ЗАЯВКИ ===== -->
+<div id="popupForm" class="popup-overlay" role="dialog" aria-modal="true" aria-label="Форма заявки на ремонт">
+    <div class="popup-form">
+        <button class="close-popup" id="closePopupBtn" aria-label="Закрыть форму заявки">×</button>
+        <h3 id="popupTitle">Оставить заявку</h3>
+        <form id="popupFormElement">
+            <input type="hidden" id="popupType" value="main">
+            <input type="text" id="popupName" placeholder="Имя" required>
+            <input type="tel" id="popupPhone" placeholder="Номер телефона" required data-phone-mask>
+            <select id="popupDevice" class="popup-device-select">
+                <option value="Телефон">Телефон</option>
+                <option value="Планшет">Планшет</option>
+                <option value="Ноутбук">Ноутбук</option>
+            </select>
+            <input type="text" id="popupModel" placeholder="Модель устройства">
+            <textarea id="popupProblem" rows="2" placeholder="Описание проблемы"></textarea>
+            <div class="popup-checkbox">
+                <input type="checkbox" id="popupPrivacy" required>
+                <label>Я принимаю <a href="privacy.html" target="_blank">Политику конфиденциальности</a></label>
+            </div>
+            <div class="form-buttons">
+                <button type="submit" id="popupSubmitBtn">Отправить</button>
+                <button type="button" class="cancel-btn" id="cancelPopupBtn">Отмена</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ===== ЛАЙТБОКС ===== -->
+<div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <button class="close-lightbox" onclick="closeLightbox()" aria-label="Закрыть увеличенное фото">&times;</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="Увеличенное фото">
+</div>
+
+<div id="toast" class="toast">Заявка отправлена. Мастер свяжется с вами.</div>
+
+<!-- ===== ПОДКЛЮЧАЕМ ВНЕШНИЙ JS ===== -->
+<script src="js/config.js"></script>
+<script src="js/main.js"></script>
+
+</body>
+</html>

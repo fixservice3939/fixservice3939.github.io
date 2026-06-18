@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Наши партнёры | FixService | Apple REANIMATOR</title>
+    <meta name="description" content="Надёжный партнёр FixService — сервисный центр ТОЧКА. Ремонт крупной бытовой техники в Ликино-Дулёво.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap" rel="stylesheet">
+    
+    <!-- ===== ОБЩИЙ CSS ===== -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        /* ===== УНИКАЛЬНЫЕ СТИЛИ ДЛЯ PARTNERS ===== */
+        
+        /* Убираем фон у заголовка h1 */
+        .container h1 {
+            background: transparent !important;
+            backdrop-filter: none !important;
+            border-left: none !important;
+            padding: 0 !important;
+            border-radius: 0 !important;
+            display: block !important;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            margin: 2rem 0 1.2rem 0;
+            color: #FFFFFF;
+            font-weight: 800;
+        }
+        
+        .partner-block {
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .partner-block h2 {
+            font-size: 1.5rem;
+            margin: 0 0 1rem 0;
+            color: #C5A3FF;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+            background: none;
+            display: block;
+            border: none;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        .partner-text {
+            background: rgba(128, 90, 180, 0.25);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(126, 200, 255, 0.35);
+            border-radius: 32px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            color: #E0F0FF;
+            line-height: 1.5;
+        }
+        
+        .contacts-list {
+            margin: 1rem 0;
+        }
+        
+        .contact-item {
+            margin-bottom: 0.8rem;
+            color: #F0F9FF;
+            background: rgba(126, 200, 255, 0.08);
+            border-radius: 48px;
+            padding: 0.6rem 1rem;
+        }
+        
+        .contact-label {
+            font-weight: 700;
+            color: #7EC8FF;
+            display: inline-block;
+            width: 80px;
+        }
+        
+        .contact-item a {
+            color: #E0F0FF;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+        
+        .contact-item a:hover {
+            color: #7EC8FF;
+        }
+        
+        .partner-form-block {
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .partner-form-block h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #7EC8FF;
+            background: none;
+            display: block;
+            border: none;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        .partner-btn-submit {
+            background: #C5A3FF;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 1rem;
+            color: #1F1B38;
+            cursor: pointer;
+            transition: all 0.2s;
+            position: relative;
+        }
+        
+        .partner-btn-submit.loading {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        .partner-btn-submit.loading::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            margin-left: 10px;
+            border: 2px solid #1F1B38;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .partner-btn-submit:hover {
+            background: #7EC8FF;
+            transform: scale(1.02);
+        }
+        
+        .partner-map-block {
+            background: transparent;
+            backdrop-filter: none;
+            border: none;
+            box-shadow: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .partner-map-block h2 {
+            margin-top: 0;
+            font-size: 1.3rem;
+            color: #7EC8FF;
+            background: none;
+            display: block;
+            border: none;
+            padding: 0;
+            border-radius: 0;
+        }
+        
+        .partner-map-block .map-wrapper iframe {
+            width: 100%;
+            height: 280px;
+            border-radius: 24px;
+            border: 1px solid rgba(126,200,255,0.4);
+        }
+        
+        .partner-work-hours {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #7EC8FF;
+        }
+        
+        .btn-back {
+            display: inline-block;
+            background: #3E9FDC;
+            color: white;
+            padding: 12px 28px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 1rem 0;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn-back:hover {
+            background: #62B8F0;
+            transform: scale(1.02);
+        }
+        
+        .partner-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: #C5A3FF;
+            color: #1F1B38;
+            padding: 12px 24px;
+            border-radius: 60px;
+            font-weight: 600;
+            z-index: 1100;
+            transition: all 0.3s;
+            opacity: 0;
+            pointer-events: none;
+            font-size: 0.9rem;
+            white-space: nowrap;
+        }
+        
+        .partner-toast.show {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        
+        @media (max-width: 800px) {
+            .contact-label {
+                width: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="container-nav">
+        <div class="logo">
+            <span class="fix">Fix</span><span class="service">Service</span>
+            <span class="separator">|</span>
+            <span class="apple-reanimator">Apple REANIMATOR</span>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link">Главная</a>
+            <a href="#partner-contacts" class="nav-link">Контакты</a>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h1>Наши партнёры</h1>
+
+    <div class="partner-block">
+        <h2>ТОЧКА</h2>
+        
+        <div class="partner-text">
+            <p>Крупная бытовая техника (телевизоры, кофемашины и т.д.) — не наш профиль. Для таких задач у нас есть надёжный партнёр — сервисный центр «Точка». Компания специализируется на сложной бытовой технике и гарантирует профессиональный подход. При обращении к нам мы оперативно перенаправим вас к партнёру. В свою очередь, «Точка» направляет клиентов с мобильной техникой к нам. Чёткое разделение компетенций — гарантия качества и отсутствия путаницы.</p>
+        </div>
+
+        <div id="partner-contacts" class="contacts-list">
+            <div class="contact-item">
+                <span class="contact-label">Телефон:</span>
+                <a href="tel:89699993524">8 (969) 999-35-24</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Сайт:</span>
+                <a href="https://www.tochkaremonta24.ru" target="_blank">tochkaremonta24.ru</a>
+            </div>
+            <div class="contact-item">
+                <span class="contact-label">Telegram:</span>
+                <a href="https://t.me/tochkaremonta24" target="_blank">@tochkaremonta24</a>
+            </div>
+        </div>
+
+        <div class="partner-form-block">
+            <h2>Оставить заявку в ТОЧКУ</h2>
+            <form id="partnerForm">
+                <div class="form-group">
+                    <input type="text" id="partnerName" placeholder="Ваше имя" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="partnerPhone" placeholder="Номер телефона" required data-phone-mask>
+                </div>
+                <div class="form-group">
+                    <select id="partnerDevice">
+                        <option value="Телевизор">Телевизор</option>
+                        <option value="Холодильник">Холодильник</option>
+                        <option value="Стиральная машина">Стиральная машина</option>
+                        <option value="Кофемашина">Кофемашина</option>
+                        <option value="Микроволновая печь">Микроволновая печь</option>
+                        <option value="Другое">Другое</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <textarea id="partnerProblem" rows="2" placeholder="Описание проблемы"></textarea>
+                </div>
+                <div class="form-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="partnerPrivacy" required> 
+                        <span>Я принимаю условия <a href="privacy.html" target="_blank">Политики конфиденциальности</a> и даю согласие на обработку данных</span>
+                    </label>
+                </div>
+                <button type="submit" class="partner-btn-submit" id="partnerSubmitBtn">Отправить заявку</button>
+            </form>
+        </div>
+
+        <div class="partner-map-block">
+            <h2>Адрес ТОЧКИ</h2>
+            <p><strong>ул. Советская 10, Ликино-Дулёво</strong></p>
+            <div class="map-wrapper">
+                <iframe src="https://yandex.ru/map-widget/v1/?ll=38.958308,55.728053&z=17&pt=38.958308,55.728053,pm2bl" allowfullscreen="true" title="Карта ТОЧКА"></iframe>
+            </div>
+            <div class="partner-work-hours">
+                Режим работы: 10:00 – 19:00 (ежедневно)
+            </div>
+        </div>
+    </div>
+
+    <div style="text-align: center;">
+        <a href="index.html" class="btn-back">Вернуться на главную</a>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-links">
+        <a href="index.html">Главная</a>
+        <a href="index.html#faq">FAQ</a>
+        <a href="#partner-contacts">Контакты</a>
+        <a href="partners.html">Партнёры</a>
+    </div>
+    <div class="footer-text">© 2025 FixService | Apple REANIMATOR — Сервисный центр.</div>
+</footer>
+
+<div id="partnerToast" class="partner-toast">Заявка отправлена. Мастер свяжется с вами.</div>
+
+<script>
+    (function() {
+        // ========== НАСТРОЙКИ БОТА ==========
+        const BOT_TOKEN = '8676096132:AAE0LDxXgNk4_8n0waZtf-6aiQR0g1-lnx8';
+        const CHAT_ID = '6634773779';
+        const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        
+        const toast = document.getElementById('partnerToast');
+        
+        function showMessage(text, isError = false) {
+            toast.textContent = text;
+            toast.style.background = isError ? '#dc2626' : '#C5A3FF';
+            toast.style.color = isError ? 'white' : '#1F1B38';
+            toast.classList.add('show');
+            setTimeout(() => toast.classList.remove('show'), 4000);
+        }
+        
+        function validatePhone(phone) {
+            const numbers = phone.replace(/[^\d+]/g, '').replace(/\D/g, '');
+            return numbers.length >= 10 && numbers.length <= 11;
+        }
+        
+        function applyPhoneMask(input) {
+            input.addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                if (value.length > 11) value = value.slice(0, 11);
+                let formatted = '';
+                if (value.length > 0) formatted = '+7';
+                if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+                if (value.length > 4) formatted += ') ' + value.slice(4, 7);
+                if (value.length > 7) formatted += '-' + value.slice(7, 9);
+                if (value.length > 9) formatted += '-' + value.slice(9, 11);
+                this.value = formatted;
+            });
+        }
+        
+        document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
+        
+        function setLoading(btn, isLoading) {
+            if (isLoading) {
+                btn.classList.add('loading');
+                btn.disabled = true;
+            } else {
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }
+        }
+        
+        async function sendToTelegram(formData) {
+            const message = `
+🔔 *Новая заявка с сайта FixService!*
+
+🤝 *Партнёр:* ТОЧКА (ремонт бытовой техники)
+👤 *Имя:* ${formData.name || 'Не указано'}
+📱 *Телефон:* ${formData.phone || 'Не указан'}
+📟 *Тип устройства:* ${formData.deviceType || 'Не указан'}
+📝 *Проблема:* ${formData.problem || 'Не указана'}
+🕐 *Время заявки:* ${new Date(formData.timestamp).toLocaleString('ru-RU')}
+            `;
+
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 15000);
+
+                const response = await fetch(TELEGRAM_API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: message,
+                        parse_mode: 'Markdown',
+                    }),
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    const errorData = await response.json();
+                    console.error('Telegram API error:', errorData);
+                    throw new Error(`Ошибка ${response.status}: ${errorData.description || 'Неизвестная ошибка'}`);
+                }
+
+                const result = await response.json();
+                if (!result.ok) {
+                    throw new Error('Telegram не подтвердил отправку');
+                }
+
+                return true;
+            } catch (error) {
+                console.error('Ошибка отправки в Telegram:', error);
+                
+                if (error.name === 'AbortError') {
+                    throw new Error('Превышено время ожидания. Попробуйте позже.');
+                } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
+                    throw new Error('Нет соединения с интернетом. Проверьте связь.');
+                } else {
+                    throw new Error('Ошибка отправки. Попробуйте позже или позвоните нам.');
+                }
+            }
+        }
+        
+        const partnerForm = document.getElementById('partnerForm');
+        const partnerSubmitBtn = document.getElementById('partnerSubmitBtn');
+        
+        if (partnerForm) {
+            partnerForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const name = document.getElementById('partnerName').value.trim();
+                const phone = document.getElementById('partnerPhone').value.trim();
+                const privacyChecked = document.getElementById('partnerPrivacy').checked;
+                
+                if (!name || !phone) {
+                    showMessage('Заполните имя и номер телефона', true);
+                    return;
+                }
+                if (!validatePhone(phone)) {
+                    showMessage('Введите корректный номер телефона (10-11 цифр)', true);
+                    return;
+                }
+                if (!privacyChecked) {
+                    showMessage('Подтвердите согласие на обработку данных', true);
+                    return;
+                }
+                
+                setLoading(partnerSubmitBtn, true);
+                
+                const formData = {
+                    name: name,
+                    phone: phone,
+                    deviceType: document.getElementById('partnerDevice').value,
+                    problem: document.getElementById('partnerProblem').value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+                
+                try {
+                    const success = await sendToTelegram(formData);
+                    
+                    if (success) {
+                        showMessage('Спасибо! Заявка отправлена в ТОЧКУ. Мастер свяжется с вами.');
+                        partnerForm.reset();
+                    } else {
+                        showMessage('Ошибка отправки. Попробуйте позвонить по телефону: 8 (969) 999-35-24', true);
+                    }
+                } catch (error) {
+                    showMessage(error.message || 'Ошибка отправки. Попробуйте позвонить.', true);
+                } finally {
+                    setLoading(partnerSubmitBtn, false);
+                }
+            });
+        }
+    })();
+</script>
+</body>
+</html>
