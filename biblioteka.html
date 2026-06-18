@@ -11,99 +11,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
+    <!-- ===== ОБЩИЙ CSS ===== -->
+    <link rel="stylesheet" href="css/style.css">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            font-weight: 500;
-            background-image: url('fon2.jpeg');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #FFFFFF;
-            line-height: 1.4;
-        }
-        
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(20, 15, 35, 0.55);
-            backdrop-filter: blur(1px);
-            z-index: -1;
-            pointer-events: none;
-        }
-        
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            width: 100%;
-            background: rgba(20, 15, 35, 0.85);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(126, 200, 255, 0.3);
-            padding: 16px 0;
-        }
-        
-        .container-nav {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        
-        .logo {
-            font-size: 1.8rem;
-            font-weight: 800;
-        }
-        
-        .logo .fix { color: #FFFFFF; }
-        .logo .service { color: #7EC8FF; }
-        .logo .reanimator { color: #C5A3FF; font-weight: 800; }
-        
-        .nav-links {
-            display: flex;
-            gap: 1.2rem;
-            flex-wrap: wrap;
-            align-items: center;
-        }
-        
-        .nav-link {
-            text-decoration: none;
-            font-weight: 600;
-            color: #F0F9FF;
-            transition: 0.2s;
-            cursor: pointer;
-            padding: 6px 0;
-            font-size: 0.9rem;
-        }
-        
-        .nav-link:hover {
-            color: #7EC8FF;
-            transform: translateY(-1px);
-        }
-        
-        .container {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 16px 60px 16px;
-            position: relative;
-            z-index: 2;
-        }
-        
+        /* ===== УНИКАЛЬНЫЕ СТИЛИ ДЛЯ БИБЛИОТЕКИ ===== */
         .page-header {
             margin: 20px 0 20px;
             text-align: left;
@@ -166,6 +78,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            border: none;
         }
         
         .category-header i {
@@ -175,6 +88,11 @@
         .category-header .chevron {
             font-size: 1rem;
             color: #C5A3FF;
+            transition: transform 0.3s;
+        }
+        
+        .category-section.open .chevron i {
+            transform: rotate(180deg);
         }
         
         .category-content {
@@ -191,10 +109,6 @@
         
         .category-section.open .category-header {
             border-bottom-color: rgba(126, 200, 255, 0.3);
-        }
-        
-        .category-section.open .chevron i {
-            transform: rotate(180deg);
         }
         
         .subcategory {
@@ -296,130 +210,6 @@
             font-size: 0.8rem;
         }
         
-        /* ===== ЛАЙТБОКС ===== */
-        .lightbox {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 9999;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            visibility: hidden;
-            opacity: 0;
-            transition: visibility 0.2s, opacity 0.2s;
-        }
-        
-        .lightbox.active {
-            visibility: visible;
-            opacity: 1;
-        }
-        
-        .lightbox-img {
-            max-width: 90%;
-            max-height: 85%;
-            object-fit: contain;
-            border-radius: 16px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            border: 2px solid rgba(126, 200, 255, 0.6);
-            background: #1a1a2e;
-        }
-        
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 30px;
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #7EC8FF;
-            background: none;
-            border: none;
-            cursor: pointer;
-            transition: 0.2s;
-            z-index: 10000;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .close-lightbox:hover {
-            color: #C5A3FF;
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.1);
-        }
-        
-        .lightbox-nav {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            padding: 0 20px;
-            pointer-events: none;
-            z-index: 10000;
-        }
-        
-        .lightbox-nav button {
-            background: rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(126, 200, 255, 0.5);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            font-size: 1.8rem;
-            color: #7EC8FF;
-            cursor: pointer;
-            transition: 0.2s;
-            pointer-events: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .lightbox-nav button:hover {
-            background: #3E9FDC;
-            color: white;
-            transform: scale(1.05);
-        }
-        
-        @media (max-width: 480px) {
-            .lightbox-nav button {
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-            .close-lightbox {
-                top: 10px;
-                right: 15px;
-                font-size: 2rem;
-                width: 40px;
-                height: 40px;
-            }
-            .lightbox-img {
-                max-width: 95%;
-                max-height: 80%;
-            }
-        }
-        
-        footer {
-            padding: 20px 0 20px;
-            margin-top: 20px;
-            border-top: 1px solid rgba(126, 200, 255, 0.3);
-            text-align: center;
-        }
-        
-        .footer-text {
-            font-size: 0.7rem;
-            color: #aaa;
-        }
-        
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -440,9 +230,115 @@
             transform: translateX(-2px);
         }
         
+        /* ===== ЛАЙТБОКС ===== */
+        .lightbox-custom {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.2s, opacity 0.2s;
+        }
+        
+        .lightbox-custom.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .lightbox-img-custom {
+            max-width: 90%;
+            max-height: 85%;
+            object-fit: contain;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(126, 200, 255, 0.6);
+            background: #1a1a2e;
+        }
+        
+        .close-lightbox-custom {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #7EC8FF;
+            background: none;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10000;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .close-lightbox-custom:hover {
+            color: #C5A3FF;
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .lightbox-nav-custom {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+            pointer-events: none;
+            z-index: 10000;
+        }
+        
+        .lightbox-nav-custom button {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(126, 200, 255, 0.5);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.8rem;
+            color: #7EC8FF;
+            cursor: pointer;
+            transition: 0.2s;
+            pointer-events: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-nav-custom button:hover {
+            background: #3E9FDC;
+            color: white;
+            transform: scale(1.05);
+        }
+        
         @media (max-width: 480px) {
-            .container {
-                padding: 0 12px 40px 12px;
+            .lightbox-nav-custom button {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            .close-lightbox-custom {
+                top: 10px;
+                right: 15px;
+                font-size: 2rem;
+                width: 40px;
+                height: 40px;
+            }
+            .lightbox-img-custom {
+                max-width: 95%;
+                max-height: 80%;
             }
             .photo-grid {
                 gap: 6px;
@@ -465,26 +361,6 @@
             .subcategory.open .subcategory-content {
                 padding: 0.6rem 0.8rem 0.8rem 0.8rem;
             }
-            .nav-links {
-                gap: 0.8rem;
-            }
-            .nav-link {
-                font-size: 0.8rem;
-            }
-            .logo {
-                font-size: 1rem;
-            }
-            .page-header h1 {
-                font-size: 1.3rem;
-                padding: 0.3rem 1rem;
-            }
-            .page-header p {
-                font-size: 0.75rem;
-            }
-        }
-        
-        .chevron, .sub-chevron {
-            transition: transform 0.3s;
         }
     </style>
 </head>
@@ -492,7 +368,11 @@
 
 <div class="navbar">
     <div class="container-nav">
-        <div class="logo"><span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span></div>
+        <div class="logo">
+            <span class="fix">Fix</span><span class="service">Service</span>
+            <span class="separator">|</span>
+            <span class="apple-reanimator">REANIMATOR</span>
+        </div>
         <div class="nav-links">
             <a href="index.html" class="nav-link">Главная</a>
         </div>
@@ -551,73 +431,75 @@
 
 <footer>
     <div class="logo" style="font-size:1rem; justify-content: center; display: flex; margin-bottom: 0.5rem;">
-        <span class="fix">Fix</span><span class="service">Service</span> <span class="reanimator">| REANIMATOR</span>
+        <span class="fix">Fix</span><span class="service">Service</span>
+        <span class="separator">|</span>
+        <span class="apple-reanimator">REANIMATOR</span>
     </div>
     <div class="footer-text">© 2025 FixService | REANIMATOR — Сервисный центр. Примеры наших работ.</div>
 </footer>
 
 <!-- ЛАЙТБОКС -->
-<div id="lightbox" class="lightbox" onclick="closeLightbox()">
-    <button class="close-lightbox" onclick="event.stopPropagation(); closeLightbox();">&times;</button>
-    <div class="lightbox-nav">
-        <button onclick="event.stopPropagation(); prevImage();">&#10094;</button>
-        <button onclick="event.stopPropagation(); nextImage();">&#10095;</button>
+<div id="lightboxCustom" class="lightbox-custom" onclick="closeLightboxCustom()">
+    <button class="close-lightbox-custom" onclick="event.stopPropagation(); closeLightboxCustom();">&times;</button>
+    <div class="lightbox-nav-custom">
+        <button onclick="event.stopPropagation(); prevImageCustom();">&#10094;</button>
+        <button onclick="event.stopPropagation(); nextImageCustom();">&#10095;</button>
     </div>
-    <img class="lightbox-img" id="lightboxImg" src="" alt="Увеличенное фото" onclick="event.stopPropagation();">
+    <img class="lightbox-img-custom" id="lightboxImgCustom" src="" alt="Увеличенное фото" onclick="event.stopPropagation();">
 </div>
 
 <script>
-    // Фотографии для категорий (ПУТИ ИСПРАВЛЕНЫ - с большой буквы)
+    // Фотографии для категорий (единые пути: photos/<категория>/)
     
     // 1. Замена стекла дисплея
     const displayPhotos = [
-        "Замена стекла дисплея/Zam.stcl1.jpg",
-        "Замена стекла дисплея/Zam.stcl2.jpg",
-        "Замена стекла дисплея/Zam.stcl3.jpg",
-        "Замена стекла дисплея/Zam.stcl4.jpg",
-        "Замена стекла дисплея/Zam.stcl5.jpg",
-        "Замена стекла дисплея/Zam.stcl7.jpg",
-        "Замена стекла дисплея/Zam.stcl8.jpg"
+        "photos/display/Zam.stcl1.jpg",
+        "photos/display/Zam.stcl2.jpg",
+        "photos/display/Zam.stcl3.jpg",
+        "photos/display/Zam.stcl4.jpg",
+        "photos/display/Zam.stcl5.jpg",
+        "photos/display/Zam.stcl7.jpg",
+        "photos/display/Zam.stcl8.jpg"
     ];
     
     // 2. Увеличение памяти на iPhone
     const upgradePhotos = [
-        "Увеличение памяти на айфон/память айфон 1.jpg",
-        "Увеличение памяти на айфон/память айфон 2.jpg"
+        "photos/iphone-memory/память айфон 1.jpg",
+        "photos/iphone-memory/память айфон 2.jpg"
     ];
     
     // 3. Ремонт ноутбуков
     const laptopPhotos = [
-        "Ремонт ноутбуков/ZamProcNout.jpg",
-        "Ремонт ноутбуков/ZamProcNout2.jpg",
-        "Ремонт ноутбуков/ZamProcNout3.jpg"
+        "photos/laptops/ZamProcNout.jpg",
+        "photos/laptops/ZamProcNout2.jpg",
+        "photos/laptops/ZamProcNout3.jpg"
     ];
     
     // 4. Сложный ремонт материнской платы
     const motherboardSubcats = [
         {
             title: "Восстановление данных Android",
-            folder: "Сложный ремонт материнской платы",
+            folder: "photos/motherboard",
             files: ["восстановление данных андроид.jpg"]
         },
         {
             title: "Восстановление сети iPhone",
-            folder: "Сложный ремонт материнской платы",
+            folder: "photos/motherboard",
             files: ["восстановление сети айфонk.jpg", "свап мат платы айфон.jpg"]
         },
         {
             title: "Восстановление процессора после другого сервиса",
-            folder: "Сложный ремонт материнской платы",
+            folder: "photos/motherboard",
             files: ["восстонавление процессора айфон после другого сервиса.jpg"]
         },
         {
             title: "Замена Type-C контроллера",
-            folder: "Сложный ремонт материнской платы",
+            folder: "photos/motherboard",
             files: ["замена тайпси контроллера-айфон 15-2.jpg"]
         },
         {
             title: "Ребол процессора",
-            folder: "Сложный ремонт материнской платы",
+            folder: "photos/motherboard",
             files: [
                 "ребол процессора айпад.jpg",
                 "ребол процессора айпад (2).jpg",
@@ -628,28 +510,28 @@
         },
         {
             title: "Ремонт материнской платы",
-            folder: "Сложный ремонт материнской платы",
+            folder: "photos/motherboard",
             files: ["ремонт мат платы 2.jpg"]
         },
         {
             title: "Удаление блокировки Google",
-            folder: "Сложный ремонт материнской платы",
+            folder: "photos/motherboard",
             files: ["удаление блокировки гугл.jpg"]
         }
     ];
     
     // Собираем все фото в единый массив для навигации
-    let allPhotos = [];
-    let currentPhotoIndex = 0;
+    let allPhotosCustom = [];
+    let currentPhotoIndexCustom = 0;
     
-    function buildPhotoArray() {
-        allPhotos = [];
-        displayPhotos.forEach(photo => allPhotos.push(photo));
-        upgradePhotos.forEach(photo => allPhotos.push(photo));
-        laptopPhotos.forEach(photo => allPhotos.push(photo));
+    function buildPhotoArrayCustom() {
+        allPhotosCustom = [];
+        displayPhotos.forEach(photo => allPhotosCustom.push(photo));
+        upgradePhotos.forEach(photo => allPhotosCustom.push(photo));
+        laptopPhotos.forEach(photo => allPhotosCustom.push(photo));
         motherboardSubcats.forEach(sub => {
             sub.files.forEach(file => {
-                allPhotos.push(`${sub.folder}/${file}`);
+                allPhotosCustom.push(`${sub.folder}/${file}`);
             });
         });
     }
@@ -664,9 +546,9 @@
         let html = '';
         for (let i = 0; i < photosArray.length; i++) {
             const photoPath = photosArray[i];
-            const globalIndex = allPhotos.indexOf(photoPath);
+            const globalIndex = allPhotosCustom.indexOf(photoPath);
             html += `
-                <div class="photo-card" onclick="openLightboxByIndex(${globalIndex})">
+                <div class="photo-card" onclick="openLightboxByIndexCustom(${globalIndex})">
                     <img src="${photoPath}" alt="Работа мастера" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото+не+найдено'">
                 </div>
             `;
@@ -687,9 +569,9 @@
                 gridHtml = '<div class="photo-grid">';
                 for (let i = 0; i < fullPaths.length; i++) {
                     const path = fullPaths[i];
-                    const globalIndex = allPhotos.indexOf(path);
+                    const globalIndex = allPhotosCustom.indexOf(path);
                     gridHtml += `
-                        <div class="photo-card" onclick="openLightboxByIndex(${globalIndex})">
+                        <div class="photo-card" onclick="openLightboxByIndexCustom(${globalIndex})">
                             <img src="${path}" alt="${sub.title}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото+не+найдено'">
                         </div>
                     `;
@@ -724,59 +606,59 @@
         subcat.classList.toggle('open');
     }
     
-    function openLightbox(imgSrc) {
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
+    function openLightboxCustom(imgSrc) {
+        const lightbox = document.getElementById('lightboxCustom');
+        const lightboxImg = document.getElementById('lightboxImgCustom');
         lightboxImg.src = imgSrc;
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
     
-    function openLightboxByIndex(index) {
-        currentPhotoIndex = index;
-        const lightbox = document.getElementById('lightbox');
-        const lightboxImg = document.getElementById('lightboxImg');
-        lightboxImg.src = allPhotos[currentPhotoIndex];
+    function openLightboxByIndexCustom(index) {
+        currentPhotoIndexCustom = index;
+        const lightbox = document.getElementById('lightboxCustom');
+        const lightboxImg = document.getElementById('lightboxImgCustom');
+        lightboxImg.src = allPhotosCustom[currentPhotoIndexCustom];
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
     }
     
-    function closeLightbox() {
-        const lightbox = document.getElementById('lightbox');
+    function closeLightboxCustom() {
+        const lightbox = document.getElementById('lightboxCustom');
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
     }
     
-    function prevImage() {
-        currentPhotoIndex--;
-        if (currentPhotoIndex < 0) {
-            currentPhotoIndex = allPhotos.length - 1;
+    function prevImageCustom() {
+        currentPhotoIndexCustom--;
+        if (currentPhotoIndexCustom < 0) {
+            currentPhotoIndexCustom = allPhotosCustom.length - 1;
         }
-        document.getElementById('lightboxImg').src = allPhotos[currentPhotoIndex];
+        document.getElementById('lightboxImgCustom').src = allPhotosCustom[currentPhotoIndexCustom];
     }
     
-    function nextImage() {
-        currentPhotoIndex++;
-        if (currentPhotoIndex >= allPhotos.length) {
-            currentPhotoIndex = 0;
+    function nextImageCustom() {
+        currentPhotoIndexCustom++;
+        if (currentPhotoIndexCustom >= allPhotosCustom.length) {
+            currentPhotoIndexCustom = 0;
         }
-        document.getElementById('lightboxImg').src = allPhotos[currentPhotoIndex];
+        document.getElementById('lightboxImgCustom').src = allPhotosCustom[currentPhotoIndexCustom];
     }
     
     document.addEventListener('keydown', function(e) {
-        const lightbox = document.getElementById('lightbox');
+        const lightbox = document.getElementById('lightboxCustom');
         if (!lightbox.classList.contains('active')) return;
         if (e.key === 'Escape') {
-            closeLightbox();
+            closeLightboxCustom();
         } else if (e.key === 'ArrowLeft') {
-            prevImage();
+            prevImageCustom();
         } else if (e.key === 'ArrowRight') {
-            nextImage();
+            nextImageCustom();
         }
     });
     
     window.addEventListener('DOMContentLoaded', () => {
-        buildPhotoArray();
+        buildPhotoArrayCustom();
         renderGrid('displayGrid', displayPhotos);
         renderGrid('upgradeGrid', upgradePhotos);
         renderGrid('laptopGrid', laptopPhotos);
@@ -790,11 +672,10 @@
     
     window.toggleCategory = toggleCategory;
     window.toggleSubcategory = toggleSubcategory;
-    window.openLightbox = openLightbox;
-    window.openLightboxByIndex = openLightboxByIndex;
-    window.closeLightbox = closeLightbox;
-    window.prevImage = prevImage;
-    window.nextImage = nextImage;
+    window.openLightboxByIndexCustom = openLightboxByIndexCustom;
+    window.closeLightboxCustom = closeLightboxCustom;
+    window.prevImageCustom = prevImageCustom;
+    window.nextImageCustom = nextImageCustom;
 </script>
 </body>
 </html>

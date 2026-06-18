@@ -4,45 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Политика конфиденциальности | FixService</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    
+    <!-- ===== ОБЩИЙ CSS ===== -->
+    <link rel="stylesheet" href="css/style.css">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-            font-weight: 500;
-            line-height: 1.5;
-            background-image: url('fon2.jpeg');
-            background-size: cover;
-            background-position: center center;
-            background-attachment: fixed;
-            background-repeat: no-repeat;
-            color: #FFFFFF;
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(20, 15, 35, 0.55);
-            backdrop-filter: blur(1px);
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .container {
+        /* ===== УНИКАЛЬНЫЕ СТИЛИ ДЛЯ POLITIKI ===== */
+        .privacy-container {
             max-width: 900px;
-            margin: 0 auto;
+            margin: 40px auto;
             background: rgba(128, 90, 180, 0.25);
             backdrop-filter: blur(8px);
             border: 1px solid rgba(126, 200, 255, 0.35);
@@ -50,17 +25,20 @@
             padding: 40px;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
-
-        h1 {
+        
+        .privacy-container h1 {
             font-size: clamp(1.8rem, 5vw, 2.5rem);
             font-weight: 800;
             border-left: 5px solid #7EC8FF;
             padding-left: 20px;
             margin-bottom: 30px;
             color: #FFFFFF;
+            background: none;
+            display: block;
+            border-radius: 0;
         }
-
-        h2 {
+        
+        .privacy-container h2 {
             font-size: 1.4rem;
             font-weight: 700;
             margin-top: 28px;
@@ -68,37 +46,40 @@
             color: #7EC8FF;
             padding-left: 12px;
             border-left: 3px solid #C5A3FF;
+            background: none;
+            display: block;
+            border-radius: 0;
         }
-
-        p, li {
+        
+        .privacy-container p, .privacy-container li {
             font-size: 1rem;
             color: #E0F0FF;
             margin-bottom: 12px;
             line-height: 1.5;
         }
-
-        ul {
+        
+        .privacy-container ul {
             margin-left: 24px;
             margin-bottom: 20px;
         }
-
-        li {
+        
+        .privacy-container li {
             margin-bottom: 6px;
         }
-
-        a {
+        
+        .privacy-container a {
             color: #7EC8FF;
             text-decoration: none;
             transition: all 0.2s;
         }
-
-        a:hover {
+        
+        .privacy-container a:hover {
             color: #C5A3FF;
             transform: translateX(2px);
             display: inline-block;
         }
-
-        .back-link {
+        
+        .privacy-back-link {
             display: inline-flex;
             align-items: center;
             gap: 10px;
@@ -112,14 +93,14 @@
             transition: all 0.2s;
             border: none;
         }
-
-        .back-link:hover {
+        
+        .privacy-back-link:hover {
             background: #62B8F0;
             transform: scale(1.02);
             color: white;
         }
-
-        footer {
+        
+        .privacy-footer {
             margin-top: 40px;
             padding-top: 25px;
             border-top: 1px solid rgba(126, 200, 255, 0.3);
@@ -127,29 +108,27 @@
             text-align: center;
             color: #aaa;
         }
-
-        footer p {
+        
+        .privacy-footer p {
             margin-bottom: 6px;
             color: #aaa;
         }
-
+        
         @media (max-width: 700px) {
-            body {
-                padding: 20px 15px;
-            }
-            .container {
+            .privacy-container {
                 padding: 24px 20px;
+                margin: 20px 15px;
             }
-            h1 {
+            .privacy-container h1 {
                 padding-left: 15px;
             }
-            h2 {
+            .privacy-container h2 {
                 font-size: 1.2rem;
             }
-            p, li {
+            .privacy-container p, .privacy-container li {
                 font-size: 0.9rem;
             }
-            .back-link {
+            .privacy-back-link {
                 padding: 10px 20px;
                 font-size: 0.9rem;
             }
@@ -157,7 +136,7 @@
     </style>
 </head>
 <body>
-<div class="container">
+<div class="privacy-container">
     <h1><i class="fas fa-shield-alt" style="color: #C5A3FF; margin-right: 12px;"></i> Политика конфиденциальности</h1>
     
     <p><strong>FixService</strong> (далее — «Сервис») уважает ваше право на конфиденциальность и обязуется защищать персональные данные, которые вы предоставляете при использовании сайта и формы заявки.</p>
@@ -183,7 +162,7 @@
     <p>Данные не передаются третьим лицам, не продаются и не используются для спам-рассылок.</p>
     
     <h2>3. Хранение и защита данных</h2>
-    <p>Ваши данные хранятся в защищённой Google Таблице, доступ к которой есть только у владельца сервиса FixService. Принимаются все необходимые меры для предотвращения несанкционированного доступа.</p>
+    <p>Ваши данные хранятся в защищённой базе, доступ к которой есть только у владельца сервиса FixService. Принимаются все необходимые меры для предотвращения несанкционированного доступа.</p>
     
     <h2>4. Срок хранения</h2>
     <p>Персональные данные хранятся до достижения цели их обработки (до выполнения заявки и закрытия диалога), но не более 1 года с момента последнего обращения. По запросу данные могут быть удалены досрочно.</p>
@@ -200,12 +179,12 @@
     <h2>6. Изменения политики</h2>
     <p>Сервис оставляет за собой право вносить изменения в политику конфиденциальности. Актуальная версия всегда доступна на этой странице.</p>
     
-    <a href="https://fixservice3939.github.io" class="back-link"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
+    <a href="index.html" class="privacy-back-link"><i class="fas fa-arrow-left"></i> Вернуться на главную</a>
     
-    <footer>
+    <div class="privacy-footer">
         <p>FixService | ИП Кондрачук Сергей Михайлович</p>
         <p>© 2026 Все права защищены</p>
-    </footer>
+    </div>
 </div>
 </body>
 </html>
