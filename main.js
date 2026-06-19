@@ -4,7 +4,7 @@
 
 (function() {
     // ========== НАСТРОЙКИ ==========
-    const SERVER_URL = 'https://script.google.com/macros/s/AKfycbxLquMUTqo9yd-F6TSAjgirf58jZ8FprRFqmH1LiFfSucJc_-rUo3hkbRZcQzOw6CzsZg/exec';
+    const SERVER_URL = 'https://script.google.com/macros/s/AKfycbw7HTDYMe17FWfF988uE-YkDlmuzMT2dsgP5Zo7_1C2B7axH106LmVed4lmNATnshgpAg/exec';
     
     // ========== ГАЛЕРЕЯ ==========
     const previewPhotos = [
