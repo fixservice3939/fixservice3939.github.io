@@ -4,7 +4,7 @@
 
 (function() {
     // ========== НАСТРОЙКИ ==========
-    const SERVER_URL = 'https://fixservicegsm.ru/send.php';
+    const SERVER_URL = 'https://script.google.com/macros/s/AKfycbzVkrR91xlwtkwfhlvUbnuGOqPqB9WLyJi7rbqWAmLlZBlpv4aDwZmd69itB5Uszptg4w/exec';
     
     // ========== ГАЛЕРЕЯ ==========
     const previewPhotos = [
