@@ -1,1 +1,1 @@
-const SERVER_URL = 'https://fixservicegsm.ru:5000/api/send';
+
