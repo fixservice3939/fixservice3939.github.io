@@ -15,9 +15,7 @@
     <meta property="og:url" content="https://fixservice3939.github.io">
     <meta property="og:image" content="https://fixservice3939.github.io/foto.webp">
     
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.telegram.org https://script.google.com; connect-src 'self' https://api.telegram.org https://script.google.com http://46.29.165.147:5000; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co; frame-src https://yandex.ru;">
-   
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com https://api.telegram.org https://script.google.com; connect-src 'self' https://api.telegram.org https://script.google.com http://46.29.165.147:5000; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https://placehold.co; frame-src https://yandex.ru;">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
@@ -120,7 +118,15 @@
             <span class="separator">|</span>
             <span class="apple-reanimator">Apple REANIMATOR</span>
         </div>
-        <div class="nav-links">
+        
+        <!-- ===== КНОПКА БУРГЕР (ТОЛЬКО НА МОБИЛКЕ) ===== -->
+        <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <div class="nav-links" id="navLinks">
             <a href="#services" class="nav-link">Услуги</a>
             <a href="#service" class="nav-link">Сервис</a>
             <a href="#faq" class="nav-link">FAQ</a>
@@ -296,8 +302,10 @@
         </div>
         <div class="map-wrapper">
             <iframe src="https://yandex.ru/map-widget/v1/?ll=38.957,55.724&z=17&pt=38.955609,55.720436,pm2rdm" allowfullscreen="true" title="Карта FixService"></iframe>
-        </div>
-        <div class="work-hours"><i class="fas fa-clock"></i> Режим работы: 10:00 – 18:00</div>
+        </div><div class="work-hours">
+    <i class="fas fa-clock"></i> 
+    Режим работы: <span id="workStatus">10:00 – 18:00</span>
+</div>
         <div class="map-link">
             <a href="https://yandex.ru/maps/-/CPdlF6Lt" target="_blank"><i class="fas fa-external-link-alt"></i> Открыть FixService на Яндекс.Картах</a>
         </div>
