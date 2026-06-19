@@ -4,7 +4,7 @@
 
 (function() {
     // ========== НАСТРОЙКИ ==========
-    const SERVER_URL = 'http://46.29.165.147:5000/api/send';
+    const SERVER_URL = 'https://script.google.com/macros/s/AKfycbzVkrR91xlwtkwfhlvUbnuGOqPqB9WLyJi7rbqWAmLlZBlpv4aDwZmd69itB5Uszptg4w/exec';
     
     // ========== ГАЛЕРЕЯ ==========
     const previewPhotos = [
@@ -211,4 +211,72 @@
             }
         });
     });
+
+    // ============================================================
+    // ШАГ 1: БУРГЕР-МЕНЮ
+    // ============================================================
+    const burgerBtn = document.getElementById('burgerBtn');
+    const navLinks = document.getElementById('navLinks');
+    
+    if (burgerBtn && navLinks) {
+        // Открыть/закрыть по клику на бургер
+        burgerBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            navLinks.classList.toggle('open');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        });
+        
+        // Закрыть при клике на ссылку
+        navLinks.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function() {
+                burgerBtn.classList.remove('active');
+                navLinks.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+        
+        // Закрыть при клике вне меню
+        document.addEventListener('click', function(e) {
+            if (navLinks.classList.contains('open') && 
+                !navLinks.contains(e.target) && 
+                !burgerBtn.contains(e.target)) {
+                burgerBtn.classList.remove('active');
+                navLinks.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // ============================================================
+    // ШАГ 3: СТАТУС РАБОТЫ (ОТКРЫТО / ЗАКРЫТО)
+    // ============================================================
+    function updateWorkStatus() {
+        const statusEl = document.getElementById('workStatus');
+        if (!statusEl) return;
+        
+        const now = new Date();
+        const hours = now.getHours();
+        const minutes = now.getMinutes();
+        const currentTime = hours + minutes / 60;
+        
+        // График работы: 10:00 – 18:00
+        const openTime = 10;
+        const closeTime = 18;
+        
+        let statusText = '';
+        
+        if (currentTime >= openTime && currentTime < closeTime) {
+            statusText = '10:00 – 18:00 (ОТКРЫТО)';
+        } else {
+            statusText = '10:00 – 18:00 (ЗАКРЫТО)';
+        }
+        
+        statusEl.textContent = statusText;
+        statusEl.style.color = '#FFFFFF';
+        statusEl.style.fontWeight = '700';
+    }
+    
+    updateWorkStatus();
+    setInterval(updateWorkStatus, 60000);
 })();
