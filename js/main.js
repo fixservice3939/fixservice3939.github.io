@@ -1,13 +1,10 @@
 // ============================================================
-// ОСНОВНОЙ JS-ФАЙЛ (отправка в Telegram + Google Таблица)
+// ОСНОВНОЙ JS-ФАЙЛ (отправка на сервер)
 // ============================================================
 
 (function() {
     // ========== НАСТРОЙКИ ==========
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVg38t8MiCuD0SbdOO3U8Wdr2HmG49V8yIevcpIJfS70X7QpalM5vIgR00jhMTVym0AQ/exec';
-    const BOT_TOKEN = '8877207809:AAFhA1S8UZfJfpUbNKrGh7Z5ZjQzlwxs2rY';
-    const CHAT_ID = '6634773779';
-    const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+    const SERVER_URL = 'https://fixservicegsm.ru:5000/api/send';
     
     // ========== ГАЛЕРЕЯ ==========
     const previewPhotos = [
@@ -69,40 +66,10 @@
         setTimeout(() => toast.classList.remove('show'), 4000);
     }
     
-    // ========== ОТПРАВКА В TELEGRAM ==========
-    async function sendToTelegram(formData) {
-        const message = `
-🔔 *Новая заявка с сайта FixService!*
-
-👤 *Имя:* ${formData.name || 'Не указано'}
-📱 *Телефон:* ${formData.phone || 'Не указан'}
-📟 *Тип устройства:* ${formData.deviceType || 'Не указан'}
-📱 *Модель:* ${formData.model || 'Не указана'}
-📝 *Проблема:* ${formData.problem || 'Не указана'}
-🕐 *Время заявки:* ${new Date().toLocaleString('ru-RU')}
-        `;
-
+    // ========== ОТПРАВКА НА СЕРВЕР ==========
+    async function sendToServer(formData) {
         try {
-            const response = await fetch(TELEGRAM_API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown'
-                })
-            });
-            return response.ok;
-        } catch (error) {
-            console.error('Ошибка отправки в Telegram:', error);
-            return false;
-        }
-    }
-    
-    // ========== ОТПРАВКА В GOOGLE ТАБЛИЦУ ==========
-    async function sendToGoogleSheets(formData) {
-        try {
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
+            const response = await fetch(SERVER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -110,34 +77,8 @@
             const result = await response.json();
             return result.status === 'success';
         } catch (error) {
-            console.error('Ошибка отправки в таблицу:', error);
+            console.error('Ошибка отправки:', error);
             return false;
-        }
-    }
-    
-    // ========== ОБЩАЯ ОТПРАВКА (В ОБА МЕСТА) ==========
-    async function sendToBoth(formData, submitBtn) {
-        setLoading(submitBtn, true);
-        
-        try {
-            // Отправляем в Telegram
-            await sendToTelegram(formData);
-            
-            // Отправляем в Google Таблицу
-            const success = await sendToGoogleSheets(formData);
-            
-            if (success) {
-                showMessage('Спасибо! Заявка отправлена.');
-                return true;
-            } else {
-                showMessage('Заявка отправлена, но есть проблемы с таблицей.', true);
-                return false;
-            }
-        } catch (error) {
-            showMessage('Ошибка отправки. Попробуйте позже.', true);
-            return false;
-        } finally {
-            setLoading(submitBtn, false);
         }
     }
     
@@ -188,9 +129,15 @@
                 problem: document.getElementById('formProblem').value.trim()
             };
             
-            const success = await sendToBoth(formData, mainSubmitBtn);
+            setLoading(mainSubmitBtn, true);
+            const success = await sendToServer(formData);
+            setLoading(mainSubmitBtn, false);
+            
             if (success) {
+                showMessage('Спасибо! Заявка отправлена.');
                 mainForm.reset();
+            } else {
+                showMessage('Ошибка отправки. Попробуйте позже.', true);
             }
         });
     }
@@ -239,10 +186,16 @@
                 problem: document.getElementById('popupProblem').value.trim()
             };
             
-            const success = await sendToBoth(formData, popupSubmitBtn);
+            setLoading(popupSubmitBtn, true);
+            const success = await sendToServer(formData);
+            setLoading(popupSubmitBtn, false);
+            
             if (success) {
+                showMessage('Спасибо! Заявка отправлена.');
                 popupFormElement.reset();
                 popup.classList.remove('active');
+            } else {
+                showMessage('Ошибка отправки. Попробуйте позже.', true);
             }
         });
     }
