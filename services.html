@@ -394,10 +394,9 @@
 <div class="navbar">
     <div class="container-nav">
         <div class="logo">
-    <span class="fix">Fix</span><span class="service">Service</span>
-    <span class="separator">|</span>
-    <span class="apple-reanimator">Apple REANIMATOR</span>
-</div>
+            <span style="color:#fff;">Fix</span><span style="color:#7EC8FF;">Service</span>
+            <span style="color:#C5A3FF;">| REANIMATOR</span>
+        </div>
         <div class="nav-links">
             <a href="index.html" class="nav-link">Главная</a>
             <a href="biblioteka.html" class="nav-link">Галерея</a>
@@ -530,6 +529,10 @@
 <div id="toast" class="toast">Заявка отправлена. Мастер свяжется с вами.</div>
 
 <script>
+    // ========== НАСТРОЙКИ ==========
+    // Берём настройки из config.js
+    const SERVER_URL = 'https://fixservicegsm.ru:5000/api/send';
+
     // ========== ОПИСАНИЯ УСЛУГ ==========
     const serviceDescriptions = {
         display: 'Замена разбитого экрана, треснувшего стекла или битого дисплея на телефонах любых брендов.',
@@ -869,66 +872,10 @@
         }
     }
 
-    // ========== ОТПРАВКА В TELEGRAM ==========
-    async function sendToTelegram(formData) {
-        const message = `
-🔔 *Новая заявка с сайта FixService!*
-
-📱 *Услуга:* ${formData.service || 'Не указана'}
-👤 *Имя:* ${formData.name || 'Не указано'}
-📱 *Телефон:* ${formData.phone || 'Не указан'}
-📱 *Модель:* ${formData.model || 'Не указана'}
-🔧 *Качество:* ${formData.quality || 'Не указано'}
-💰 *Цена:* ${formData.price || 'Не указана'}
-🕐 *Время заявки:* ${new Date(formData.timestamp).toLocaleString('ru-RU')}
-        `;
-
+    // ========== ОТПРАВКА НА СЕРВЕР ==========
+    async function sendToServer(formData) {
         try {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
-
-            const response = await fetch(TELEGRAM_API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: message,
-                    parse_mode: 'Markdown'
-                }),
-                signal: controller.signal
-            });
-
-            clearTimeout(timeoutId);
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                console.error('Telegram API error:', errorData);
-                throw new Error(`Ошибка ${response.status}: ${errorData.description || 'Неизвестная ошибка'}`);
-            }
-
-            const result = await response.json();
-            if (!result.ok) {
-                throw new Error('Telegram не подтвердил отправку');
-            }
-
-            return true;
-        } catch (error) {
-            console.error('Ошибка отправки в Telegram:', error);
-            
-            if (error.name === 'AbortError') {
-                throw new Error('Превышено время ожидания. Попробуйте позже.');
-            } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                throw new Error('Нет соединения с интернетом. Проверьте связь.');
-            } else {
-                throw new Error('Ошибка отправки. Попробуйте позже или позвоните нам.');
-            }
-        }
-    }
-
-    // ========== ОТПРАВКА В GOOGLE ТАБЛИЦУ ==========
-    async function sendToGoogleSheets(formData) {
-        try {
-            const response = await fetch(GOOGLE_SCRIPT_URL, {
+            const response = await fetch(SERVER_URL, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(formData)
@@ -936,31 +883,8 @@
             const result = await response.json();
             return result.status === 'success';
         } catch (error) {
-            console.error('Ошибка отправки в таблицу:', error);
+            console.error('Ошибка отправки:', error);
             return false;
-        }
-    }
-
-    // ========== ОБЩАЯ ОТПРАВКА ==========
-    async function sendToBoth(formData, submitBtn) {
-        setLoading(submitBtn, true);
-        
-        try {
-            await sendToTelegram(formData);
-            const success = await sendToGoogleSheets(formData);
-            
-            if (success) {
-                showMessage('Спасибо! Заявка отправлена.');
-                return true;
-            } else {
-                showMessage('Заявка отправлена, но есть проблемы с таблицей.', true);
-                return false;
-            }
-        } catch (error) {
-            showMessage('Ошибка отправки. Попробуйте позже.', true);
-            return false;
-        } finally {
-            setLoading(submitBtn, false);
         }
     }
 
@@ -1025,11 +949,16 @@
             timestamp: new Date().toISOString()
         };
         
-        const success = await sendToBoth(formData, popupSubmitBtn);
+        const success = await sendToServer(formData);
+        setLoading(popupSubmitBtn, false);
+        
         if (success) {
+            showMessage('Спасибо! Заявка отправлена.');
             popupFormElement.reset();
             popup.classList.remove('active');
             document.getElementById('popupPrivacy').checked = false;
+        } else {
+            showMessage('Ошибка отправки. Попробуйте позвонить по телефону.', true);
         }
     });
 
