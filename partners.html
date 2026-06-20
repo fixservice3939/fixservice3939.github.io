@@ -345,159 +345,109 @@
 <div id="partnerToast" class="partner-toast">Заявка отправлена. Мастер свяжется с вами.</div>
 
 <script>
-    (function() {
-        // ========== НАСТРОЙКИ БОТА ==========
-        const BOT_TOKEN = '8676096132:AAE0LDxXgNk4_8n0waZtf-6aiQR0g1-lnx8';
-        const CHAT_ID = '6634773779';
-        const TELEGRAM_API_URL = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-        
-        const toast = document.getElementById('partnerToast');
-        
-        function showMessage(text, isError = false) {
-            toast.textContent = text;
-            toast.style.background = isError ? '#dc2626' : '#C5A3FF';
-            toast.style.color = isError ? 'white' : '#1F1B38';
-            toast.classList.add('show');
-            setTimeout(() => toast.classList.remove('show'), 4000);
-        }
-        
-        function validatePhone(phone) {
-            const numbers = phone.replace(/[^\d+]/g, '').replace(/\D/g, '');
-            return numbers.length >= 10 && numbers.length <= 11;
-        }
-        
-        function applyPhoneMask(input) {
-            input.addEventListener('input', function(e) {
-                let value = this.value.replace(/\D/g, '');
-                if (value.length > 11) value = value.slice(0, 11);
-                let formatted = '';
-                if (value.length > 0) formatted = '+7';
-                if (value.length > 1) formatted += ' (' + value.slice(1, 4);
-                if (value.length > 4) formatted += ') ' + value.slice(4, 7);
-                if (value.length > 7) formatted += '-' + value.slice(7, 9);
-                if (value.length > 9) formatted += '-' + value.slice(9, 11);
-                this.value = formatted;
+    // ========== МАСКА ТЕЛЕФОНА ==========
+    function applyPhoneMask(input) {
+        input.addEventListener('input', function(e) {
+            let value = this.value.replace(/\D/g, '');
+            if (value.length > 11) value = value.slice(0, 11);
+            let formatted = '';
+            if (value.length > 0) formatted = '+7';
+            if (value.length > 1) formatted += ' (' + value.slice(1, 4);
+            if (value.length > 4) formatted += ') ' + value.slice(4, 7);
+            if (value.length > 7) formatted += '-' + value.slice(7, 9);
+            if (value.length > 9) formatted += '-' + value.slice(9, 11);
+            this.value = formatted;
+        });
+    }
+    document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
+
+    // ========== TOAST ==========
+    const toast = document.getElementById('partnerToast');
+    function showMessage(text, isError = false) {
+        toast.textContent = text;
+        toast.style.background = isError ? '#dc2626' : '#C5A3FF';
+        toast.style.color = isError ? 'white' : '#1F1B38';
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+    }
+
+    // ========== ОТПРАВКА НА СЕРВЕР ==========
+    const SERVER_URL = 'https://api.fixservicegsm.ru/api/send';
+
+    async function sendToServer(formData) {
+        try {
+            const response = await fetch(SERVER_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formData)
             });
+            const result = await response.json();
+            return result.status === 'success';
+        } catch (error) {
+            console.error('Ошибка отправки:', error);
+            return false;
         }
-        
-        document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
-        
-        function setLoading(btn, isLoading) {
-            if (isLoading) {
-                btn.classList.add('loading');
-                btn.disabled = true;
+    }
+
+    // ========== ОБРАБОТКА ФОРМЫ ==========
+    function validatePhone(phone) {
+        const numbers = phone.replace(/[^\d+]/g, '').replace(/\D/g, '');
+        return numbers.length >= 10 && numbers.length <= 11;
+    }
+
+    function setLoading(btn, isLoading) {
+        if (isLoading) {
+            btn.classList.add('loading');
+            btn.disabled = true;
+        } else {
+            btn.classList.remove('loading');
+            btn.disabled = false;
+        }
+    }
+
+    const partnerForm = document.getElementById('partnerForm');
+    const partnerSubmitBtn = document.getElementById('partnerSubmitBtn');
+
+    if (partnerForm) {
+        partnerForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const name = document.getElementById('partnerName').value.trim();
+            const phone = document.getElementById('partnerPhone').value.trim();
+            const privacyChecked = document.getElementById('partnerPrivacy').checked;
+
+            if (!name || !phone) {
+                showMessage('Заполните имя и номер телефона', true);
+                return;
+            }
+            if (!validatePhone(phone)) {
+                showMessage('Введите корректный номер телефона (10-11 цифр)', true);
+                return;
+            }
+            if (!privacyChecked) {
+                showMessage('Подтвердите согласие на обработку данных', true);
+                return;
+            }
+
+            const formData = {
+                name: name,
+                phone: phone,
+                deviceType: document.getElementById('partnerDevice').value,
+                problem: document.getElementById('partnerProblem').value.trim(),
+                source: 'partners'
+            };
+
+            setLoading(partnerSubmitBtn, true);
+            const success = await sendToServer(formData);
+            setLoading(partnerSubmitBtn, false);
+
+            if (success) {
+                showMessage('Спасибо! Заявка отправлена.');
+                partnerForm.reset();
             } else {
-                btn.classList.remove('loading');
-                btn.disabled = false;
+                showMessage('Ошибка отправки. Попробуйте позже.', true);
             }
-        }
-        
-        async function sendToTelegram(formData) {
-            const message = `
-🔔 *Новая заявка с сайта FixService!*
-
-🤝 *Партнёр:* ТОЧКА (ремонт бытовой техники)
-👤 *Имя:* ${formData.name || 'Не указано'}
-📱 *Телефон:* ${formData.phone || 'Не указан'}
-📟 *Тип устройства:* ${formData.deviceType || 'Не указан'}
-📝 *Проблема:* ${formData.problem || 'Не указана'}
-🕐 *Время заявки:* ${new Date(formData.timestamp).toLocaleString('ru-RU')}
-            `;
-
-            try {
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 15000);
-
-                const response = await fetch(TELEGRAM_API_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        chat_id: CHAT_ID,
-                        text: message,
-                        parse_mode: 'Markdown',
-                    }),
-                    signal: controller.signal
-                });
-
-                clearTimeout(timeoutId);
-
-                if (!response.ok) {
-                    const errorData = await response.json();
-                    console.error('Telegram API error:', errorData);
-                    throw new Error(`Ошибка ${response.status}: ${errorData.description || 'Неизвестная ошибка'}`);
-                }
-
-                const result = await response.json();
-                if (!result.ok) {
-                    throw new Error('Telegram не подтвердил отправку');
-                }
-
-                return true;
-            } catch (error) {
-                console.error('Ошибка отправки в Telegram:', error);
-                
-                if (error.name === 'AbortError') {
-                    throw new Error('Превышено время ожидания. Попробуйте позже.');
-                } else if (error.message.includes('Failed to fetch') || error.message.includes('NetworkError')) {
-                    throw new Error('Нет соединения с интернетом. Проверьте связь.');
-                } else {
-                    throw new Error('Ошибка отправки. Попробуйте позже или позвоните нам.');
-                }
-            }
-        }
-        
-        const partnerForm = document.getElementById('partnerForm');
-        const partnerSubmitBtn = document.getElementById('partnerSubmitBtn');
-        
-        if (partnerForm) {
-            partnerForm.addEventListener('submit', async function(e) {
-                e.preventDefault();
-                const name = document.getElementById('partnerName').value.trim();
-                const phone = document.getElementById('partnerPhone').value.trim();
-                const privacyChecked = document.getElementById('partnerPrivacy').checked;
-                
-                if (!name || !phone) {
-                    showMessage('Заполните имя и номер телефона', true);
-                    return;
-                }
-                if (!validatePhone(phone)) {
-                    showMessage('Введите корректный номер телефона (10-11 цифр)', true);
-                    return;
-                }
-                if (!privacyChecked) {
-                    showMessage('Подтвердите согласие на обработку данных', true);
-                    return;
-                }
-                
-                setLoading(partnerSubmitBtn, true);
-                
-                const formData = {
-                    name: name,
-                    phone: phone,
-                    deviceType: document.getElementById('partnerDevice').value,
-                    problem: document.getElementById('partnerProblem').value.trim(),
-                    timestamp: new Date().toISOString()
-                };
-                
-                try {
-                    const success = await sendToTelegram(formData);
-                    
-                    if (success) {
-                        showMessage('Спасибо! Заявка отправлена в ТОЧКУ. Мастер свяжется с вами.');
-                        partnerForm.reset();
-                    } else {
-                        showMessage('Ошибка отправки. Попробуйте позвонить по телефону: 8 (969) 999-35-24', true);
-                    }
-                } catch (error) {
-                    showMessage(error.message || 'Ошибка отправки. Попробуйте позвонить.', true);
-                } finally {
-                    setLoading(partnerSubmitBtn, false);
-                }
-            });
-        }
-    })();
+        });
+    }
 </script>
 
 <script src="js/main.js"></script>
