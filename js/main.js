@@ -279,4 +279,171 @@
     
     updateWorkStatus();
     setInterval(updateWorkStatus, 60000);
+
+    // ============================================================
+    // ПОПАП ВЫБОРА МОДЕЛИ (клик по бренду)
+    // ============================================================
+    
+    // ===== БАЗА МОДЕЛЕЙ ПО БРЕНДАМ =====
+    const modelsByBrand = {
+        apple: [
+            "iPhone X", "iPhone XR", "iPhone XS", "iPhone XS Max",
+            "iPhone 11", "iPhone 11 Pro", "iPhone 11 Pro Max",
+            "iPhone 12", "iPhone 12 mini", "iPhone 12 Pro", "iPhone 12 Pro Max",
+            "iPhone 13", "iPhone 13 mini", "iPhone 13 Pro", "iPhone 13 Pro Max",
+            "iPhone 14", "iPhone 14 Plus", "iPhone 14 Pro", "iPhone 14 Pro Max",
+            "iPhone 15", "iPhone 15 Plus", "iPhone 15 Pro", "iPhone 15 Pro Max",
+            "iPhone 16", "iPhone 16 Plus", "iPhone 16 Pro", "iPhone 16 Pro Max",
+            "iPhone 16e", "iPhone 17", "iPhone 17 Pro", "iPhone 17 Pro Max", "iPhone 17e",
+            "iPhone Air"
+        ],
+        samsung: [
+            "Galaxy S21", "Galaxy S22", "Galaxy S23",
+            "Galaxy A52", "Galaxy A53",
+            "Galaxy Z Fold3", "Galaxy Z Flip3"
+        ],
+        xiaomi: [
+            "Mi 11", "Mi 12",
+            "Redmi Note 10", "Redmi Note 11",
+            "12T Pro", "Poco F3"
+        ],
+        honor: [],
+        huawei: [],
+        oneplus: [],
+        oppo: [],
+        infinix: [],
+        nokia: [],
+        vivo: [],
+        itel: [],
+        tecno: [],
+        blackberry: [],
+        sony: [],
+        realme: []
+    };
+    
+    // ===== ЭЛЕМЕНТЫ =====
+    const modelPopup = document.getElementById('modelSelectPopup');
+    const modelSearchInput = document.getElementById('modelSearchInput');
+    const popupModelsList = document.getElementById('popupModelsList');
+    const modelPopupBrandTitle = document.getElementById('modelPopupBrandTitle');
+    const closeModelPopupBtn = document.getElementById('closeModelPopupBtn');
+    
+    // ===== ОТКРЫТИЕ ПОПАПА ПРИ КЛИКЕ НА БРЕНД =====
+    document.querySelectorAll('.brand-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const brand = this.dataset.brand.toLowerCase();
+            const brandName = this.textContent.trim();
+            
+            // Показываем попап
+            modelPopupBrandTitle.textContent = 'Выберите модель ' + brandName;
+            modelPopup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Отображаем модели
+            renderModels(brand);
+            
+            // Очищаем поиск
+            modelSearchInput.value = '';
+        });
+    });
+    
+    // ===== ЗАКРЫТИЕ ПОПАПА =====
+    function closeModelPopup() {
+        modelPopup.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    
+    closeModelPopupBtn?.addEventListener('click', closeModelPopup);
+    modelPopup?.addEventListener('click', function(e) {
+        if (e.target === this) closeModelPopup();
+    });
+    
+    // ===== ОТОБРАЖЕНИЕ МОДЕЛЕЙ =====
+    function renderModels(brand) {
+        const models = modelsByBrand[brand] || [];
+        
+        if (models.length === 0) {
+            popupModelsList.innerHTML = '<div class="popup-model-card" style="grid-column:1/-1;color:#aaa;font-style:italic;">Модели временно отсутствуют</div>';
+            return;
+        }
+        
+        let html = '';
+        models.forEach(model => {
+            html += `
+                <div class="popup-model-card" data-model="${model}">
+                    ${model}
+                </div>
+            `;
+        });
+        popupModelsList.innerHTML = html;
+        
+        // ===== ПРИ КЛИКЕ НА МОДЕЛЬ =====
+        popupModelsList.querySelectorAll('.popup-model-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const modelName = this.dataset.model;
+                
+                // Заполняем поле модели в основной форме
+                const formModelInput = document.getElementById('formModel');
+                if (formModelInput) {
+                    formModelInput.value = modelName;
+                }
+                
+                // Заполняем поле модели в попап-форме
+                const popupModelInput = document.getElementById('popupModel');
+                if (popupModelInput) {
+                    popupModelInput.value = modelName;
+                }
+                
+                // Закрываем попап
+                closeModelPopup();
+                
+                // Показываем уведомление
+                showMessage('Модель "' + modelName + '" выбрана!');
+            });
+        });
+    }
+    
+    // ===== ПОИСК МОДЕЛЕЙ =====
+    modelSearchInput?.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        // Определяем текущий бренд из заголовка
+        const titleText = modelPopupBrandTitle?.textContent || 'Apple';
+        const brand = titleText.replace('Выберите модель ', '').toLowerCase();
+        const models = modelsByBrand[brand] || [];
+        
+        const filtered = models.filter(model => 
+            model.toLowerCase().includes(searchTerm)
+        );
+        
+        if (filtered.length === 0) {
+            popupModelsList.innerHTML = '<div class="popup-model-card" style="grid-column:1/-1;color:#aaa;font-style:italic;">Моделей не найдено</div>';
+            return;
+        }
+        
+        let html = '';
+        filtered.forEach(model => {
+            html += `
+                <div class="popup-model-card" data-model="${model}">
+                    ${model}
+                </div>
+            `;
+        });
+        popupModelsList.innerHTML = html;
+        
+        // Перепривязываем события
+        popupModelsList.querySelectorAll('.popup-model-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const modelName = this.dataset.model;
+                
+                const formModelInput = document.getElementById('formModel');
+                if (formModelInput) formModelInput.value = modelName;
+                
+                const popupModelInput = document.getElementById('popupModel');
+                if (popupModelInput) popupModelInput.value = modelName;
+                
+                closeModelPopup();
+                showMessage('Модель "' + modelName + '" выбрана!');
+            });
+        });
+    });
 })();
