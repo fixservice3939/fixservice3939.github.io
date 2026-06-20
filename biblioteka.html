@@ -369,12 +369,23 @@
 <div class="navbar">
     <div class="container-nav">
         <div class="logo">
-    <span class="fix">Fix</span><span class="service">Service</span>
-    <span class="separator">|</span>
-    <span class="apple-reanimator">Apple REANIMATOR</span>
-</div>
-        <div class="nav-links">
+            <span class="fix">Fix</span><span class="service">Service</span>
+            <span class="separator">|</span>
+            <span class="apple-reanimator">Apple REANIMATOR</span>
+        </div>
+        
+        <!-- ===== КНОПКА БУРГЕР ===== -->
+        <button class="burger-btn" id="burgerBtn" aria-label="Меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <div class="nav-links" id="navLinks">
             <a href="index.html" class="nav-link">Главная</a>
+            <a href="biblioteka.html" class="nav-link">Галерея</a>
+            <a href="partners.html" class="nav-link">Партнёры</a>
+            <a href="index.html#contacts" class="nav-link">Контакты</a>
         </div>
     </div>
 </div>
@@ -677,5 +688,8 @@
     window.prevImageCustom = prevImageCustom;
     window.nextImageCustom = nextImageCustom;
 </script>
+
+<script src="js/main.js"></script>
+
 </body>
 </html>
