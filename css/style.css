@@ -1357,16 +1357,20 @@ footer {
         color: #7EC8FF;
     }
     
-    /* ===== ОТЗЫВЫ (КОМПАКТНЕЕ) ===== */
+    /* ===== ОТЗЫВЫ (КОМПАКТНЫЕ, КВАДРАТНЫЕ) ===== */
     .reviews-grid {
         gap: 12px;
         padding-bottom: 6px;
     }
     
     .review-card {
-        flex: 0 0 85%;
+        flex: 0 0 220px;
+        aspect-ratio: 1 / 1;
         padding: 0.8rem 1rem;
         border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
     
     .review-author {
@@ -1381,10 +1385,10 @@ footer {
     }
     
     .review-text {
-        font-size: 0.8rem;
+        font-size: 0.78rem;
         line-height: 1.3;
         display: -webkit-box;
-        -webkit-line-clamp: 3;
+        -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
     }
