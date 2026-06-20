@@ -606,7 +606,7 @@ h2 {
     border: 1px solid rgba(126, 200, 255, 0.5);
     border-radius: 40px;
     font-size: 1rem;
-    color: white;
+    color: #FFFFFF;
     font-family: inherit;
 }
 
@@ -990,7 +990,7 @@ h2 {
     background: rgba(255, 255, 255, 0.12);
     border: 1px solid rgba(126, 200, 255, 0.5);
     border-radius: 30px;
-    color: white;
+    color: #FFFFFF;
     font-family: inherit;
     font-size: 0.9rem;
 }
@@ -1357,48 +1357,36 @@ footer {
         color: #7EC8FF;
     }
     
-       /* ===== ОТЗЫВЫ (КВАДРАТНЫЕ, ПОЛНЫЙ ТЕКСТ) ===== */
+    /* ===== ОТЗЫВЫ ===== */
     .reviews-grid {
         gap: 12px;
         padding-bottom: 6px;
     }
     
     .review-card {
-        flex: 0 0 220px;
-        aspect-ratio: 1 / 1;
-        padding: 1rem 1rem 0.8rem 1rem;
+        flex: 0 0 85%;
+        padding: 0.8rem 1rem;
         border-radius: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        overflow-y: auto;
     }
     
     .review-author {
         font-size: 0.85rem;
         margin-bottom: 0.15rem;
-        flex-shrink: 0;
     }
     
     .review-rating {
         font-size: 0.7rem;
         margin-bottom: 0.3rem;
         letter-spacing: 1px;
-        flex-shrink: 0;
     }
     
     .review-text {
-        font-size: 0.75rem;
+        font-size: 0.8rem;
         line-height: 1.3;
-        text-align: left;
-        overflow-y: auto;
-        flex: 1;
-        /* Убираем обрезание текста */
-        display: block;
-        -webkit-line-clamp: unset;
-        -webkit-box-orient: unset;
-        overflow: visible;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
     
     /* ===== БРЕНДЫ (ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ) ===== */
@@ -1606,4 +1594,44 @@ footer {
         grid-template-columns: repeat(4, 1fr);
         gap: 6px;
     }
+}
+
+/* ============================================================
+   ИСПРАВЛЕНИЕ: ВЫПАДАЮЩИЙ СПИСОК (ОСНОВНАЯ ФОРМА + ПОПАП)
+   ============================================================ */
+
+/* ===== ОСНОВНАЯ ФОРМА ===== */
+.form-group select {
+    color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.1) !important;
+}
+
+.form-group select option {
+    color: #000000 !important;
+    background: #FFFFFF !important;
+    padding: 10px !important;
+}
+
+.form-group select option:hover,
+.form-group select option:focus,
+.form-group select option:active {
+    background: #f0f0f0 !important;
+}
+
+/* ===== ПОПАП-ФОРМА ===== */
+.popup-form select {
+    color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.12) !important;
+}
+
+.popup-form select option {
+    color: #000000 !important;
+    background: #FFFFFF !important;
+    padding: 10px !important;
+}
+
+.popup-form select option:hover,
+.popup-form select option:focus,
+.popup-form select option:active {
+    background: #f0f0f0 !important;
 }
