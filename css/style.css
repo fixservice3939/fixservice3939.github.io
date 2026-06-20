@@ -1357,7 +1357,7 @@ footer {
         color: #7EC8FF;
     }
     
-    /* ===== ОТЗЫВЫ (КОМПАКТНЫЕ, КВАДРАТНЫЕ) ===== */
+       /* ===== ОТЗЫВЫ (КОМПАКТНЫЕ, КВАДРАТНЫЕ) ===== */
     .reviews-grid {
         gap: 12px;
         padding-bottom: 6px;
@@ -1366,11 +1366,12 @@ footer {
     .review-card {
         flex: 0 0 220px;
         aspect-ratio: 1 / 1;
-        padding: 0.8rem 1rem;
+        padding: 1rem 1rem 0.8rem 1rem;
         border-radius: 20px;
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
+        align-items: flex-start;
     }
     
     .review-author {
@@ -1391,6 +1392,7 @@ footer {
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical;
         overflow: hidden;
+        text-align: left;
     }
     
     /* ===== БРЕНДЫ (ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ) ===== */
