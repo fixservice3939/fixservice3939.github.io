@@ -1243,22 +1243,69 @@ footer {
     transform: rotate(-45deg) translate(5px, -6px);
 }
 
-/* ===== МОБИЛЬНАЯ ВЕРСИЯ (ДО 768px) ===== */
 @media (max-width: 768px) {
     /* Показываем бургер */
     .burger-btn {
         display: flex;
+        flex-shrink: 0;
+        gap: 4px;
+        padding: 4px 2px;
     }
     
-    /* Меняем расположение в шапке */
+    .burger-btn span {
+        width: 22px;
+        height: 2.5px;
+    }
+    
+    /* Анимация бургера в крестик */
+    .burger-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(4px, 5px);
+    }
+    
+    .burger-btn.active span:nth-child(2) {
+        opacity: 0;
+        transform: scaleX(0);
+    }
+    
+    .burger-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(4px, -5px);
+    }
+    
+    /* Шапка */
     .navbar .container-nav {
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
-        padding: 8px 16px;
+        padding: 6px 12px;
+        gap: 0;
     }
     
-    /* Меню скрыто за экраном */
+    /* ===== ЛОГО НА ВСЮ ШИРИНУ ДО БУРГЕРА ===== */
+    .logo {
+        font-size: 1.2rem !important;
+        gap: 2px;
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+    
+    .logo .fix,
+    .logo .service,
+    .logo .separator,
+    .logo .apple-reanimator {
+        white-space: nowrap;
+    }
+    
+    .logo .separator {
+        font-size: 0.9rem;
+    }
+    
+    .logo .apple-reanimator {
+        font-size: 0.65rem;
+    }
+    
+    /* Меню */
     .nav-links {
         position: fixed;
         top: 0;
@@ -1270,54 +1317,37 @@ footer {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 1.5rem;
+        gap: 0.8rem;
         transform: translateX(100%);
-        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         z-index: 105;
-        padding: 40px 20px;
+        padding: 20px;
         overflow-y: auto;
     }
     
-    /* Меню открыто */
     .nav-links.open {
         transform: translateX(0);
     }
     
-    /* Ссылки в меню */
     .nav-links .nav-link {
-        font-size: 1.4rem;
-        font-weight: 700;
+        font-size: 1.1rem;
+        font-weight: 600;
         color: #FFFFFF;
-        padding: 12px 24px;
-        border-radius: 16px;
+        padding: 8px 20px;
+        border-radius: 12px;
         width: 100%;
-        max-width: 300px;
+        max-width: 260px;
         text-align: center;
-        border: 1px solid rgba(126, 200, 255, 0.15);
-        background: rgba(126, 200, 255, 0.05);
+        border: 1px solid rgba(126, 200, 255, 0.12);
+        background: rgba(126, 200, 255, 0.04);
         transition: all 0.2s;
     }
     
     .nav-links .nav-link:hover {
-        background: rgba(62, 159, 220, 0.3);
+        background: rgba(62, 159, 220, 0.25);
         color: #7EC8FF;
     }
     
-    /* ===== ЛОГО МЕНЬШЕ НА МОБИЛКЕ (ШАГ 2) ===== */
-    .logo {
-        font-size: 1.1rem !important;
-        gap: 2px;
-    }
-    
-    .logo .separator {
-        font-size: 0.9rem;
-    }
-    
-    .logo .apple-reanimator {
-        font-size: 0.7rem;
-    }
-    
-    /* ===== АДАПТИВНОСТЬ (СТАРЫЕ СТИЛИ) ===== */
     .close-lightbox {
         top: 10px;
         right: 15px;
@@ -1326,13 +1356,6 @@ footer {
     .lightbox-img {
         max-width: 95%;
         max-height: 85%;
-    }
-}
-
-/* На десктопе бургер скрыт */
-@media (min-width: 769px) {
-    .burger-btn {
-        display: none !important;
     }
 }
 
