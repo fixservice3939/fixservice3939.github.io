@@ -116,72 +116,78 @@
         });
     }
 
-    // ========== ПОПАП ФОРМА ==========
-    const popup = document.getElementById('popupForm');
-    const popupFormElement = document.getElementById('popupFormElement');
-    const popupSubmitBtn = document.getElementById('popupSubmitBtn');
+// ========== ПОПАП ФОРМА ==========
+const popup = document.getElementById('popupForm');
+const popupFormElement = document.getElementById('popupFormElement');
+const popupSubmitBtn = document.getElementById('popupSubmitBtn');
 
-    document.getElementById('heroOpenBtn')?.addEventListener('click', function() {
-        popup.classList.add('active');
+document.getElementById('heroOpenBtn')?.addEventListener('click', function() {
+    popup.classList.add('active');
+});
+
+document.getElementById('closePopupBtn')?.addEventListener('click', function() {
+    popup.classList.remove('active');
+});
+
+document.getElementById('cancelPopupBtn')?.addEventListener('click', function() {
+    popup.classList.remove('active');
+});
+
+if (popupFormElement) {
+    popupFormElement.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const nameEl = document.getElementById('popupName');
+        const phoneEl = document.getElementById('popupPhone');
+        const privacyChecked = document.getElementById('popupPrivacy');
+        
+        const name = nameEl ? nameEl.value.trim() : '';
+        const phone = phoneEl ? phoneEl.value.trim() : '';
+
+        if (!name || !phone) {
+            showMessage('Заполните имя и номер телефона', true);
+            return;
+        }
+        if (!validatePhone(phone)) {
+            showMessage('Введите корректный номер телефона (10-11 цифр)', true);
+            return;
+        }
+        if (!privacyChecked || !privacyChecked.checked) {
+            showMessage('Подтвердите согласие на обработку данных', true);
+            return;
+        }
+
+        const serviceEl = document.getElementById('popupService');
+        const modelEl = document.getElementById('popupModel');
+        const qualityEl = document.getElementById('popupQuality');
+        const priceEl = document.getElementById('popupPrice');
+        const problemEl = document.getElementById('popupProblem');
+
+        const formData = {
+            name: name,
+            phone: phone,
+            deviceType: 'Телефон',
+            model: modelEl ? modelEl.value.trim() : '',
+            service: serviceEl ? serviceEl.value : '',
+            quality: qualityEl ? qualityEl.value : '',
+            price: priceEl ? priceEl.value : '',
+            problem: problemEl ? problemEl.value.trim() : '',
+            source: 'services'
+        };
+
+        setLoading(popupSubmitBtn, true);
+        const success = await sendToServer(formData);
+        setLoading(popupSubmitBtn, false);
+
+        if (success) {
+            showMessage('Спасибо! Заявка отправлена.');
+            popupFormElement.reset();
+            popup.classList.remove('active');
+        } else {
+            showMessage('Ошибка отправки. Попробуйте позже.', true);
+        }
     });
-
-    document.getElementById('closePopupBtn')?.addEventListener('click', function() {
-        popup.classList.remove('active');
-    });
-
-    document.getElementById('cancelPopupBtn')?.addEventListener('click', function() {
-        popup.classList.remove('active');
-    });
-
-    if (popupFormElement) {
-        popupFormElement.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const nameEl = document.getElementById('popupName');
-            const phoneEl = document.getElementById('popupPhone');
-            const privacyChecked = document.getElementById('popupPrivacy');
-            
-            const name = nameEl ? nameEl.value.trim() : '';
-            const phone = phoneEl ? phoneEl.value.trim() : '';
-
-            if (!name || !phone) {
-                showMessage('Заполните имя и номер телефона', true);
-                return;
-            }
-            if (!validatePhone(phone)) {
-                showMessage('Введите корректный номер телефона (10-11 цифр)', true);
-                return;
-            }
-            if (!privacyChecked || !privacyChecked.checked) {
-                showMessage('Подтвердите согласие на обработку данных', true);
-                return;
-            }
-
-            const deviceTypeEl = document.getElementById('popupDevice');
-            const modelEl = document.getElementById('popupModel');
-            const problemEl = document.getElementById('popupProblem');
-
-            const formData = {
-                name: name,
-                phone: phone,
-                deviceType: deviceTypeEl ? deviceTypeEl.value : '',
-                model: modelEl ? modelEl.value.trim() : '',
-                problem: problemEl ? problemEl.value.trim() : ''
-            };
-
-            setLoading(popupSubmitBtn, true);
-            const success = await sendToServer(formData);
-            setLoading(popupSubmitBtn, false);
-
-            if (success) {
-                showMessage('Спасибо! Заявка отправлена.');
-                popupFormElement.reset();
-                popup.classList.remove('active');
-            } else {
-                showMessage('Ошибка отправки. Попробуйте позже.', true);
-            }
-        });
-    }
+}
 
     // ========== ПЛАВНАЯ ПРОКРУТКА ==========
     document.querySelectorAll('a.nav-link, .footer-links a').forEach(anchor => {
