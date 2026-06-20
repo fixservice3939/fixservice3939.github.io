@@ -5,42 +5,7 @@
 (function() {
     // ========== НАСТРОЙКИ ==========
     const SERVER_URL = 'https://api.fixservicegsm.ru/api/send';
-    
-    // ========== ГАЛЕРЕЯ ==========
-    const previewPhotos = [
-        "photos/display/Zam.stcl1.jpg",
-        "photos/display/Zam.stcl2.jpg",
-        "photos/display/Zam.stcl3.jpg",
-        "photos/iphone-memory/память айфон 1.jpg",
-        "photos/laptops/ZamProcNout.jpg",
-        "photos/laptops/ZamProcNout2.jpg",
-        "photos/motherboard/восстановление сети айфонk.jpg",
-        "photos/motherboard/ребол процессора.jpg"
-    ];
-    
-    const galleryGrid = document.getElementById('serviceGalleryGrid');
-    if (galleryGrid) {
-        galleryGrid.innerHTML = previewPhotos.map(src => `
-            <div class="service-gallery-item" onclick="openLightbox('${src.replace(/'/g, "\\'")}')">
-                <img src="${src}" loading="lazy" onerror="this.src='https://placehold.co/400x400/3E9FDC/white?text=Фото'">
-            </div>
-        `).join('');
-    }
-    
-    window.openLightbox = function(imgSrc) {
-        const lb = document.getElementById('lightbox');
-        const img = document.getElementById('lightboxImg');
-        img.src = imgSrc;
-        lb.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    };
-    
-    window.closeLightbox = function() {
-        const lb = document.getElementById('lightbox');
-        lb.classList.remove('active');
-        document.body.style.overflow = '';
-    };
-    
+
     // ========== МАСКА ТЕЛЕФОНА ==========
     function applyPhoneMask(input) {
         input.addEventListener('input', function(e) {
@@ -56,7 +21,7 @@
         });
     }
     document.querySelectorAll('[data-phone-mask]').forEach(applyPhoneMask);
-    
+
     // ========== TOAST ==========
     const toast = document.getElementById('toast');
     function showMessage(text, isError = false) {
@@ -65,7 +30,7 @@
         toast.classList.add('show');
         setTimeout(() => toast.classList.remove('show'), 4000);
     }
-    
+
     // ========== ОТПРАВКА НА СЕРВЕР ==========
     async function sendToServer(formData) {
         try {
@@ -81,13 +46,13 @@
             return false;
         }
     }
-    
+
     // ========== ФОРМЫ ==========
     function validatePhone(phone) {
         const numbers = phone.replace(/[^\d+]/g, '').replace(/\D/g, '');
         return numbers.length >= 10 && numbers.length <= 11;
     }
-    
+
     function setLoading(btn, isLoading) {
         if (isLoading) {
             btn.classList.add('loading');
@@ -97,18 +62,22 @@
             btn.disabled = false;
         }
     }
-    
+
     // ========== ОСНОВНАЯ ФОРМА ==========
     const mainForm = document.getElementById('mainForm');
     const mainSubmitBtn = document.getElementById('mainFormSubmit');
-    
+
     if (mainForm) {
         mainForm.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const name = document.getElementById('formName').value.trim();
-            const phone = document.getElementById('formPhone').value.trim();
-            const privacyChecked = document.getElementById('formPrivacy').checked;
             
+            const nameEl = document.getElementById('formName');
+            const phoneEl = document.getElementById('formPhone');
+            const privacyChecked = document.getElementById('formPrivacy');
+            
+            const name = nameEl ? nameEl.value.trim() : '';
+            const phone = phoneEl ? phoneEl.value.trim() : '';
+
             if (!name || !phone) {
                 showMessage('Заполните имя и номер телефона', true);
                 return;
@@ -117,22 +86,27 @@
                 showMessage('Введите корректный номер телефона (10-11 цифр)', true);
                 return;
             }
-            if (!privacyChecked) {
+            if (!privacyChecked || !privacyChecked.checked) {
                 showMessage('Подтвердите согласие на обработку данных', true);
                 return;
             }
-            
+
+            const deviceTypeEl = document.getElementById('formDevice');
+            const modelEl = document.getElementById('formModel');
+            const problemEl = document.getElementById('formProblem');
+
             const formData = {
-                name, phone,
-                deviceType: document.getElementById('formDevice').value,
-                model: document.getElementById('formModel').value.trim(),
-                problem: document.getElementById('formProblem').value.trim()
+                name: name,
+                phone: phone,
+                deviceType: deviceTypeEl ? deviceTypeEl.value : '',
+                model: modelEl ? modelEl.value.trim() : '',
+                problem: problemEl ? problemEl.value.trim() : ''
             };
-            
+
             setLoading(mainSubmitBtn, true);
             const success = await sendToServer(formData);
             setLoading(mainSubmitBtn, false);
-            
+
             if (success) {
                 showMessage('Спасибо! Заявка отправлена.');
                 mainForm.reset();
@@ -141,31 +115,35 @@
             }
         });
     }
-    
+
     // ========== ПОПАП ФОРМА ==========
     const popup = document.getElementById('popupForm');
     const popupFormElement = document.getElementById('popupFormElement');
     const popupSubmitBtn = document.getElementById('popupSubmitBtn');
-    
+
     document.getElementById('heroOpenBtn')?.addEventListener('click', function() {
         popup.classList.add('active');
     });
-    
+
     document.getElementById('closePopupBtn')?.addEventListener('click', function() {
         popup.classList.remove('active');
     });
-    
+
     document.getElementById('cancelPopupBtn')?.addEventListener('click', function() {
         popup.classList.remove('active');
     });
-    
+
     if (popupFormElement) {
         popupFormElement.addEventListener('submit', async function(e) {
             e.preventDefault();
-            const name = document.getElementById('popupName').value.trim();
-            const phone = document.getElementById('popupPhone').value.trim();
-            const privacyChecked = document.getElementById('popupPrivacy').checked;
             
+            const nameEl = document.getElementById('popupName');
+            const phoneEl = document.getElementById('popupPhone');
+            const privacyChecked = document.getElementById('popupPrivacy');
+            
+            const name = nameEl ? nameEl.value.trim() : '';
+            const phone = phoneEl ? phoneEl.value.trim() : '';
+
             if (!name || !phone) {
                 showMessage('Заполните имя и номер телефона', true);
                 return;
@@ -174,22 +152,27 @@
                 showMessage('Введите корректный номер телефона (10-11 цифр)', true);
                 return;
             }
-            if (!privacyChecked) {
+            if (!privacyChecked || !privacyChecked.checked) {
                 showMessage('Подтвердите согласие на обработку данных', true);
                 return;
             }
-            
+
+            const deviceTypeEl = document.getElementById('popupDevice');
+            const modelEl = document.getElementById('popupModel');
+            const problemEl = document.getElementById('popupProblem');
+
             const formData = {
-                name, phone,
-                deviceType: document.getElementById('popupDevice').value,
-                model: document.getElementById('popupModel').value.trim(),
-                problem: document.getElementById('popupProblem').value.trim()
+                name: name,
+                phone: phone,
+                deviceType: deviceTypeEl ? deviceTypeEl.value : '',
+                model: modelEl ? modelEl.value.trim() : '',
+                problem: problemEl ? problemEl.value.trim() : ''
             };
-            
+
             setLoading(popupSubmitBtn, true);
             const success = await sendToServer(formData);
             setLoading(popupSubmitBtn, false);
-            
+
             if (success) {
                 showMessage('Спасибо! Заявка отправлена.');
                 popupFormElement.reset();
@@ -199,7 +182,7 @@
             }
         });
     }
-    
+
     // ========== ПЛАВНАЯ ПРОКРУТКА ==========
     document.querySelectorAll('a.nav-link, .footer-links a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -213,21 +196,19 @@
     });
 
     // ============================================================
-    // ШАГ 1: БУРГЕР-МЕНЮ
+    // БУРГЕР-МЕНЮ
     // ============================================================
     const burgerBtn = document.getElementById('burgerBtn');
     const navLinks = document.getElementById('navLinks');
-    
+
     if (burgerBtn && navLinks) {
-        // Открыть/закрыть по клику на бургер
         burgerBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             this.classList.toggle('active');
             navLinks.classList.toggle('open');
             document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
         });
-        
-        // Закрыть при клике на ссылку
+
         navLinks.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', function() {
                 burgerBtn.classList.remove('active');
@@ -235,8 +216,7 @@
                 document.body.style.overflow = '';
             });
         });
-        
-        // Закрыть при клике вне меню
+
         document.addEventListener('click', function(e) {
             if (navLinks.classList.contains('open') && 
                 !navLinks.contains(e.target) && 
@@ -249,42 +229,38 @@
     }
 
     // ============================================================
-    // ШАГ 3: СТАТУС РАБОТЫ (ОТКРЫТО / ЗАКРЫТО)
+    // СТАТУС РАБОТЫ (ОТКРЫТО / ЗАКРЫТО)
     // ============================================================
     function updateWorkStatus() {
         const statusEl = document.getElementById('workStatus');
         if (!statusEl) return;
-        
+
         const now = new Date();
         const hours = now.getHours();
         const minutes = now.getMinutes();
         const currentTime = hours + minutes / 60;
-        
-        // График работы: 10:00 – 18:00
+
         const openTime = 10;
         const closeTime = 18;
-        
+
         let statusText = '';
-        
         if (currentTime >= openTime && currentTime < closeTime) {
             statusText = '10:00 – 18:00 (ОТКРЫТО)';
         } else {
             statusText = '10:00 – 18:00 (ЗАКРЫТО)';
         }
-        
+
         statusEl.textContent = statusText;
         statusEl.style.color = '#FFFFFF';
         statusEl.style.fontWeight = '700';
     }
-    
+
     updateWorkStatus();
     setInterval(updateWorkStatus, 60000);
 
     // ============================================================
-    // ПОПАП ВЫБОРА МОДЕЛИ (клик по бренду)
+    // ПОПАП ВЫБОРА МОДЕЛИ
     // ============================================================
-    
-    // ===== БАЗА МОДЕЛЕЙ ПО БРЕНДАМ =====
     const modelsByBrand = {
         apple: [
             "iPhone X", "iPhone XR", "iPhone XS", "iPhone XS Max",
@@ -320,53 +296,52 @@
         sony: [],
         realme: []
     };
-    
-    // ===== ЭЛЕМЕНТЫ =====
+
     const modelPopup = document.getElementById('modelSelectPopup');
     const modelSearchInput = document.getElementById('modelSearchInput');
     const popupModelsList = document.getElementById('popupModelsList');
     const modelPopupBrandTitle = document.getElementById('modelPopupBrandTitle');
     const closeModelPopupBtn = document.getElementById('closeModelPopupBtn');
-    
-    // ===== ОТКРЫТИЕ ПОПАПА ПРИ КЛИКЕ НА БРЕНД =====
+
     document.querySelectorAll('.brand-card').forEach(card => {
         card.addEventListener('click', function() {
             const brand = this.dataset.brand.toLowerCase();
             const brandName = this.textContent.trim();
-            
-            // Показываем попап
-            modelPopupBrandTitle.textContent = 'Выберите модель ' + brandName;
-            modelPopup.classList.add('active');
+
+            if (modelPopupBrandTitle) {
+                modelPopupBrandTitle.textContent = 'Выберите модель ' + brandName;
+            }
+            if (modelPopup) {
+                modelPopup.classList.add('active');
+            }
             document.body.style.overflow = 'hidden';
-            
-            // Отображаем модели
             renderModels(brand);
-            
-            // Очищаем поиск
-            modelSearchInput.value = '';
+            if (modelSearchInput) modelSearchInput.value = '';
         });
     });
-    
-    // ===== ЗАКРЫТИЕ ПОПАПА =====
+
     function closeModelPopup() {
-        modelPopup.classList.remove('active');
+        if (modelPopup) {
+            modelPopup.classList.remove('active');
+        }
         document.body.style.overflow = '';
     }
-    
+
     closeModelPopupBtn?.addEventListener('click', closeModelPopup);
     modelPopup?.addEventListener('click', function(e) {
         if (e.target === this) closeModelPopup();
     });
-    
-    // ===== ОТОБРАЖЕНИЕ МОДЕЛЕЙ =====
+
     function renderModels(brand) {
         const models = modelsByBrand[brand] || [];
-        
+
+        if (!popupModelsList) return;
+
         if (models.length === 0) {
             popupModelsList.innerHTML = '<div class="popup-model-card" style="grid-column:1/-1;color:#aaa;font-style:italic;">Модели временно отсутствуют</div>';
             return;
         }
-        
+
         let html = '';
         models.forEach(model => {
             html += `
@@ -376,50 +351,40 @@
             `;
         });
         popupModelsList.innerHTML = html;
-        
-        // ===== ПРИ КЛИКЕ НА МОДЕЛЬ =====
+
         popupModelsList.querySelectorAll('.popup-model-card').forEach(card => {
             card.addEventListener('click', function() {
                 const modelName = this.dataset.model;
-                
-                // Заполняем поле модели в основной форме
+
                 const formModelInput = document.getElementById('formModel');
-                if (formModelInput) {
-                    formModelInput.value = modelName;
-                }
-                
-                // Заполняем поле модели в попап-форме
+                if (formModelInput) formModelInput.value = modelName;
+
                 const popupModelInput = document.getElementById('popupModel');
-                if (popupModelInput) {
-                    popupModelInput.value = modelName;
-                }
-                
-                // Закрываем попап
+                if (popupModelInput) popupModelInput.value = modelName;
+
                 closeModelPopup();
-                
-                // Показываем уведомление
                 showMessage('Модель "' + modelName + '" выбрана!');
             });
         });
     }
-    
-    // ===== ПОИСК МОДЕЛЕЙ =====
+
     modelSearchInput?.addEventListener('input', function() {
         const searchTerm = this.value.toLowerCase().trim();
-        // Определяем текущий бренд из заголовка
-        const titleText = modelPopupBrandTitle?.textContent || 'Apple';
+        const titleText = modelPopupBrandTitle?.textContent || 'Выберите модель Apple';
         const brand = titleText.replace('Выберите модель ', '').toLowerCase();
         const models = modelsByBrand[brand] || [];
-        
+
         const filtered = models.filter(model => 
             model.toLowerCase().includes(searchTerm)
         );
-        
+
+        if (!popupModelsList) return;
+
         if (filtered.length === 0) {
             popupModelsList.innerHTML = '<div class="popup-model-card" style="grid-column:1/-1;color:#aaa;font-style:italic;">Моделей не найдено</div>';
             return;
         }
-        
+
         let html = '';
         filtered.forEach(model => {
             html += `
@@ -429,18 +394,17 @@
             `;
         });
         popupModelsList.innerHTML = html;
-        
-        // Перепривязываем события
+
         popupModelsList.querySelectorAll('.popup-model-card').forEach(card => {
             card.addEventListener('click', function() {
                 const modelName = this.dataset.model;
-                
+
                 const formModelInput = document.getElementById('formModel');
                 if (formModelInput) formModelInput.value = modelName;
-                
+
                 const popupModelInput = document.getElementById('popupModel');
                 if (popupModelInput) popupModelInput.value = modelName;
-                
+
                 closeModelPopup();
                 showMessage('Модель "' + modelName + '" выбрана!');
             });
