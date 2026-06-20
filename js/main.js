@@ -4,7 +4,7 @@
 
 (function() {
     // ========== НАСТРОЙКИ ==========
-    const SERVER_URL = 'http://api.fixservicegsm.ru/api/send';
+    const SERVER_URL = 'https://api.fixservicegsm.ru';
     
     // ========== ГАЛЕРЕЯ ==========
     const previewPhotos = [
