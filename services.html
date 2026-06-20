@@ -948,13 +948,15 @@
         setLoading(popupSubmitBtn, true);
         
         const formData = {
-            name, phone,
-            service: service,
-            model: model,
-            quality: quality,
-            price: price,
-            timestamp: new Date().toISOString()
-        };
+    name: name,
+    phone: phone,
+    deviceType: 'Телефон',
+    model: model,
+    service: service,
+    price: price,
+    problem: problem,
+    source: 'services'
+};
         
         const success = await sendToServer(formData);
         setLoading(popupSubmitBtn, false);
