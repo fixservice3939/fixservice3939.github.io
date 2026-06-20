@@ -536,7 +536,7 @@
 <div id="toast" class="toast">Заявка отправлена. Мастер свяжется с вами.</div>
 
 <script>
-    
+    // ========== НАСТРОЙКИ ==========
     const SERVER_URL = 'https://api.fixservicegsm.ru/api/send';
 
     // ========== ОПИСАНИЯ УСЛУГ ==========
@@ -929,6 +929,7 @@
         const model = document.getElementById('popupModel').value;
         const quality = document.getElementById('popupQuality').value;
         const price = document.getElementById('popupPrice').value;
+        const problem = document.getElementById('popupProblem').value.trim();
         const privacyChecked = document.getElementById('popupPrivacy').checked;
         
         if (!name || !phone) {
@@ -947,15 +948,16 @@
         setLoading(popupSubmitBtn, true);
         
         const formData = {
-    name: name,
-    phone: phone,
-    deviceType: 'Телефон',
-    model: model,
-    service: service,
-    price: price,
-    problem: problem,
-    source: 'services'
-};
+            name: name,
+            phone: phone,
+            deviceType: 'Телефон',
+            model: model,
+            service: service,
+            quality: quality,
+            price: price,
+            problem: problem,
+            source: 'services'
+        };
         
         const success = await sendToServer(formData);
         setLoading(popupSubmitBtn, false);
