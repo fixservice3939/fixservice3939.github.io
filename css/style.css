@@ -1204,7 +1204,7 @@ footer {
 }
 
 /* ============================================================
-   МОБИЛЬНАЯ ВЕРСИЯ: БУРГЕР-МЕНЮ (ШАГ 1)
+   МОБИЛЬНАЯ ВЕРСИЯ: БУРГЕР-МЕНЮ
    ============================================================ */
 
 /* Кнопка бургер */
@@ -1243,8 +1243,12 @@ footer {
     transform: rotate(-45deg) translate(5px, -6px);
 }
 
+/* ============================================================
+   МОБИЛЬНАЯ ВЕРСИЯ (ДО 768px)
+   ============================================================ */
+
 @media (max-width: 768px) {
-    /* Показываем бургер */
+    /* ===== БУРГЕР ===== */
     .burger-btn {
         display: flex;
         flex-shrink: 0;
@@ -1259,7 +1263,6 @@ footer {
         height: 2.5px;
     }
     
-    /* Анимация бургера в крестик */
     .burger-btn.active span:nth-child(1) {
         transform: rotate(45deg) translate(4px, 5px);
     }
@@ -1273,7 +1276,7 @@ footer {
         transform: rotate(-45deg) translate(4px, -5px);
     }
     
-    /* Шапка */
+    /* ===== ШАПКА ===== */
     .navbar .container-nav {
         flex-direction: row;
         justify-content: space-between;
@@ -1282,7 +1285,7 @@ footer {
         gap: 0;
     }
     
-    /* ===== ЛОГО БОЛЬШЕ НА ВСЮ ШИРИНУ ===== */
+    /* ===== ЛОГО НА ВСЮ ШИРИНУ ===== */
     .logo {
         font-size: 1.8rem !important;
         gap: 2px;
@@ -1307,7 +1310,7 @@ footer {
         font-size: 0.85rem;
     }
     
-    /* ===== МЕНЮ — ССЫЛКИ САМЫЙ ВЕРХ ===== */
+    /* ===== МЕНЮ ===== */
     .nav-links {
         position: fixed;
         top: 0;
@@ -1325,7 +1328,6 @@ footer {
         z-index: 105;
         padding: 70px 16px 20px 16px;
         overflow-y: auto;
-        padding-top: 70px;
     }
     
     .nav-links.open {
@@ -1355,6 +1357,134 @@ footer {
         color: #7EC8FF;
     }
     
+    /* ===== ОТЗЫВЫ (КОМПАКТНЕЕ) ===== */
+    .reviews-grid {
+        gap: 12px;
+        padding-bottom: 6px;
+    }
+    
+    .review-card {
+        flex: 0 0 85%;
+        padding: 0.8rem 1rem;
+        border-radius: 20px;
+    }
+    
+    .review-author {
+        font-size: 0.85rem;
+        margin-bottom: 0.15rem;
+    }
+    
+    .review-rating {
+        font-size: 0.7rem;
+        margin-bottom: 0.3rem;
+        letter-spacing: 1px;
+    }
+    
+    .review-text {
+        font-size: 0.8rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+    
+    /* ===== БРЕНДЫ (ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ) ===== */
+    .brands-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        padding: 10px 4px 16px 4px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .brands-grid::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .brands-grid::-webkit-scrollbar-track {
+        background: rgba(126, 200, 255, 0.15);
+        border-radius: 10px;
+    }
+    
+    .brands-grid::-webkit-scrollbar-thumb {
+        background: rgba(126, 200, 255, 0.5);
+        border-radius: 10px;
+    }
+    
+    .brands-grid .brand-card {
+        flex: 0 0 auto;
+        min-width: 100px;
+        scroll-snap-align: start;
+    }
+    
+    /* ===== ЗАПЧАСТИ (ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ) ===== */
+    .parts-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 14px;
+        padding: 10px 4px 16px 4px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .parts-grid::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .parts-grid::-webkit-scrollbar-track {
+        background: rgba(126, 200, 255, 0.15);
+        border-radius: 10px;
+    }
+    
+    .parts-grid::-webkit-scrollbar-thumb {
+        background: rgba(126, 200, 255, 0.5);
+        border-radius: 10px;
+    }
+    
+    .parts-grid .part-card {
+        flex: 0 0 180px;
+        scroll-snap-align: start;
+        margin: 0;
+    }
+    
+    /* ===== АКСЕССУАРЫ (ГОРИЗОНТАЛЬНЫЙ СКРОЛЛ) ===== */
+    .accessories-grid {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 10px;
+        padding: 10px 4px 16px 4px;
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+    }
+    
+    .accessories-grid::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .accessories-grid::-webkit-scrollbar-track {
+        background: rgba(126, 200, 255, 0.15);
+        border-radius: 10px;
+    }
+    
+    .accessories-grid::-webkit-scrollbar-thumb {
+        background: rgba(126, 200, 255, 0.5);
+        border-radius: 10px;
+    }
+    
+    .accessories-grid .accessory-card {
+        flex: 0 0 auto;
+        min-width: 140px;
+        scroll-snap-align: start;
+        padding: 1rem;
+        font-size: 0.85rem;
+    }
+    
+    /* ===== АДАПТИВНОСТЬ ===== */
     .close-lightbox {
         top: 10px;
         right: 15px;
@@ -1366,7 +1496,38 @@ footer {
     }
 }
 
-/* ===== СТАРЫЕ АДАПТИВНЫЕ СТИЛИ (ОСТАВЛЯЕМ) ===== */
+/* ============================================================
+   ДЕСКТОПНАЯ ВЕРСИЯ (ОТ 769px)
+   ============================================================ */
+
+@media (min-width: 769px) {
+    .burger-btn {
+        display: none !important;
+    }
+    
+    /* ===== БРЕНДЫ (СЕТКА) ===== */
+    .brands-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    }
+    
+    /* ===== ЗАПЧАСТИ (СЕТКА) ===== */
+    .parts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    /* ===== АКСЕССУАРЫ (СЕТКА) ===== */
+    .accessories-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
+}
+
+/* ============================================================
+   СТАРЫЕ АДАПТИВНЫЕ СТИЛИ (ДО 800px)
+   ============================================================ */
+
 @media (max-width: 800px) {
     .about-service-block {
         flex-direction: column;
@@ -1379,30 +1540,8 @@ footer {
         grid-template-columns: repeat(4, 1fr);
         gap: 8px;
     }
-    .brands-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-    .brand-card {
-        flex: 0 0 auto;
-        min-width: 90px;
-        font-size: 0.8rem;
-    }
     .services-grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    }
-    .parts-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-    }
-    .reviews-grid {
-        mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-        -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
-    }
-    .review-card {
-        flex: 0 0 85%;
     }
     .toast {
         white-space: normal;
