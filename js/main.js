@@ -4,7 +4,7 @@
 
 (function() {
     // ========== НАСТРОЙКИ ==========
-    const SERVER_URL = 'https://api.fixservicegsm.ru/api/send';
+    const SERVER_URL = 'https://fixcrm-kataburhovich251.waw0.amvera.tech/api/send';
 
     // ========== МАСКА ТЕЛЕФОНА ==========
     function applyPhoneMask(input) {
